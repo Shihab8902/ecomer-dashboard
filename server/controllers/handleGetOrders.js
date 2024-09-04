@@ -12,12 +12,12 @@ const handleGetOrders = async (req, res) => {
         //Send orders data for admin
         if (isAdmin) {
             const orders = allOrders.filter(order => order.products?.filter(product => product.admin === user))
-            return res.send(orders);
+            return res.send({ orders, admin: isAdmin });
         }
 
         //Send orders for customer
         const orders = allOrders.filter(order => order.shipping_details.email === user);
-        res.send(orders);
+        res.send({ orders, admin: isAdmin });
 
 
     }
