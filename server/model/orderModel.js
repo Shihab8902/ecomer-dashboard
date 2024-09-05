@@ -22,7 +22,10 @@ const orderSchema = new mongoose.Schema({
     products: {
         type: Array,
         require: true
-    }
+    },
+    storeId: {
+        type: String
+    },
 
 });
 

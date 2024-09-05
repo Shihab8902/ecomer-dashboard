@@ -1,12 +1,20 @@
 const orderCollection = require("../model/orderModel");
 const moment = require('moment');
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
+
 
 const handleCheckoutSuccess = async (req, res) => {
+
+
+
     const requestOrigin = req.query.origin;
     const sessionID = req.query.session_id;
     const products = JSON.parse(req.query.products);
+    const stripeSecret = req.query.secret;
+    const storeId = req.query.storeId;
+
+
+    const stripe = require("stripe")(stripeSecret);
 
     //Collect order details from session id
     if (sessionID) {
@@ -17,6 +25,7 @@ const handleCheckoutSuccess = async (req, res) => {
 
         const orderDetails = {
             subtotal: combinedData.amount_subtotal,
+            storeId: storeId,
             currency: combinedData.currency,
             shipping_details: combinedData.customer_details,
             status: {
