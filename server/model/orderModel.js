@@ -12,7 +12,7 @@ const orderSchema = new mongoose.Schema({
         require: true
     },
     status: {
-        type: Object,
+        type: Array,
 
     },
     exp_deliver: {
@@ -24,8 +24,17 @@ const orderSchema = new mongoose.Schema({
         require: true
     },
     storeId: {
-        type: String
+        type: String,
+        require: true
     },
+    orderNumber: {
+        type: String,
+        require: true
+    },
+    orderedAt: {
+        type: String,
+        require: true
+    }
 
 });
 

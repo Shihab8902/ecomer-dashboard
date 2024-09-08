@@ -2,16 +2,34 @@ const orderCollection = require("../model/orderModel");
 
 const handleGetOrders = async (req, res) => {
     try {
-        const storeId = req.query.storeId;
+        const { storeId, filter } = req.query;
 
-        //Send data based on store id
-        const orders = await orderCollection.find({ storeId: storeId });
+        // Define the aggregation pipeline
+        const pipeline = [
+            {
+                // Match documents by storeId
+                $match: { storeId: storeId }
+            },
+            {
+                // Add a field for the last status message
+                $addFields: {
+                    lastStatus: { $arrayElemAt: [{ $reverseArray: '$status.message' }, 0] } // Get the last status message
+                }
+            },
+            {
+                // Filter based on the last status message if filter is provided
+                $match: filter && filter !== 'All' ? { lastStatus: filter } : {}
+            }
+        ];
+
+        // Execute the aggregation
+        const orders = await orderCollection.aggregate(pipeline).exec();
+
         res.send(orders);
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
+        res.status(500).send({ error: 'An error occurred while fetching orders' });
     }
-}
-
+};
 
 module.exports = handleGetOrders;

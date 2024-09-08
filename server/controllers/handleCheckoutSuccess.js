@@ -28,10 +28,14 @@ const handleCheckoutSuccess = async (req, res) => {
             storeId: storeId,
             currency: combinedData.currency,
             shipping_details: combinedData.customer_details,
-            status: {
-                message: "Order Received",
-                date: moment().format('Do MMMM YYYY')
-            },
+            orderNumber: `#${Date.now().toString().slice(5, 13)}`,
+            orderedAt: moment().format('Do MMMM YYYY'),
+            status: [
+                {
+                    message: "Order Received",
+                    date: moment().format('Do MMMM YYYY')
+                }
+            ],
             products
         }
 
