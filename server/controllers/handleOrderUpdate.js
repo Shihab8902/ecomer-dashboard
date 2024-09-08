@@ -6,7 +6,14 @@ const handleOrderUpdate = async (req, res) => {
         const data = req.body;
         //Get the order based on id
         const order = await orderCollection.findOne({ _id: id });
-        const result = await orderCollection.findOneAndUpdate({ _id: id }, { exp_deliver: data.exp_deliver, status: [...order.status, data.newStatus] });
+        if (data.newStatus.message) {
+            const result = await orderCollection.findOneAndUpdate({ _id: id }, { exp_deliver: data.exp_deliver, status: [...order.status, data.newStatus] });
+            res.send(result);
+            return;
+        }
+
+        const result = await orderCollection.findOneAndUpdate({ _id: id }, { exp_deliver: data.exp_deliver });
+
         res.send(result);
     }
     catch (error) {

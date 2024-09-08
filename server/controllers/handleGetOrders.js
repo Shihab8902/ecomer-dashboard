@@ -19,6 +19,10 @@ const handleGetOrders = async (req, res) => {
             {
                 // Filter based on the last status message if filter is provided
                 $match: filter && filter !== 'All' ? { lastStatus: filter } : {}
+            },
+            {
+                // Sort documents by createdAt in descending order (latest first)
+                $sort: { createdAt: -1 }
             }
         ];
 

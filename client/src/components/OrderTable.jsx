@@ -13,6 +13,10 @@ const OrderTable = ({ orders, refetch }) => {
     const [selectedOrder, setSelectedOrder] = useState({});
 
     const formatDate = (dateString) => {
+        if (dateString === "unknown") {
+            return "unknown";
+        }
+
         const date = moment(dateString);
         return date.format('Do MMMM YYYY');
     };

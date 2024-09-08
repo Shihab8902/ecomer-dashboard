@@ -10,8 +10,6 @@ import moment from 'moment';
 
 const UpdateOrderModal = ({ modalID, isModalVisible, setIsModalVisible, order, refetch }) => {
 
-
-
     const [status, setStatus] = useState('');
 
     const axiosPublic = useAxiosPublic();
@@ -24,7 +22,7 @@ const UpdateOrderModal = ({ modalID, isModalVisible, setIsModalVisible, order, r
         const data = {
             exp_deliver,
             newStatus: {
-                message: e.target.fulfillmentStatus.value || "Order Completed",
+                message: e.target.fulfillmentStatus.value,
                 date: moment().format('Do MMMM YYYY')
             }
         }
@@ -34,6 +32,7 @@ const UpdateOrderModal = ({ modalID, isModalVisible, setIsModalVisible, order, r
                 if (res.data) {
                     e.target.reset();
                     setIsModalVisible(false);
+                    setStatus('');
                     refetch();
                     Swal.fire({
                         text: "Order updated successfully!",
@@ -55,14 +54,13 @@ const UpdateOrderModal = ({ modalID, isModalVisible, setIsModalVisible, order, r
 
                     <button onClick={() => setIsModalVisible(false)} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
 
-
-
                     <div >
                         <h4 className="text-center font-semibold text-2xl text-[#232327]">Update Order</h4>
                         <form onSubmit={handleFormSubmit}>
                             <div>
                                 <label className="block text-sm mb-1 font-medium" htmlFor="order status">Fulfillment Status</label>
-                                <select onChange={(e) => setStatus(e.target.value)} value={status} defaultValue={order?.status?.map(status => status.message)[order.status.length - 1]} name="fulfillmentStatus" id="fulfillmentStatus" className="w-full cursor-pointer p-3 border border-[#232327]">
+                                <select onChange={(e) => setStatus(e.target.value)} value={status} defaultValue="" name="fulfillmentStatus" id="fulfillmentStatus" className="w-full cursor-pointer p-3 border border-[#232327]">
+                                    <option value="">Unchanged</option>
                                     <option value="Order Received" disabled>Order Received</option>
                                     <option disabled={order?.status?.find(s => s.message === "Preparing Order")} value="Preparing Order">Preparing Order</option>
                                     <option disabled={order?.status?.find(s => s.message === "Order Shipped")} value="Order Shipped">Order Shipped</option>

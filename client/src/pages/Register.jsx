@@ -54,34 +54,34 @@ const Register = () => {
 
     return <div className="mx-auto max-w-6xl h-screen flex justify-center items-center">
 
-        <div className="w-1/3 shadow-xl p-6">
-            <h3 className="text-4xl font-semibold text-center mb-10">Register Account.</h3>
+        <div className="max-w-[500px] min-w-[500px] bg-[#FDFDFF] p-8 border border-[#EBEBEE]">
+            <h3 className="text-4xl font-semibold text-center mb-10 text-[#232327]">Register</h3>
 
             <form onSubmit={handleFormSubmit} className="flex flex-col gap-2">
                 {/* Name field */}
                 <div>
-                    <label className="block text-lg mb-1 font-medium" htmlFor="name">Name</label>
-                    <input className="w-full p-3 border border-[#232327]" type="text" name="name" id="name" placeholder="Enter your name" />
+                    <label className="block text-[#232327] font-normal text-base leading-6 mb-2" htmlFor="name">Full Name</label>
+                    <input className="w-full p-3 border border-[#D3D3D4]" type="text" name="name" id="name" placeholder="Enter your full name" />
                 </div>
 
                 {/* Email field */}
                 <div>
-                    <label className="block text-lg mb-1 font-medium" htmlFor="email">Email*</label>
-                    <input className="w-full p-3 border border-[#232327]" type="email" name="email" id="email" placeholder="Enter your email" required />
+                    <label className="block text-[#232327] font-normal text-base leading-6 mb-2" htmlFor="email">Email Address</label>
+                    <input className="w-full p-3 border border-[#D3D3D4]" type="email" name="email" id="email" placeholder="Enter your email" required />
 
                 </div>
 
                 {/* Password field */}
                 <div className="relative">
-                    <label className="block text-lg mb-1 font-medium" htmlFor="password">Password*</label>
-                    <input className="w-full p-3 border border-[#232327]" type={visiblePassword ? "text" : "password"} name="password" id="password" placeholder="Minimum 6 character" required />
+                    <label className="block text-[#232327] font-normal text-base leading-6 mb-2" htmlFor="password">Password</label>
+                    <input className="w-full p-3 border border-[#D3D3D4]" type={visiblePassword ? "text" : "password"} name="password" id="password" placeholder="Minimum 6 character" required />
                     <span onClick={() => setVisiblePassword(!visiblePassword)} className="absolute bottom-4 right-2 text-lg text-gray-400 cursor-pointer">{visiblePassword ? <FaEye /> : <FaEyeSlash />}</span>
                 </div>
 
-                <button type="submit" className="w-full bg-[#232327] p-3 text-white mt-3">Register</button>
+                <button type="submit" className="w-full bg-[#232327] font-semibold p-3 text-white mt-3">Register</button>
             </form>
 
-            <p className="text-center mt-3">Already have an account? <Link className="underline" to="/login">Login</Link></p>
+            <p className="text-center mt-6 text-[#232327] leading-6 text-base">Already have an account? <Link className="font-bold hover:underline" to="/login">Login</Link></p>
 
         </div>
 
