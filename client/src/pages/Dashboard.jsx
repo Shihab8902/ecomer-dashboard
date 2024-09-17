@@ -37,7 +37,7 @@ const Dashboard = () => {
     //Refetch orders after getting store id
     useEffect(() => {
         refetchOrders();
-    }, [store, refetchOrders, filterValue])
+    }, [store, refetchOrders, filterValue, orders])
 
 
 
@@ -167,8 +167,6 @@ const Dashboard = () => {
                             <span className="loading loading-spinner loading-lg"></span>
                         </div> :
                             orders?.length > 0 ? <div>
-
-
 
                                 <OrderTable orders={orders} refetch={refetchOrders} />
 

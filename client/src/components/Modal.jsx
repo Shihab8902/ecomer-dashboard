@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { UserContext } from '../context/AuthProvider';
 import useAxiosPublic from '../hooks/useAxiosPublic';
+import { Link } from 'react-router-dom';
 
 
 
@@ -54,12 +55,6 @@ const Modal = ({ modalID, isModalVisible, setIsModalVisible, refetchStoreId }) =
 
 
 
-
-
-
-
-
-
     return <>
 
         {
@@ -82,8 +77,9 @@ const Modal = ({ modalID, isModalVisible, setIsModalVisible, refetchStoreId }) =
                                 <input className="w-full p-3 border border-[#232327]" type={visiblePassword ? "text" : "password"} name="stripeSecret" id="stripeSecret" placeholder="Enter stripe secret" required />
                                 <span onClick={() => setVisiblePassword(!visiblePassword)} className="absolute bottom-4 right-2 text-lg text-gray-400 cursor-pointer">{visiblePassword ? <FaEye /> : <FaEyeSlash />}</span>
                             </div>
+                            <p className=" mt-1 text-[#232327] leading-6 text-sm">For retrieving your Stripe Secret, visit the <Link className="font-bold hover:underline" to="https://docs.stripe.com/keys" target='_blank'>Stripe API documentation.</Link></p>
 
-                            <button type="submit" className="w-full bg-[#232327] p-3 text-white mt-4">Create</button>
+                            <button type="submit" className="w-full bg-[#232327] p-3 text-white mt-5">Create</button>
                         </form>
                     </div>
 

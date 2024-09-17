@@ -116,8 +116,16 @@ const OrderTable = ({ orders, refetch }) => {
                                                     <h4 className="text-[#232327] font-semibold leading-6 text-base">Order Summary: </h4>
                                                     <div className="flex flex-col gap-3">
                                                         {order.products?.map(product => (
-                                                            <OrderCard key={product.uid} product={product} subtotal={order?.subtotal} />
+                                                            <OrderCard key={product.uid} product={product} />
                                                         ))}
+                                                    </div>
+                                                    {/* Divider */}
+                                                    <div className="w-full mt-3 h-[1px] bg-[#232327]"></div>
+
+                                                    {/* Subtotal */}
+                                                    <div className="mt-1 flex justify-between items-center">
+                                                        <h5 className="text-[#232327] font-bold leading-6 text-base">Subtotal: </h5>
+                                                        <p className="text-[#232327] font-bold leading-6 text-base">${(order?.subtotal / 100).toFixed(2)}</p>
                                                     </div>
                                                 </div>
                                             </div>

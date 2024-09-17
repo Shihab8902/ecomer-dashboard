@@ -33,9 +33,11 @@ const Login = () => {
 
             })
             .catch(error => {
+                const errorMessage = error.message === "Firebase: Error (auth/invalid-credential)." ? "The password you entered is incorrect. Please try again." : error.message;
+                console.log(errorMessage);
                 Swal.fire({
                     title: "Error",
-                    text: error.message,
+                    text: errorMessage,
                     icon: "error"
                 })
             })

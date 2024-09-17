@@ -1,6 +1,6 @@
 
 
-const OrderCard = ({ product, subtotal }) => {
+const OrderCard = ({ product }) => {
 
     return <div>
         <div className="flex justify-between items-center">
@@ -27,15 +27,7 @@ const OrderCard = ({ product, subtotal }) => {
             </div>
         </div>
 
-        {/* Divider */}
-        <div className="w-full mt-3 h-[1px] bg-[#232327]"></div>
 
-        {/* Subtotal */}
-        <div className="mt-3 flex justify-between items-center">
-            <h5 className="text-[#232327] font-bold leading-6 text-base">Subtotal: </h5>
-            <p className="text-[#232327] font-bold leading-6 text-base">${(subtotal / 100).toFixed(2)}</p>
-
-        </div>
 
     </div>
 }

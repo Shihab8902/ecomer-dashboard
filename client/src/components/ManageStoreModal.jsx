@@ -19,7 +19,7 @@ const ManageStoreModal = ({ modalID, isModalVisible, setIsModalVisible, store, r
     const handleFormSubmit = e => {
         e.preventDefault();
         const storeName = e.target.storeName.value;
-        const stripeSecret = e.target.stripeSecret.value || store?.stripeSecret
+        const stripeSecret = e.target.stripeSecret?.value || store?.stripeSecret
 
         axiosPublic.put(`/store?id=${store?._id}`, { storeName, stripeSecret })
             .then(res => {
