@@ -12,9 +12,13 @@ const OrderCard = ({ product }) => {
                 <div >
                     <h4 className="text-[#232327] text-sm font-semibold leading-5 ">{product.productName}</h4>
                     <div className="flex items-center  gap-8 mt-1">
-                        <p className="text-[#232327] text-base leading-6">Size: <span className="text-[#6E717D]">{product.size}</span></p>
                         <p className="text-[#232327] text-base leading-6">Qty: <span className="text-[#6E717D]">{product.quantity}</span></p>
-                        <p className="text-[#232327] text-base leading-6 flex items-center gap-2">Color: <div style={{ background: product.color }} className={`w-5 h-5 rounded-full`}></div></p>
+                        {
+                            product?.additionalData?.map((data, index) => {
+                                const [key, value] = Object.entries(data)[0];
+                                return <p key={index} className="text-[#232327] text-base leading-6">{key}: <span className="text-[#6E717D]">{value}</span></p>
+                            })
+                        }
 
                     </div>
                 </div>

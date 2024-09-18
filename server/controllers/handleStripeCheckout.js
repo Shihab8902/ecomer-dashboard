@@ -8,22 +8,26 @@ const handleStripeCheckout = async (req, res) => {
         const storeId = req.query.storeId;
 
 
-
         //Get the stripe secret for the particular store
         const requestedStore = await storeCollection.findOne({ storeId: storeId });
         if (requestedStore) {
             const stripe = require("stripe")(requestedStore.stripeSecret);
 
+
             const items = productData.map(item => ({
+
                 price_data: {
                     currency: 'usd',
                     product_data: {
                         name: item.productName,
-                        description: `Size: ${item.size}, Color: ${item.color}`,
+                        description: `${item?.additionalData?.map((data, index) => {
+                            const [key, value] = Object.entries(data)[0];
+                            return `${key}: ${value}`;
+                        }).join(', ')}` || '',
                         images: [item.image],
 
                     },
-                    unit_amount: item.price * 100,
+                    unit_amount: Math.ceil(item.price * 100),
                 },
                 quantity: item.quantity,
             }));
