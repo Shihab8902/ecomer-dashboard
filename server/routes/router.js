@@ -1,3 +1,4 @@
+const handleCashOnDeliveryCheckout = require("../controllers/handleCashOnDeliveryCheckout");
 const handleCheckoutSuccess = require("../controllers/handleCheckoutSuccess");
 const handleGetOrders = require("../controllers/handleGetOrders");
 const handleGetStoreId = require("../controllers/handleGetStoreId");
@@ -10,9 +11,12 @@ const handleStripeCheckout = require("../controllers/handleStripeCheckout");
 const router = require("express").Router();
 
 
-//Checkout routes
+//Stripe checkout routes
 router.post("/checkout", handleStripeCheckout);
 router.get("/success", handleCheckoutSuccess);
+
+//COD checkout routes
+router.post("/checkout/cod", handleCashOnDeliveryCheckout);
 
 //Order management routes
 router.get("/orders", handleGetOrders);

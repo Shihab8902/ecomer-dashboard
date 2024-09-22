@@ -27,8 +27,22 @@ const handleCheckoutSuccess = async (req, res) => {
             subtotal: combinedData.amount_subtotal,
             storeId: storeId,
             currency: combinedData.currency,
-            shipping_details: combinedData.customer_details,
+            shipping_details: {
+                email: combinedData.customer_details?.email,
+                name: combinedData.customer_details?.name,
+                address: {
+                    city: combinedData.customer_details?.address?.city,
+                    country: combinedData.customer_details?.address?.country,
+                    state: combinedData.customer_details?.address?.state,
+                    postal_code: combinedData.customer_details?.address?.postal_code,
+                    additionalData: [
+                        { Line1: combinedData.customer_details?.address?.line1 },
+                        { Line2: combinedData.customer_details?.address?.line2 }
+                    ]
+                }
+            },
             orderNumber: `#${Date.now().toString().slice(5, 13)}`,
+            paymentMethod: "Stripe",
             orderedAt: moment().format('Do MMMM YYYY'),
             status: [
                 {

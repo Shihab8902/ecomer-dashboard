@@ -42,7 +42,7 @@ const OrderTable = ({ orders, refetch }) => {
                         <th className="text-center text-[#232327] text-sm font-semibold leading-5">Date</th>
                         <th className="text-center text-[#232327] text-sm font-semibold leading-5">Fulfillment Status</th>
                         <th className="text-center text-[#232327] text-sm font-semibold leading-5">Expected Delivery</th>
-                        <th className="text-center text-[#232327] text-sm font-semibold leading-5">Total Items</th>
+                        <th className="text-center text-[#232327] text-sm font-semibold leading-5">Payment Method</th>
                         <th className="text-center text-[#232327] text-sm font-semibold leading-5">Subtotal</th>
                         <th className="text-center text-[#232327] text-sm font-semibold leading-5">Edit Order</th>
                     </tr>
@@ -66,7 +66,7 @@ const OrderTable = ({ orders, refetch }) => {
                                     <td className="text-center text-base leading-6 font-medium text-[#6E717D]">
                                         {formatDate(order.exp_deliver)}
                                     </td>
-                                    <td className="text-center text-base leading-6 font-medium text-[#6E717D]">{order.products?.length}</td>
+                                    <td className="text-center text-base leading-6 font-medium text-[#6E717D]">{order?.paymentMethod}</td>
                                     <td className="text-center text-base leading-6 font-medium text-[#6E717D]">${(order.subtotal / 100).toFixed(2)}</td>
 
                                     {/* Edit order button */}
@@ -102,11 +102,24 @@ const OrderTable = ({ orders, refetch }) => {
                                                                 <li className="text-sm font-semibold text-[#232327] leading-5">State: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.state},</span></li>
                                                                 <li className="text-sm font-semibold text-[#232327] leading-5">City: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.city},</span></li>
                                                                 <li className="text-sm font-semibold text-[#232327] leading-5">Country: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.country},</span></li>
-                                                                <li className="text-sm font-semibold text-[#232327] leading-5">Postal Code: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.postal_code},</span></li>
-                                                                <li className="text-sm font-semibold text-[#232327] leading-5">Additional: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.line1 + ", " + order.shipping_details.address.line2}</span></li>
-
-
+                                                                <li className="text-sm font-semibold text-[#232327] leading-5">Postal Code: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.postal_code}</span></li>
                                                             </ul>
+
+                                                        </li>
+                                                        <li className="text-sm font-semibold text-[#232327] flex items-center gap-1">
+                                                            Additional:
+                                                            {
+                                                                order?.shipping_details?.address?.additionalData
+                                                                    ?.map((data, index) => {
+                                                                        const [key, value] = Object.entries(data)[0];
+                                                                        return (
+                                                                            <span key={index} className="text-sm font-semibold text-[#232327]">
+                                                                                {key}: <span className="text-[#6E717D] font-medium">{value}</span>
+                                                                                {index !== order?.shipping_details?.address?.additionalData.length - 1 && ', '}
+                                                                            </span>
+                                                                        );
+                                                                    })
+                                                            }
                                                         </li>
                                                     </ul>
                                                 </div>
