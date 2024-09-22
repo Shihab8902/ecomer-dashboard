@@ -12,7 +12,7 @@ const router = require("express").Router();
 
 
 //Stripe checkout routes
-router.post("/checkout", handleStripeCheckout);
+router.post("/checkout/stripe", handleStripeCheckout);
 router.get("/success", handleCheckoutSuccess);
 
 //COD checkout routes

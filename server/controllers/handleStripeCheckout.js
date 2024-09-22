@@ -32,7 +32,7 @@ const handleStripeCheckout = async (req, res) => {
                 quantity: item.quantity,
             }));
 
-            //Checkout session
+            //checkout/stripe session
             const session = await stripe.checkout.sessions.create({
                 line_items: items,
                 mode: 'payment',

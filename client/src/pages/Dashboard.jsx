@@ -70,7 +70,6 @@ const Dashboard = () => {
 
 
 
-
     return <div className="max-w-7xl mx-auto px-5">
         {/* Top Header */}
         <div className="mt-6 flex justify-between items-center border-b pb-6">
@@ -136,10 +135,11 @@ const Dashboard = () => {
             </div> : ''
         }
 
-        <div className=" bg-[#FDFDFF] p-8 h-fit mt-10 border border-[#EBEBEE]">
-            {/* Filter */}
-            {
-                store?.storeId && <div className="flex justify-between ">
+        {
+            store?.storeId && <div className=" bg-[#FDFDFF] p-8 h-fit mt-10 border border-[#EBEBEE]">
+                {/* Filter */}
+
+                <div className="flex justify-between ">
                     <h3 className="text-[#232327] text-[20px] leading-[30px] font-semibold ">Recent Orders</h3>
                     <div className="max-w-64 ">
 
@@ -156,12 +156,12 @@ const Dashboard = () => {
                         </select>
                     </div>
                 </div>
-            }
 
 
-            {/* Display orders */}
-            {
-                store?.storeId && <div className=" overflow-auto">
+
+                {/* Display orders */}
+
+                <div className=" overflow-auto">
                     {
                         isOrderDataLoading ? <div className=" flex justify-center items-center">
                             <span className="loading loading-spinner loading-lg"></span>
@@ -177,8 +177,9 @@ const Dashboard = () => {
                                 </div>
                     }
                 </div>
-            }
-        </div>
+
+            </div>
+        }
 
 
 

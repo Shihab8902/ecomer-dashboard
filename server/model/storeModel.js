@@ -12,7 +12,9 @@ const storeSchema = new mongoose.Schema({
     },
     stripeSecret: {
         type: String,
-        require: true
+    },
+    yocoSecret: {
+        type: String
     },
     storeId: {
         type: String,

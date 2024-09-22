@@ -8,6 +8,7 @@ const handleCashOnDeliveryCheckout = async (req, res) => {
 
         const userData = req.body;
 
+
         //Calculate subtotal
         const countedSubtotal = userData?.products?.reduce(
             (acc, item) => acc + parseFloat(item.totalPrice),
@@ -32,26 +33,16 @@ const handleCashOnDeliveryCheckout = async (req, res) => {
         }
 
         const newOrder = orderCollection(data);
-        const result = await newOrder.save();
-
-        //Send confirmation email for both customer and owner
-        // if (result) {
-        //     const to = userData?.shipping_details?.email;
-        //     const subject = "Order Placed!";
-        //     const message = `<b>Your order has been successfully placed with order number: ${data.orderNumber}</b>`
-        //     const status = await sendEmail(to, subject, message);
-        //     if (status) {
-        //         return res.send({ message: "success" });
-        //     }
-        // }
+        await newOrder.save();
+        res.send({ message: "success" })
 
 
-        res.send({ message: "success" });
 
 
     }
     catch (error) {
         console.log(error.message);
+        res.send({ message: "failed" })
     }
 }
 
