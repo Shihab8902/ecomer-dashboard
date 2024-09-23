@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const axiosPublic = axios.create({
-    baseURL: "https://ecomer-dashboard.vercel.app"
+    // baseURL: "https://ecomer-dashboard.vercel.app"
+    baseURL: "http://localhost:9000"
 });
 
 const useAxiosPublic = () => {

@@ -7,6 +7,8 @@ const handleOrderUpdate = require("../controllers/handleOrderUpdate");
 const handleStoreCreation = require("../controllers/handleStoreCreation");
 const handleStoreUpdate = require("../controllers/handleStoreUpdate");
 const handleStripeCheckout = require("../controllers/handleStripeCheckout");
+const handleYocoCheckout = require("../controllers/handleYocoCheckout");
+const handleYocoSuccess = require("../controllers/success/handleYocoSuccess");
 
 const router = require("express").Router();
 
@@ -17,6 +19,10 @@ router.get("/success", handleCheckoutSuccess);
 
 //COD checkout routes
 router.post("/checkout/cod", handleCashOnDeliveryCheckout);
+
+//YOCO checkout routes
+router.post("/checkout/yoco", handleYocoCheckout)
+router.get("/success/yoco", handleYocoSuccess);
 
 //Order management routes
 router.get("/orders", handleGetOrders);
