@@ -14,6 +14,10 @@ const handleYocoCheckout = async (req, res) => {
         //Retrieve yoco secret
         const requestedStore = await storeCollection.findOne({ storeId: userData?.storeId });
 
+        if (!requestedStore?.yocoSecret) {
+            return res.status(403).send("Operation now allowed!");
+        }
+
         const convertUsdToZarInCents = (usdAmount) => {
             // Constant exchange rate: 1 USD = 18 ZAR
             const usdToZarRate = 18.00;

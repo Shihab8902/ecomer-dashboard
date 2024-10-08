@@ -1,12 +1,19 @@
 const moment = require('moment');
 const orderCollection = require('../model/orderModel');
 const sendEmail = require('../email/sendEmail');
+const storeCollection = require('../model/storeModel');
 
 
 const handleCashOnDeliveryCheckout = async (req, res) => {
     try {
 
         const userData = req.body;
+
+        //Check for cod delivery permission
+        const requestedStore = await storeCollection.findOne({ storeId: userData?.storeId });
+        if (!requestedStore?.allowCod) {
+            return res.status(403).send("Operation now allowed!");
+        }
 
 
         //Calculate subtotal

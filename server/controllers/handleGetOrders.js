@@ -1,5 +1,6 @@
 const orderCollection = require("../model/orderModel");
 
+
 const handleGetOrders = async (req, res) => {
     try {
         const { storeId, filter } = req.query;
@@ -31,6 +32,8 @@ const handleGetOrders = async (req, res) => {
 
         // Execute 
         const orders = await orderCollection.aggregate(pipeline).exec();
+
+
 
         res.send(orders);
     } catch (error) {

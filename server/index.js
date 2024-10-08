@@ -8,6 +8,7 @@ const routes = require("./routes/router");
 const connectDB = require("./db/connectDB");
 
 
+
 //Middlewares
 app.use(cors());
 app.use(express.json());
@@ -25,6 +26,7 @@ const run = async () => {
     app.listen(PORT, () => {
         console.log(`The server is running at http://localhost:${PORT}`);
     });
+
 }
 
 run();

@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+
 const storeCollection = require('../model/storeModel');
 const { v4: uuidv4 } = require('uuid');
 
@@ -7,10 +7,10 @@ const handleStoreCreation = async (req, res) => {
         const storeData = req.body;
 
         //Check for duplication
-        const isStoreExist = await storeCollection.findOne({ admin: storeData?.admin });
-        if (isStoreExist) {
-            return res.status(400).send({ message: "Store exists with same credentials!" });
-        }
+        // const isStoreExist = await storeCollection.findOne({ admin: storeData?.admin });
+        // if (isStoreExist) {
+        //     return res.status(400).send({ message: "Store exists with same credentials!" });
+        // }
 
         //Hashing stripe secret
         if (storeData) {

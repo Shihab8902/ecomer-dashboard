@@ -19,6 +19,14 @@ const storeSchema = new mongoose.Schema({
     storeId: {
         type: String,
         require: true
+    },
+    location: {
+        type: Object,
+        require: true
+    },
+    allowCod: {
+        type: Boolean,
+        default: true
     }
 });
 

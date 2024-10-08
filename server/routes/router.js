@@ -4,6 +4,8 @@ const handleGetOrders = require("../controllers/handleGetOrders");
 const handleGetStoreId = require("../controllers/handleGetStoreId");
 const handleGetUserOrder = require("../controllers/handleGetUserOrder");
 const handleOrderUpdate = require("../controllers/handleOrderUpdate");
+const handlePaymentMethodActivation = require("../controllers/handlePaymentMethodActivation");
+const handlePaymentMethodDeactivation = require("../controllers/handlePaymentMethodDeactivation");
 const handleStoreCreation = require("../controllers/handleStoreCreation");
 const handleStoreUpdate = require("../controllers/handleStoreUpdate");
 const handleStripeCheckout = require("../controllers/handleStripeCheckout");
@@ -16,6 +18,10 @@ const router = require("express").Router();
 //Stripe checkout routes
 router.post("/checkout/stripe", handleStripeCheckout);
 router.get("/success", handleCheckoutSuccess);
+
+//Payment method management routes
+router.put("/payment/deactivate", handlePaymentMethodDeactivation);
+router.put("/payment/activate", handlePaymentMethodActivation);
 
 //COD checkout routes
 router.post("/checkout/cod", handleCashOnDeliveryCheckout);
