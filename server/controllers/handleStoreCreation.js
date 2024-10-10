@@ -20,7 +20,7 @@ const handleStoreCreation = async (req, res) => {
             }
             const newStoreData = storeCollection(data);
             const result = await newStoreData.save();
-            res.send({ storeId: result.storeId });
+            res.send(result);
             return
         }
 
