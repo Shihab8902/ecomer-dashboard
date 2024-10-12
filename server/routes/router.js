@@ -9,6 +9,7 @@ const handlePaymentMethodDeactivation = require("../controllers/handlePaymentMet
 const handleStoreCreation = require("../controllers/handleStoreCreation");
 const handleStoreUpdate = require("../controllers/handleStoreUpdate");
 const handleStripeCheckout = require("../controllers/handleStripeCheckout");
+const handleTotalOrderCount = require("../controllers/handleTotalOrderCount");
 const handleYocoCheckout = require("../controllers/handleYocoCheckout");
 const handleYocoSuccess = require("../controllers/success/handleYocoSuccess");
 
@@ -32,6 +33,7 @@ router.get("/success/yoco", handleYocoSuccess);
 
 //Order management routes
 router.get("/orders", handleGetOrders);
+router.get("/orders/total", handleTotalOrderCount);
 router.put("/orders", handleOrderUpdate);
 
 //Store creation routes

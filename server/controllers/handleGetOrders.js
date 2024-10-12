@@ -33,8 +33,6 @@ const handleGetOrders = async (req, res) => {
         // Execute 
         const orders = await orderCollection.aggregate(pipeline).exec();
 
-
-
         res.send(orders);
     } catch (error) {
         console.log(error);
