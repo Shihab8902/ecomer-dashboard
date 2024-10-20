@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { Navigate } from 'react-router-dom';
 import { UserContext } from '../context/AuthProvider';
+import LoaderSpinner from '../components/LoaderSpinner';
 
 
 const PrivateRoute = ({ children }) => {
@@ -8,9 +9,7 @@ const PrivateRoute = ({ children }) => {
 
 
     if (loading) {
-        return <div className='text-center my-20 text-7xl'>
-            <span className="loading loading-spinner text-success w-[80px]"></span>
-        </div>
+        return <LoaderSpinner shapeWidth="40" shapeHeight="40" shapeColor="#6E717D" />
     }
 
 
