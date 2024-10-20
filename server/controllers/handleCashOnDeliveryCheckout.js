@@ -2,6 +2,8 @@ const moment = require('moment');
 const orderCollection = require('../model/orderModel');
 const sendEmail = require('../email/sendEmail');
 const storeCollection = require('../model/storeModel');
+const ownerEmailTemplate = require('../templates/owner');
+const customerEmailTemplate = require('../templates/customer');
 
 
 const handleCashOnDeliveryCheckout = async (req, res) => {
@@ -41,6 +43,17 @@ const handleCashOnDeliveryCheckout = async (req, res) => {
 
         const newOrder = orderCollection(data);
         await newOrder.save();
+
+        //Send confirmation email to the store owner
+        const result = await sendEmail(requestedStore?.admin, "A new order received!", ownerEmailTemplate())
+        if (result?.messageId) {
+            //Send confirmation email to the customer
+            await sendEmail(userData?.shipping_details?.email, "Order placed!", customerEmailTemplate());
+        }
+
+
+
+
         res.send({ message: "success" })
 
 

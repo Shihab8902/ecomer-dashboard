@@ -15,11 +15,14 @@ const OrderTable = ({ orders, refetch }) => {
     const formatDate = (dateString) => {
         if (dateString === "unknown") {
             return "unknown";
+
         }
 
         const date = moment(dateString);
         return date.format('Do MMMM YYYY');
     };
+
+
 
 
 
@@ -52,6 +55,8 @@ const OrderTable = ({ orders, refetch }) => {
                 <tbody>
                     {orders?.map((order, index) => {
                         const isOpen = openOrders[index] || false; // Get the open state for each order
+
+
 
                         return (
                             <React.Fragment key={index}>
@@ -99,10 +104,29 @@ const OrderTable = ({ orders, refetch }) => {
                                                         <li className="text-sm font-semibold text-[#232327] leading-5">Email: <span className="text-[#6E717D] font-medium">{order.shipping_details.email}</span></li>
                                                         <li className="text-sm font-semibold text-[#232327] leading-5 flex items-center gap-1">Address:
                                                             <ul className="flex items-center gap-1">
-                                                                <li className="text-sm font-semibold text-[#232327] leading-5">State: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.state},</span></li>
+                                                                {
+                                                                    Object.entries(order?.shipping_details?.address || {})
+                                                                        .filter(([key, _]) => key !== 'additionalData')
+                                                                        .map(([key, value], index, array) => (
+                                                                            <li key={index} className="text-sm font-semibold text-[#232327] leading-5">
+                                                                                {key}: <span className="text-[#6E717D] font-medium">
+                                                                                    {
+                                                                                        typeof value === 'object' && value !== null
+                                                                                            ? JSON.stringify(value)
+                                                                                            : value
+                                                                                    }
+                                                                                </span>
+                                                                                {index !== array.length - 1 && ', '}
+                                                                            </li>
+                                                                        ))
+                                                                }
+
+
+
+                                                                {/* <li className="text-sm font-semibold text-[#232327] leading-5">State: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.state},</span></li>
                                                                 <li className="text-sm font-semibold text-[#232327] leading-5">City: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.city},</span></li>
                                                                 <li className="text-sm font-semibold text-[#232327] leading-5">Country: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.country},</span></li>
-                                                                <li className="text-sm font-semibold text-[#232327] leading-5">Postal Code: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.postal_code}</span></li>
+                                                                <li className="text-sm font-semibold text-[#232327] leading-5">Postal Code: <span className="text-[#6E717D] font-medium">{order.shipping_details.address.postal_code}</span></li> */}
                                                             </ul>
 
                                                         </li>
