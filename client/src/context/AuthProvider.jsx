@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
 
     //States
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     //Create user with google
     const googleProvider = new GoogleAuthProvider();

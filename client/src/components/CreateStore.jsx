@@ -97,7 +97,7 @@ const CreateStore = () => {
 
 
     return (
-        <div className='max-w-7xl  mx-auto px-5'>
+        <div className='max-w-7xl mx-auto px-5'>
             <TopBar title="Create Store" />
 
             <div className='h-[80vh] flex justify-center items-center'>

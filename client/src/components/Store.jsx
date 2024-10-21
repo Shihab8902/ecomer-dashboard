@@ -4,9 +4,10 @@ import { RxCaretDown } from "react-icons/rx";
 import { MdOutlineSettings } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { LuPlus } from 'react-icons/lu';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../context/AuthProvider';
 import Swal from 'sweetalert2';
+import useOrderInfo from '../hooks/useOrderInfo';
 
 
 
@@ -16,6 +17,13 @@ const Store = () => {
     const { user, logOut } = useContext(UserContext);
 
     const { currentStore, store, selectNewStore } = useStoreInfo();
+    const { refetchOrders } = useOrderInfo({ filter: "All", currentStore: currentStore });
+
+
+    //Refetch store items
+    useEffect(() => {
+        refetchOrders();
+    }, [currentStore, refetchOrders])
 
     //Handle logout
     const handleLogOut = () => {
@@ -73,6 +81,7 @@ const Store = () => {
                         store && store?.map(store => {
                             return <div onClick={() => {
                                 selectNewStore(store)
+
 
                             }} key={store?._id} className={`w-full flex  hover:bg-gray-100 justify-between items-center border ${currentStore === store && " bg-gray-100 cursor-default"}  cursor-pointer p-1 rounded `}>
                                 <div className="flex items-center gap-1">

@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import PrivateRoute from "../hooks/PrivateRoute";
 import CreateStore from "../components/CreateStore";
+import ManageStore from "../pages/ManageStore";
 
 
 export const router = createBrowserRouter([
@@ -30,6 +31,12 @@ export const router = createBrowserRouter([
                 path: "/store/create",
                 element: <PrivateRoute>
                     <CreateStore />
+                </PrivateRoute>
+            },
+            {
+                path: "/store/manage",
+                element: <PrivateRoute>
+                    <ManageStore />
                 </PrivateRoute>
             }
         ]

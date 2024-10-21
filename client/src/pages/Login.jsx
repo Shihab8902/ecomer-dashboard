@@ -35,7 +35,7 @@ const Login = () => {
     }
 
 
-    return <div className="mx-auto max-w-6xl h-screen flex justify-center items-center">
+    return <div className="mx-auto max-w-7xl h-screen flex justify-center items-center">
 
         <div className="max-w-[400px] md:min-w-[400px] bg-[#FDFDFF] p-8 border border-[#EBEBEE]">
             <img className="w-10 mx-auto mb-3" src="ecomer.png" alt="Ecomer logo" />
