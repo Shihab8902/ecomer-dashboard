@@ -16,7 +16,7 @@ const TopBar = ({ title }) => {
                 currentStore?.storeId && <nav className="flex gap-6">
                     <NavLink className="font-semibold text-base hover:underline" to="/">Home</NavLink>
                     <NavLink className="font-semibold text-base hover:underline" to="/store/manage">Settings</NavLink>
-                    <NavLink className="font-semibold text-base hover:underline" to="/store/manage">Payments</NavLink>
+                    <NavLink className="font-semibold text-base hover:underline" to="/payments">Payments</NavLink>
                 </nav>
             }
             <Store />

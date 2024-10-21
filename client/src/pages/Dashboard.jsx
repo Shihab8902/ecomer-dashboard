@@ -16,10 +16,6 @@ const Dashboard = () => {
     const { ordersLoading } = useOrderInfo({ filter: "All", currentStore: currentStore });
 
 
-
-
-
-
     {/* Conditional render store creation  */ }
 
     if (!currentStore?.storeId) {
@@ -31,7 +27,6 @@ const Dashboard = () => {
             }
         </main>
     }
-
 
 
     {/* Conditional render order information */ }
