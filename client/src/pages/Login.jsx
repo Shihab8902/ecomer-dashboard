@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useContext } from "react";
 import { UserContext } from "../context/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
@@ -35,7 +35,7 @@ const Login = () => {
     }
 
 
-    return <div className="mx-auto max-w-7xl h-screen flex justify-center items-center">
+    return <div className="mx-auto max-w-7xl h-screen flex justify-center flex-col items-center">
 
         <div className="max-w-[400px] md:min-w-[400px] bg-[#FDFDFF] p-8 border border-[#EBEBEE]">
             <img className="w-10 mx-auto mb-3" src="ecomer.png" alt="Ecomer logo" />
@@ -45,6 +45,20 @@ const Login = () => {
             </div>
         </div>
 
+        {/* Notice */}
+        <div className="  rounded-md p-2 shadow-sm max-w-[400px] md:min-w-[400px] mx-auto mt-6 flex  gap-4">
+            <p className="font-semibold text-base mb-1">Notice:</p>
+            <p className="text-sm">
+                Email us at{" "}
+                <Link
+                    to="mailto:hello@framax.co"
+                    className="underline  font-medium "
+                >
+                    hello@framax.co
+                </Link>{" "}
+                if you are facing any issues with login.
+            </p>
+        </div>
 
     </div>
 

@@ -1,5 +1,9 @@
+const sendEmail = require("../email/sendEmail");
 const orderCollection = require("../model/orderModel");
 const moment = require('moment');
+const customerEmailTemplate = require("../templates/customer");
+const ownerEmailTemplate = require("../templates/owner");
+const storeCollection = require("../model/storeModel");
 
 
 
@@ -53,10 +57,23 @@ const handleCheckoutSuccess = async (req, res) => {
             products
         }
 
+        const requestedStore = await storeCollection.findOne({ storeId: storeId });
 
         //Save order details to the database
         const newOrder = orderCollection(orderDetails);
         await newOrder.save();
+        //Send confirmation email to the store owner
+        const result = await sendEmail(requestedStore?.admin, "A new order received!", ownerEmailTemplate(requestedStore, orderDetails))
+        if (result?.messageId) {
+            //Send confirmation email to the customer
+            const result = await sendEmail(orderDetails?.shipping_details?.email, "Order placed!", customerEmailTemplate(requestedStore, orderDetails));
+            if (result?.messageId) {
+                //Update email usage for the store
+                const newEmailCount = requestedStore?.emailUsage ? requestedStore.emailUsage + 2 : 2;
+                await storeCollection.updateOne({ _id: requestedStore?._id }, { emailUsage: newEmailCount });
+            }
+
+        }
 
     }
 

@@ -27,6 +27,9 @@ const storeSchema = new mongoose.Schema({
     allowCod: {
         type: Boolean,
         default: true
+    },
+    emailUsage: {
+        type: Number
     }
 });
 

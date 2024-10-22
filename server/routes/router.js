@@ -6,6 +6,7 @@ const handleGetUserOrder = require("../controllers/handleGetUserOrder");
 const handleOrderUpdate = require("../controllers/handleOrderUpdate");
 const handlePaymentMethodActivation = require("../controllers/handlePaymentMethodActivation");
 const handlePaymentMethodDeactivation = require("../controllers/handlePaymentMethodDeactivation");
+const handlePaymentMethodRequest = require("../controllers/handlePaymentMethodRequest");
 const handleStoreCreation = require("../controllers/handleStoreCreation");
 const handleStoreUpdate = require("../controllers/handleStoreUpdate");
 const handleStripeCheckout = require("../controllers/handleStripeCheckout");
@@ -43,6 +44,9 @@ router.put("/store", handleStoreUpdate);
 
 //User order getting routes
 router.get("/userOrders", handleGetUserOrder);
+
+//Feature request routes
+router.put("/payment/request", handlePaymentMethodRequest);
 
 
 module.exports = router;

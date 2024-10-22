@@ -2,7 +2,7 @@ import Avatar from 'react-avatar';
 import useStoreInfo from '../hooks/useStoreInfo';
 import { RxCaretDown } from "react-icons/rx";
 import { MdOutlineSettings } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LuPlus } from 'react-icons/lu';
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../context/AuthProvider';
@@ -115,6 +115,7 @@ const Store = () => {
                         </p>
                     )}
                     <p className="text-[#6E717D] text-xs break-words">{user?.email}</p>
+
                 </div>
 
 

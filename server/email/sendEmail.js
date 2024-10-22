@@ -22,7 +22,6 @@ const sendEmail = async (receiver, subject, htmlContent) => {
         sender,
         to: receivers,
         subject,
-        textContent: "Test",
         htmlContent
     });
 

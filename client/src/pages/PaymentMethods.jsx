@@ -7,6 +7,7 @@ import TopBar from "../components/TopBar";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useStoreInfo from "../hooks/useStoreInfo";
 import Swal from "sweetalert2";
+import { IoIosMail } from "react-icons/io";
 
 
 
@@ -290,7 +291,7 @@ const PaymentMethods = () => {
                     <div onClick={() => setIsCodOpen(!isCodOpen)} className={`flex items-center justify-between  mt-2  h-10 px-3 ${isCodOpen && "border-b"} border-[#D3D3D4]`}>
                         <div className="flex items-center gap-2">
                             <PiCaretRightBold className={`text-sm ${isCodOpen ? "rotate-90" : "rotate-0"} transition-transform duration-300`} />
-                            <img className='w-10 select-none' src="../../public/cod.svg" alt="Cash on Delivery" />
+                            <img className='w-10 select-none' src="cod.svg" alt="Cash on Delivery" />
                         </div>
                         {
                             store?.allowCod ? <span className="flex items-center gap-1 text-sm text-[#1FAC64]"><FaRegCheckCircle /> <span className="text-xs font-semibold ">Active</span></span>
@@ -325,7 +326,7 @@ const PaymentMethods = () => {
                     <div onClick={() => setIsStripeOpen(!isStripeOpen)} className={`flex items-center justify-between  mt-2  h-10 px-3 ${isStripeOpen && "border-b"} border-[#D3D3D4]`}>
                         <div className="flex items-center gap-2">
                             <PiCaretRightBold className={`text-sm ${isStripeOpen ? "rotate-90" : "rotate-0"} transition-transform duration-300`} />
-                            <img className='w-10 select-none' src="../../public/stripe.png" alt="Stripe" />
+                            <img className='w-10 select-none' src="stripe.png" alt="Stripe" />
                         </div>
                         {
                             store?.stripeSecret ? <span className="flex items-center gap-1 text-sm text-[#1FAC64]"><FaRegCheckCircle /> <span className="text-xs font-semibold ">Active</span></span>
@@ -404,7 +405,7 @@ const PaymentMethods = () => {
                     <div onClick={() => setIsYocoOpen(!isYocoOpen)} className={`flex items-center justify-between  mt-2  h-10 px-3 ${isYocoOpen && "border-b"} border-[#D3D3D4]`}>
                         <div className="flex items-center gap-2">
                             <PiCaretRightBold className={`text-sm ${isYocoOpen ? "rotate-90" : "rotate-0"} transition-transform duration-300`} />
-                            <img className='w-12 select-none' src="../../public/yoco.svg" alt="Yoco" />
+                            <img className='w-12 select-none' src="yoco.svg" alt="Yoco" />
                         </div>
                         {
                             store?.yocoSecret ? <span className="flex items-center gap-1 text-sm text-[#1FAC64]"><FaRegCheckCircle /> <span className="text-xs font-semibold ">Active</span></span>
@@ -421,9 +422,9 @@ const PaymentMethods = () => {
                             {
                                 store?.yocoSecret && <>
                                     {/* Yoco Secret */}
-                                    <div className="mt-3">
+                                    <div className="mt-3 bg-white">
                                         <label className="block text-xs mb-1 font-medium" htmlFor="storeName">YOCO Secret Key</label>
-                                        <div className="w-full p-3 border flex justify-between  border-gray-100 ">
+                                        <div className="w-full p-3 border flex justify-between  border-[#D3D3D4] rounded">
                                             <p className='w-full overflow-x-auto break-words text-xs pr-2'>{formatSecret(store?.yocoSecret)}</p> <span title='Update Yoco Secret' onClick={() => setIsYocoSecretFieldVisible(!isYocoSecretFieldVisible)} className='cursor-pointer'><FaRegEdit className='text-base' /></span>
                                         </div>
                                     </div>
@@ -433,11 +434,11 @@ const PaymentMethods = () => {
                                         isYocoSecretFieldVisible && <>
                                             <div className="relative mt-3">
                                                 <label className="block text-xs mb-1 font-medium" htmlFor="stripeSecret">New YOCO Secret Key</label>
-                                                <input onChange={(e) => setYocoSecret(e.target.value)} value={yocoSecret} className="w-full p-3 rounded-md  h-10" type={yocoPasswordVisible ? "text" : "password"} name="stripeSecret" id="stripeSecret" placeholder="Enter YOCO secret" required />
+                                                <input onChange={(e) => setYocoSecret(e.target.value)} value={yocoSecret} className="w-full px-3 py-[10px] text-sm rounded border border-[#D3D3D4] outline-gray-200" type={yocoPasswordVisible ? "text" : "password"} name="stripeSecret" id="stripeSecret" placeholder="Enter YOCO secret" required />
                                                 <span onClick={() => setYocoPasswordVisible(!yocoPasswordVisible)} className="absolute bottom-3 right-2 text-base text-gray-400 cursor-pointer">{visiblePassword ? <FaEye /> : <FaEyeSlash />}</span>
                                             </div>
 
-                                            <button onClick={() => handlePaymentMethodActivation("yoco")} className=" w-full bg-[#232327] mt-2 h-fit px-3 py-2 rounded-md text-white hover:bg-black focus:bg-black">Save</button>
+                                            <button onClick={() => handlePaymentMethodActivation("yoco")} className="w-full bg-[#232327] mt-2 px-3 py-2 rounded-md text-white hover:bg-black text-sm focus:bg-black">Save</button>
                                         </>
 
                                     }
@@ -459,13 +460,13 @@ const PaymentMethods = () => {
                                 {/* Render stripe secret field */}
                                 <div className="relative  px-3 ">
                                     <label className="block text-xs mb-1 font-medium" htmlFor="stripeSecret">YOCO Secret Key</label>
-                                    <input onChange={(e) => setYocoSecret(e.target.value)} className="w-full p-3 rounded-md  h-10" type={yocoPasswordVisible ? "text" : "password"} name="stripeSecret" id="stripeSecret" placeholder="Enter stripe secret" />
+                                    <input onChange={(e) => setYocoSecret(e.target.value)} className="w-full px-3 py-[10px] text-sm rounded border border-[#D3D3D4] outline-gray-200" type={yocoPasswordVisible ? "text" : "password"} name="stripeSecret" id="stripeSecret" placeholder="Enter stripe secret" />
                                     <span onClick={() => setYocoPasswordVisible(!yocoPasswordVisible)} className="absolute bottom-3 right-6 text-base text-gray-400 cursor-pointer">{yocoPasswordVisible ? <FaEye /> : <FaEyeSlash />}</span>
                                 </div>
                                 <p className=" mt-1 text-[#232327] px-3 pb-2  text-[9px]">For retrieving your Yoco Secret, visit the <Link className="font-bold hover:underline" to="https://developer.yoco.com/online/resources/integration-keys" target='_blank'>YOCO API documentation.</Link></p>
 
                                 <div className="w-full flex px-5 justify-end">
-                                    <button onClick={() => handlePaymentMethodActivation("yoco")} className=" w-fit h-fit px-3 py-1 rounded-md bg-gray-200">Save</button>
+                                    <button onClick={() => handlePaymentMethodActivation("yoco")} className=" px-3 py-1 rounded text-sm bg-gray-200">Save</button>
                                 </div>
                             </div>
                         }
@@ -481,6 +482,8 @@ const PaymentMethods = () => {
 
 
         </div>
+
+        <p className="text-center font-medium mt-5 text-sm flex justify-center items-center gap-1"> <IoIosMail className="text-2xl" /> <Link to="/payments/request">Request Payment Method</Link></p>
 
     </main>
 }

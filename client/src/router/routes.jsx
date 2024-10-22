@@ -7,6 +7,9 @@ import PrivateRoute from "../hooks/PrivateRoute";
 import CreateStore from "../components/CreateStore";
 import ManageStore from "../pages/ManageStore";
 import PaymentMethods from "../pages/PaymentMethods";
+import RemixTemplate from "../pages/RemixTemplate";
+import Documentation from "../pages/Documentation";
+import PaymentRequest from "../pages/PaymentRequest";
 
 
 export const router = createBrowserRouter([
@@ -44,6 +47,22 @@ export const router = createBrowserRouter([
                 path: "/payments",
                 element: <PrivateRoute>
                     <PaymentMethods />
+                </PrivateRoute>
+            },
+            {
+                path: "/remix",
+                element: <PrivateRoute>
+                    <RemixTemplate />
+                </PrivateRoute>
+            },
+            {
+                path: "/setup",
+                element: <Documentation />
+            },
+            {
+                path: "/payments/request",
+                element: <PrivateRoute>
+                    <PaymentRequest />
                 </PrivateRoute>
             }
         ]

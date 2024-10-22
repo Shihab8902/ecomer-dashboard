@@ -1,7 +1,4 @@
-const ownerEmailTemplate = () => {
-
-    const currentYear = new Date().getFullYear();
-
+const ownerEmailTemplate = (store, order) => {
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +13,15 @@ const ownerEmailTemplate = () => {
             background-color: #f4f4f4;
         }
         .container {
-            width: 100%;
+            width: 80vw;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto;
             background-color: #ffffff;
             padding: 20px;
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
         }
         .header {
-            background-color: #2f2f2f;
+            background-color: #333;
             padding: 20px;
             text-align: center;
             color: #ffffff;
@@ -39,22 +36,86 @@ const ownerEmailTemplate = () => {
         }
         .order-summary h2 {
             margin-top: 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
         }
         .order-item {
+            padding: 15px 0;
+        }
+        .product-wrapper {
             display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
+            justify-content: space-between; 
+            width : 100%;
+            align-items: center; 
+            padding: 5px 0;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .product-image-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .product-details {
+            height: fit-content;
+        }
+        .product-details h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        .product-details p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #777;
+        }
+        .product-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            position: absolute; 
+            margin-left: 60px;
+            right: 10px;
         }
         .total {
             font-size: 18px;
             font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
         }
         .contact-info {
-            padding: 20px;
+            padding: 20px 0;
         }
-        .contact-info a {
-            color: #2f2f2f;
-            text-decoration: none;
+        .contact-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .contact-info ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        .address-list {
+            font-size: 14px;
+            font-weight: 600;
+            color: #232327;
+            line-height: 1.5;
+        }
+        .address-list span {
+            color: #6E717D;
+        }
+        .bold {
+            font-weight: bold;
+            color: #333;
         }
         .footer {
             text-align: center;
@@ -70,34 +131,59 @@ const ownerEmailTemplate = () => {
 
 <div class="container">
     <div class="header">
-        <h1>New Order Placed at [Store Name]</h1>
+        <h1>New Order Placed at ${store?.storeName}</h1>
     </div>
 
     <div class="order-summary">
-        <h2>A new order has been placed by [Customer Name].</h2>
-        <p>Order Number: <strong>[Order Number]</strong></p>
+        <h2>A new order has been placed by <span class="bold">${order?.shipping_details?.name}</span>.</h2>
+        <p>Order Number: <strong>${order?.orderNumber}</strong></p>
         
         <div class="order-item">
-            <div>Product 1 (Size: M)</div>
-            <div>$30</div>
+            ${order?.products?.map(product => `
+                <div class="product-wrapper">
+                    <div class="product-image-wrapper">
+                        <img class="product-image" src="${product?.image}" alt="Image unavailable" />
+                        <div class="product-details">
+                            <h3>${product?.productName}</h3>
+                            <p>Quantity: ${product?.quantity}</p>
+                        </div>
+                    </div>
+                    <p class="product-price">$${(product?.price).toFixed(2)}</p>
+                </div>
+            `).join('')}
         </div>
-        <div class="order-item">
-            <div>Product 2 (Size: L)</div>
-            <div>$45</div>
-        </div>
-        
-        <div class="total">Total: $75</div>
+      
+        <div class="total">Total: <span class="bold">$${(order?.subtotal / 100).toFixed(2)}</span></div>
     </div>
 
     <div class="contact-info">
-        <p>Shipping Address: [Shipping Address]</p>
-        <p>Payment Method: [Payment Method]</p>
-        <p>Estimated Delivery: [Delivery Date]</p>
-        <p>If you have any questions, feel free to <a href="mailto:support@store.com">contact us</a>.</p>
+        <h3>Shipping Address</h3>
+        <ul>
+            <li class="address-list">Name: <span>${order?.shipping_details?.name}</span></li>
+            <li class="address-list">Email: <span>${order?.shipping_details?.email}</span></li>
+            <li class="address-list">Address:
+                <ul>
+                    ${Object.entries(order?.shipping_details?.address || {})
+            .filter(([key]) => key !== 'additionalData')
+            .map(([key, value], index, array) => `
+                        <li class="address-list">${key}: <span>${typeof value === 'object' && value !== null ? JSON.stringify(value) : value}</span>
+                        ${index !== array.length - 1 ? ', ' : ''}</li>
+                    `).join('')}
+                </ul>
+            </li>
+            ${order?.shipping_details?.address?.additionalData?.map((data, index) => `
+                <li class="address-list">
+                    Additional: ${Object.entries(data).map(([key, value]) => `
+                    <span>${key}: <span class="additional-address">${value}</span></span>`).join(', ')}
+                </li>
+            `).join('')}
+        </ul>
+        <p><strong>Payment Method:</strong> ${order?.paymentMethod}</p>
+        <p><strong>Ordered At:</strong> ${order?.orderedAt}</p>
     </div>
 
     <div class="footer">
-        <p>&copy; ${currentYear} [Store Name]. All rights reserved.</p>
+        <p>Powered by eComer.</p>
     </div>
 </div>
 

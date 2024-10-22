@@ -38,26 +38,26 @@ const handleCashOnDeliveryCheckout = async (req, res) => {
             orderNumber: `#${Date.now().toString().slice(5, 13)}`,
             orderedAt: moment().format('Do MMMM YYYY'),
             paymentMethod: "Cash on Delivery",
-
         }
 
         const newOrder = orderCollection(data);
         await newOrder.save();
 
         //Send confirmation email to the store owner
-        const result = await sendEmail(requestedStore?.admin, "A new order received!", ownerEmailTemplate())
+        const result = await sendEmail(requestedStore?.admin, "A new order received!", ownerEmailTemplate(requestedStore, data))
         if (result?.messageId) {
             //Send confirmation email to the customer
-            await sendEmail(userData?.shipping_details?.email, "Order placed!", customerEmailTemplate());
+            const result = await sendEmail(userData?.shipping_details?.email, "Order placed!", customerEmailTemplate(requestedStore, data));
+            if (result?.messageId) {
+                //Update email usage for the store
+                const newEmailCount = requestedStore?.emailUsage ? requestedStore.emailUsage + 2 : 2;
+                await storeCollection.updateOne({ _id: requestedStore?._id }, { emailUsage: newEmailCount });
+            }
+
         }
 
 
-
-
         res.send({ message: "success" })
-
-
-
 
     }
     catch (error) {

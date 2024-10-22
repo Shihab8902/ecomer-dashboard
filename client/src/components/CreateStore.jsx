@@ -52,7 +52,7 @@ const CreateStore = () => {
                     icon: "success"
                 })
                 setIsStoreCreating(false);
-                navigate("/");
+                navigate("/remix");
 
             }).catch(error => {
                 Swal.fire({
