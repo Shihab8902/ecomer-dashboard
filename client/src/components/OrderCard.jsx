@@ -1,6 +1,6 @@
 
 
-const OrderCard = ({ product }) => {
+const OrderCard = ({ product, currency }) => {
 
     return <div>
         <div className="flex justify-between items-center">
@@ -25,7 +25,7 @@ const OrderCard = ({ product }) => {
             </div>
 
             <div>
-                <p className="text-[#6E717D] text-base leading-6 font-semibold ">${product.price}</p>
+                <p className="text-[#6E717D] text-base leading-6 font-semibold ">{currency}{product.price}</p>
 
 
             </div>

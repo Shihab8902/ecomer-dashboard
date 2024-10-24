@@ -30,6 +30,10 @@ const storeSchema = new mongoose.Schema({
     },
     emailUsage: {
         type: Number
+    },
+    storeCurrency: {
+        type: String,
+        default: "$"
     }
 });
 

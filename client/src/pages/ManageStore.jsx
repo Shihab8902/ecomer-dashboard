@@ -1,10 +1,9 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import useStoreInfo from '../hooks/useStoreInfo';
-import { UserContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../components/TopBar';
 import LoaderSpinner from '../components/LoaderSpinner';
@@ -15,7 +14,6 @@ const ManageStore = () => {
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const { refetchStore, currentStore } = useStoreInfo();
-
 
 
     const [isStoreUpdating, setIsStoreUpdating] = useState(false);
@@ -47,14 +45,14 @@ const ManageStore = () => {
         e.preventDefault();
         setIsStoreUpdating(true)
         const storeName = e.target.storeName.value;
+        const storeCurrency = e.target.storeCurrency.value;
 
-        axiosPublic.put(`/store?id=${currentStore?._id}`, { storeName, location })
+        axiosPublic.put(`/store?id=${currentStore?._id}`, { storeName, location, storeCurrency })
             .then(res => {
                 if (res.data) {
                     refetchStore();
                     setIsStoreUpdating(false);
-                    navigate("/")
-
+                    navigate("/");
                     Swal.fire({
                         text: "Store updated successfully",
                         showConfirmButton: false,
@@ -72,13 +70,6 @@ const ManageStore = () => {
                 setIsStoreUpdating(false);
             })
     }
-
-
-
-
-
-
-
 
 
     //Country selection
@@ -114,7 +105,16 @@ const ManageStore = () => {
         <div className='max-w-7xl mx-auto px-5'>
             <TopBar title="Manage Store" />
 
-            <div className='h-[80vh] flex justify-center items-center'>
+            <div className='h-[80vh] flex justify-center flex-col items-center'>
+
+                {/* Store id */}
+                <div className="mt-3 max-w-[400px] md:min-w-[400px] mx-auto bg-[#FDFDFF] py-3 px-5 mb-10 border border-[#EBEBEE]">
+                    <label className="block text-base mb-1  text-[#232327]" htmlFor="storeId">Store ID</label>
+                    <div className="w-full rounded p-3 mb-2 border text-xs flex justify-between items-center border-[#D3D3D4] ">
+                        {currentStore?.storeId} <span onClick={handleStoreIdCopy} title='Copy Store ID' className='cursor-pointer'><FaCopy /></span>
+                    </div>
+                </div>
+
                 <form onSubmit={handleFormSubmit} className="max-w-[400px] md:min-w-[400px] bg-[#FDFDFF] p-8 border border-[#EBEBEE]" >
                     <div>
                         <label className="block text-base mb-1  text-[#232327]" htmlFor="name">Store Name</label>
@@ -126,15 +126,10 @@ const ManageStore = () => {
                         <Select styles={customStyles} options={options} defaultValue={location} className='cursor-pointer rounded-md  outline-gray-300 focus:border-gray-300' value={location} onChange={(value) => setLocation(value)} />
                     </div>
 
-                    {/* Store id */}
-                    <div className="mt-3">
-                        <label className="block text-base mb-1  text-[#232327]" htmlFor="storeId">Store ID</label>
-                        <div className="w-full rounded p-3 mb-2 border text-xs flex justify-between items-center border-[#D3D3D4] ">
-                            {currentStore?.storeId} <span onClick={handleStoreIdCopy} title='Copy Store ID' className='cursor-pointer'><FaCopy /></span>
-                        </div>
+                    <div className='mt-3'>
+                        <label className="block text-base mb-1  text-[#232327]" htmlFor="storeCurrency">Store Currency</label>
+                        <input defaultValue={currentStore?.storeCurrency} className="w-full px-4 py-[10px] outline-gray-300 rounded border placeholder:text-[#A9A9B7] border-[#D3D3D4] " type="text" name="storeCurrency" id="storeCurrency" placeholder="Enter store currency" required />
                     </div>
-
-
 
                     <button type="submit" disabled={isStoreUpdating} className="w-full h-10  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327] p-2 py-[10px] hover:bg-black font-medium rounded text-white flex items-center justify-center gap-2 mt-5">
                         {

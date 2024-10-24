@@ -1,12 +1,17 @@
 import { useContext } from "react";
 import TopBar from "../components/TopBar"
 import { UserContext } from "../context/AuthProvider";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const PaymentRequest = () => {
 
 
     const { user } = useContext(UserContext);
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
 
 
@@ -27,7 +32,27 @@ const PaymentRequest = () => {
             description
         }
 
-        console.log(data);
+        axiosPublic.put("/payment/request", data)
+            .then(res => {
+                if (res.data === "success") {
+                    Swal.fire({
+                        title: "Sent!",
+                        text: "Your message has been successfully sent. We'll get back to you shortly!",
+                        icon: "success"
+                    });
+                    navigate(-1);
+                    e.target.reset();
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error"
+                })
+            })
+
+
     }
 
 

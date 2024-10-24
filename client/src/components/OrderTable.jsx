@@ -110,7 +110,7 @@ const OrderTable = () => {
                                                     {formatDate(order.exp_deliver)}
                                                 </td>
                                                 <td className="text-center text-base leading-6 font-medium text-[#6E717D]">{order?.paymentMethod}</td>
-                                                <td className="text-center text-base leading-6 font-medium text-[#6E717D]">${(order.subtotal / 100).toFixed(2)}</td>
+                                                <td className="text-center text-base leading-6 font-medium text-[#6E717D]">{currentStore?.storeCurrency}{(order.subtotal / 100).toFixed(2)}</td>
 
                                                 {/* Edit order button */}
                                                 <td className="text-center  flex justify-center"><button onClick={(e) => {
@@ -186,7 +186,7 @@ const OrderTable = () => {
                                                                 <h4 className="text-[#232327] font-semibold leading-6 text-base">Order Summary: </h4>
                                                                 <div className="flex flex-col gap-3">
                                                                     {order.products?.map(product => (
-                                                                        <OrderCard key={product.uid} product={product} />
+                                                                        <OrderCard key={product.uid} product={product} currency={currentStore?.storeCurrency} />
                                                                     ))}
                                                                 </div>
                                                                 {/* Divider */}
@@ -195,7 +195,7 @@ const OrderTable = () => {
                                                                 {/* Subtotal */}
                                                                 <div className="mt-1 flex justify-between items-center">
                                                                     <h5 className="text-[#232327] font-bold leading-6 text-base">Subtotal: </h5>
-                                                                    <p className="text-[#232327] font-bold leading-6 text-base">${(order?.subtotal / 100).toFixed(2)}</p>
+                                                                    <p className="text-[#232327] font-bold leading-6 text-base">{currentStore?.storeCurrency}{(order?.subtotal / 100).toFixed(2)}</p>
                                                                 </div>
                                                             </div>
                                                         </div>

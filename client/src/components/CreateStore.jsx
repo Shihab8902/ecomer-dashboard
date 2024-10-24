@@ -28,9 +28,11 @@ const CreateStore = () => {
         e.preventDefault();
         setIsStoreCreating(true)
         const storeName = e.target?.storeName?.value;
+        const storeCurrency = e.target.storeCurrency.value;
         const storeData = {
             storeName,
             location,
+            storeCurrency,
             admin: user.email
         }
         if (!location) {
@@ -110,6 +112,11 @@ const CreateStore = () => {
                     <div className='mt-3'>
                         <label className="block text-base mb-1  text-[#232327]" htmlFor="location">Where is the business located?</label>
                         <Select styles={customStyles} options={options} className='cursor-pointer rounded-md  outline-gray-300 focus:border-gray-300' value={location} onChange={(value) => setLocation(value)} />
+                    </div>
+
+                    <div className='mt-3'>
+                        <label className="block text-base mb-1  text-[#232327]" htmlFor="storeCurrency">Store Currency</label>
+                        <input defaultValue="$" className="w-full px-4 py-[10px] outline-gray-300 rounded border placeholder:text-[#A9A9B7] border-[#D3D3D4] " type="text" name="storeCurrency" id="storeCurrency" placeholder="Enter store currency" required />
                     </div>
 
 
