@@ -6,6 +6,8 @@ const PORT = process.env.PORT;
 const cors = require("cors");
 const routes = require("./routes/router");
 const connectDB = require("./db/connectDB");
+const storeCollection = require("./model/storeModel");
+const orderCollection = require("./model/orderModel");
 
 
 

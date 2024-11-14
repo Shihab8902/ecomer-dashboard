@@ -10,6 +10,7 @@ const handleStripeCheckout = async (req, res) => {
 
         //Get the stripe secret for the particular store
         const requestedStore = await storeCollection.findOne({ storeId: storeId });
+        console.log(requestedStore);
 
         if (!requestedStore?.stripeSecret) {
             return res.status(403).send("Operation now allowed!");

@@ -28,9 +28,13 @@ const handleCheckoutSuccess = async (req, res) => {
         const combinedData = { ...orderPaymentInfo, ...orderedProducts };
 
         const orderDetails = {
-            subtotal: combinedData.amount_subtotal,
+            subtotal: (combinedData.amount_subtotal + ((combinedData?.shipping || 0) * 100) + ((combinedData?.tax || 0) * 100)) - ((combinedData?.discount || 0) * 100),
             storeId: storeId,
             currency: combinedData.currency,
+            additionalCharges: combinedData.additionalCharges,
+            additionalCustomerData: combinedData.additionalCustomerData,
+            additionalShippingData: combinedData.additionalShippingData,
+            additionalProductData: combinedData.additionalProductData,
             shipping_details: {
                 email: combinedData.customer_details?.email,
                 name: combinedData.customer_details?.name,
@@ -47,6 +51,7 @@ const handleCheckoutSuccess = async (req, res) => {
             },
             orderNumber: `#${Date.now().toString().slice(5, 13)}`,
             paymentMethod: "Stripe",
+            paymentStatus: "Paid",
             orderedAt: moment().format('Do MMMM YYYY'),
             status: [
                 {

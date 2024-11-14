@@ -34,7 +34,7 @@ const handleYocoCheckout = async (req, res) => {
         )
 
         const data = {
-            subtotal: countedSubtotal * 100,
+            subtotal: (((countedSubtotal * 100) + ((userData?.shipping || 0) * 100) + ((userData?.tax || 0) * 100)) - ((userData?.discount || 0) * 100)),
             shipping_details: userData?.shipping_details,
             status: [
                 {
@@ -43,7 +43,11 @@ const handleYocoCheckout = async (req, res) => {
                 }
             ],
             products: userData?.products,
+            additionalCustomerData: userData.additionalCustomerData,
+            additionalShippingData: userData.additionalShippingData,
+            additionalProductData: userData.additionalProductData,
             storeId: userData?.storeId,
+            additionalCharges: userData.additionalCharges,
             orderNumber: `#${Date.now().toString().slice(5, 13)}`,
             orderedAt: moment().format('Do MMMM YYYY'),
             paymentMethod: "unknown",

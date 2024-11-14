@@ -38,9 +38,38 @@ const orderSchema = new mongoose.Schema({
     paymentMethod: {
         type: String,
     },
+    paymentStatus: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: new Date()
+    },
+    timelineStatus: {
+        type: Array
+    },
+    note: {
+        type: String
+    },
+    additionalCustomerData: {
+        type: Array
+    },
+    additionalShippingData: {
+        type: Array
+    },
+    additionalProductData: {
+        type: Array
+    },
+    additionalPaymentData: {
+        type: Array
+    },
+    additionalCharges: {
+        type: {
+            discount: { type: Number, default: 0 },
+            shipping: { type: Number, default: 0 },
+            tax: { type: Number, default: 0 }
+        },
+        default: {}
     }
 
 });

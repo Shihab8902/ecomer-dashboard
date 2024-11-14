@@ -22,7 +22,7 @@ const RemixTemplate = () => {
                 <div className="w-full flex items-center flex-col h-full justify-end">
                     <p className="mt-3 text-center font-medium mb-4">Remix our E-commerce template to <br /> get started.</p>
                     <Link to="https://framer.com/projects/new?duplicate=y7nKoZJCd7roMdEXiGxM" target="_blank"><button onClick={() => navigate("/setup")} className="px-8 py-2 rounded bg-[#232327] hover:bg-black text-white">Remix Template</button></Link>
-                    <p className="mt-3 text-center text-xs ">Already have the template? <Link className="font-semibold hover:underline" to="/">Return to Home</Link></p>
+                    <p className="mt-3 text-center text-xs ">Already have the template? <Link className="font-semibold hover:underline" to="/setup">Return to Home</Link></p>
                 </div>
             </div>
 

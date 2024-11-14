@@ -7,7 +7,7 @@ const handleYocoSuccess = async (req, res) => {
         const id = req.query.id;
 
         //Update the order payment method
-        await orderCollection.findByIdAndUpdate(new mongoose.Types.ObjectId(id), { paymentMethod: "YOCO" })
+        await orderCollection.findByIdAndUpdate(new mongoose.Types.ObjectId(id), { paymentMethod: "YOCO", paymentStatus: "Paid" })
 
         res.redirect(`${originURL}/thank-you`);
 

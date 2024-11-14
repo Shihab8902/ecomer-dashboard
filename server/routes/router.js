@@ -1,6 +1,7 @@
 const handleCashOnDeliveryCheckout = require("../controllers/handleCashOnDeliveryCheckout");
 const handleCheckoutSuccess = require("../controllers/handleCheckoutSuccess");
 const handleGetOrders = require("../controllers/handleGetOrders");
+const handleGetSingleOrderData = require("../controllers/handleGetSingleOrderData");
 const handleGetStoreId = require("../controllers/handleGetStoreId");
 const handleGetUserOrder = require("../controllers/handleGetUserOrder");
 const handleOrderUpdate = require("../controllers/handleOrderUpdate");
@@ -8,6 +9,8 @@ const handlePaymentMethodActivation = require("../controllers/handlePaymentMetho
 const handlePaymentMethodDeactivation = require("../controllers/handlePaymentMethodDeactivation");
 const handlePaymentMethodRequest = require("../controllers/handlePaymentMethodRequest");
 const handleStoreCreation = require("../controllers/handleStoreCreation");
+const handleStoreDelete = require("../controllers/handleStoreDelete");
+const handleStoreSetupStepsUpdate = require("../controllers/handleStoreSetupSetpsUpdate");
 const handleStoreUpdate = require("../controllers/handleStoreUpdate");
 const handleStripeCheckout = require("../controllers/handleStripeCheckout");
 const handleTotalOrderCount = require("../controllers/handleTotalOrderCount");
@@ -34,6 +37,7 @@ router.get("/success/yoco", handleYocoSuccess);
 
 //Order management routes
 router.get("/orders", handleGetOrders);
+router.get("/order", handleGetSingleOrderData);
 router.get("/orders/total", handleTotalOrderCount);
 router.put("/orders", handleOrderUpdate);
 
@@ -41,12 +45,15 @@ router.put("/orders", handleOrderUpdate);
 router.post("/store", handleStoreCreation);
 router.get("/store", handleGetStoreId)
 router.put("/store", handleStoreUpdate);
+router.delete("/store", handleStoreDelete);
+router.put("/store/setup", handleStoreSetupStepsUpdate);
 
 //User order getting routes
 router.get("/userOrders", handleGetUserOrder);
 
 //Feature request routes
 router.put("/payment/request", handlePaymentMethodRequest);
+
 
 
 module.exports = router;

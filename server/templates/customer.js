@@ -1,5 +1,5 @@
 const customerEmailTemplate = (store, order) => {
-  return `
+    return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,7 +148,7 @@ const customerEmailTemplate = (store, order) => {
                           <p>Quantity: ${product?.quantity}</p>
                       </div>
                   </div>
-                  <p class="product-price">$${(product?.price).toFixed(2)}</p>
+                        <p class="product-price">$${parseFloat(product?.price || 0).toFixed(2)}</p>
               </div>
           `).join('')}
       </div>
@@ -164,8 +164,8 @@ const customerEmailTemplate = (store, order) => {
           <li class="address-list">Address:
               <ul>
                   ${Object.entries(order?.shipping_details?.address || {})
-      .filter(([key]) => key !== 'additionalData')
-      .map(([key, value], index, array) => `
+            .filter(([key]) => key !== 'additionalData')
+            .map(([key, value], index, array) => `
                       <li class="address-list">${key}: <span>${typeof value === 'object' && value !== null ? JSON.stringify(value) : value}</span>
                       ${index !== array.length - 1 ? ', ' : ''}</li>
                   `).join('')}

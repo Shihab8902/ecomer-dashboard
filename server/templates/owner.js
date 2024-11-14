@@ -148,7 +148,7 @@ const ownerEmailTemplate = (store, order) => {
                             <p>Quantity: ${product?.quantity}</p>
                         </div>
                     </div>
-                    <p class="product-price">$${(product?.price).toFixed(2)}</p>
+                   <p class="product-price">$${parseFloat(product?.price || 0).toFixed(2)}</p>
                 </div>
             `).join('')}
         </div>

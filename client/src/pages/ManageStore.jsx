@@ -7,13 +7,14 @@ import useStoreInfo from '../hooks/useStoreInfo';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../components/TopBar';
 import LoaderSpinner from '../components/LoaderSpinner';
-import { FaCopy } from 'react-icons/fa';
+import { FaCopy, FaTrashAlt } from 'react-icons/fa';
+
 
 const ManageStore = () => {
 
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
-    const { refetchStore, currentStore } = useStoreInfo();
+    const { refetchStore, currentStore, store, selectNewStore } = useStoreInfo();
 
 
     const [isStoreUpdating, setIsStoreUpdating] = useState(false);
@@ -68,6 +69,49 @@ const ManageStore = () => {
                     icon: "error"
                 })
                 setIsStoreUpdating(false);
+            })
+    }
+
+
+    //Store delete
+    const handleStoreDelete = () => {
+        Swal.fire({
+            title: "Delete Store?",
+            html: `<span>Are you sure you want to delete this store? This action is irreversible and will permanently delete all store data, including orders.</span> <br /> Type <strong>${currentStore?.storeName}</strong> below to confirm.`,
+            icon: "warning",
+            input: "text",
+            showCancelButton: true,
+            confirmButtonText: "Confirm"
+        })
+            .then(res => {
+                if (res.value === currentStore?.storeName) {
+                    axiosPublic.delete(`/store?storeId=${currentStore?.storeId}`)
+                        .then(res => {
+                            if (res.data === "success") {
+                                Swal.fire({
+                                    icon: "success",
+                                    text: "The store has been successfully deleted.",
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                })
+                                selectNewStore(store[0]);
+                            }
+
+                        })
+                } else {
+                    Swal.fire({
+                        title: "Failed!",
+                        text: "Store name is incorrect.",
+                        icon: "error"
+                    })
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error"
+                })
             })
     }
 
@@ -139,7 +183,16 @@ const ManageStore = () => {
                     </button>
 
                 </form>
+
+
+                {/* Delete button */}
+                <div className='flex justify-center w-full max-w-[400px] mt-6 mx-auto'>
+                    <button onClick={handleStoreDelete} className=' px-2 py-3 w-1/2 bg-red-600 hover:bg-red-700  text-sm flex justify-center items-center font-medium rounded gap-2 text-white '><FaTrashAlt className='text-lg' />Delete Store</button>
+                </div>
+
             </div>
+
+
 
 
         </div>

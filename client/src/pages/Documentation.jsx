@@ -53,7 +53,7 @@ const Documentation = () => {
 
             <div className="flex flex-col items-center gap-3 ">
                 <p className="text-base"><span className="font-bold">Step 3:</span> Open the starter template and double click on the footer component. Here you will find  a code component name “Store Id Injector”, paste the store id on its property control. (This code component can also be placed on any other component that is shared across multiple pages.)</p>
-                <img className="w-full" src="storeId.png" alt="" />
+                <img className="w-full" src="storeId.png" alt="Store Id placement image reference" />
             </div>
 
             <div className="flex items-center gap-3 ">

@@ -34,6 +34,9 @@ const storeSchema = new mongoose.Schema({
     storeCurrency: {
         type: String,
         default: "$"
+    },
+    setupSteps: {
+        type: [Object]
     }
 });
 

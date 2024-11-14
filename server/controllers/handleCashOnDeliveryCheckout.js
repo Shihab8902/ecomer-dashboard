@@ -18,14 +18,20 @@ const handleCashOnDeliveryCheckout = async (req, res) => {
         }
 
 
+
+
         //Calculate subtotal
         const countedSubtotal = userData?.products?.reduce(
             (acc, item) => acc + parseFloat(item.totalPrice),
             0
         )
 
+
+
+
+
         const data = {
-            subtotal: countedSubtotal * 100,
+            subtotal: (((countedSubtotal * 100) + ((userData?.shipping || 0) * 100) + ((userData?.tax || 0) * 100)) - ((userData?.discount || 0) * 100)),
             shipping_details: userData?.shipping_details,
             status: [
                 {
@@ -36,15 +42,24 @@ const handleCashOnDeliveryCheckout = async (req, res) => {
             products: userData?.products,
             storeId: userData?.storeId,
             orderNumber: `#${Date.now().toString().slice(5, 13)}`,
+            paymentStatus: "Unpaid",
             orderedAt: moment().format('Do MMMM YYYY'),
             paymentMethod: "Cash on Delivery",
+            additionalCharges: userData.additionalCharges,
+            additionalCustomerData: userData.additionalCustomerData,
+            additionalShippingData: userData.additionalShippingData,
+            additionalProductData: userData.additionalProductData
         }
 
         const newOrder = orderCollection(data);
         await newOrder.save();
 
+
+
         //Send confirmation email to the store owner
         const result = await sendEmail(requestedStore?.admin, "A new order received!", ownerEmailTemplate(requestedStore, data))
+
+
         if (result?.messageId) {
             //Send confirmation email to the customer
             const result = await sendEmail(userData?.shipping_details?.email, "Order placed!", customerEmailTemplate(requestedStore, data));
