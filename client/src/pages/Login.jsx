@@ -35,30 +35,22 @@ const Login = () => {
     }
 
 
-    return <div className="mx-auto max-w-7xl h-screen flex justify-center flex-col items-center">
+    return <div className="mx-auto max-w-7xl h-screen flex justify-center flex-col items-center px-5">
 
-        <div className="max-w-[400px] md:min-w-[400px] bg-[#FDFDFF] p-8 border border-[#EBEBEE]">
-            <img className="w-10 mx-auto mb-3" src="ecomer.png" alt="Ecomer logo" />
-            <h3 className="text-2xl font-semibold text-center mb-6 text-[#232327]">Welcome to eComer</h3>
+        <div className="max-w-[600px] w-full bg-white rounded-lg md:p-10 px-5 py-6  ">
+            <img className="md:w-[78px] md:h-[78px] w-12 h-12 mx-auto " src="ecomer.png" alt="Ecomer logo" />
+            <h3 className="text-xl md:text-[32px] leading-[160%] font-semibold text-center my-5 md:my-8 text-[#232327]">Welcome to eComer</h3>
             <div className="flex w-full justify-center">
-                <button onClick={handleGoogleLogin} className="flex items-center text-base font-semibold gap-2 rounded-md hover:bg-black px-5 py-3 w-full justify-center bg-[#232327] text-white"> <FaGoogle className="text-xl" />  Continue with Google</button>
+                <button onClick={handleGoogleLogin} className="flex items-center text-base font-semibold gap-2 leading-[150%] rounded-[4px] hover:bg-black px-5 py-3 w-full justify-center bg-[#232327] text-white"> <FaGoogle />  Continue with Google</button>
+            </div>
+
+            {/* Notice */}
+            <div className="w-full mt-5">
+                <p className="text-sm md:text-base text-center font-normal leading-[160%] text-[#696969]"><span className="text-[#232327] font-medium">Note: </span>Email us at <Link className="text-[#232327] font-medium underline" to="mailto:hello@framax.co">hello@framax.co</Link> if you are facing any issues with login.</p>
             </div>
         </div>
 
-        {/* Notice */}
-        <div className="  rounded-md p-2 shadow-sm max-w-[400px] md:min-w-[400px] mx-auto mt-6 flex  gap-4">
-            <p className="font-semibold text-base mb-1">Notice:</p>
-            <p className="text-sm">
-                Email us at{" "}
-                <Link
-                    to="mailto:hello@framax.co"
-                    className="underline  font-medium "
-                >
-                    hello@framax.co
-                </Link>{" "}
-                if you are facing any issues with login.
-            </p>
-        </div>
+
 
     </div>
 

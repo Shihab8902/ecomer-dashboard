@@ -102,7 +102,7 @@ const CreateStore = () => {
         <div className='max-w-7xl mx-auto px-5'>
             <TopBar title="Create Store" />
 
-            <div className='h-[80vh] flex justify-center items-center'>
+            <div className='h-screen flex justify-center items-center'>
                 <form onSubmit={handleFormSubmit} className="max-w-[400px] md:min-w-[400px] bg-[#FDFDFF] p-8 border border-[#EBEBEE]" >
                     <div>
                         <label className="block text-base mb-1  text-[#232327]" htmlFor="name">Store Name</label>

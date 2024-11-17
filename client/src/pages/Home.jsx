@@ -8,7 +8,11 @@ const Home = () => {
 
     const { user } = useContext(UserContext);
 
-    return user ? <Dashboard /> : <Login />
+    return <main className="bg-[#F1F1F1]">
+        {
+            user ? <Dashboard /> : <Login />
+        }
+    </main>
 
 
 }
