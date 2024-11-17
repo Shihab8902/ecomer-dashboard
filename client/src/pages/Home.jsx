@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { UserContext } from "../context/AuthProvider"
-import Dashboard from "./Dashboard";
 import Login from "./Login";
+import Documentation from "./Documentation";
 
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
 
     return <main className="bg-[#F1F1F1]">
         {
-            user ? <Dashboard /> : <Login />
+            user ? <Documentation /> : <Login />
         }
     </main>
 

@@ -5,7 +5,8 @@ body {
 }
 
 .active {
-    text-decoration: underline;
+    color: #232327 !important;
+    
 }
 
 @tailwind base;

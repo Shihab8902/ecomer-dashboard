@@ -10,6 +10,7 @@ import PaymentMethods from "../pages/PaymentMethods";
 import RemixTemplate from "../pages/RemixTemplate";
 import Documentation from "../pages/Documentation";
 import PaymentRequest from "../pages/PaymentRequest";
+import OrderTable from "../components/OrderTable";
 
 
 export const router = createBrowserRouter([
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
                 </PrivateRoute>
             },
             {
-                path: "/payments",
+                path: "/payment",
                 element: <PrivateRoute>
                     <PaymentMethods />
                 </PrivateRoute>
@@ -63,6 +64,12 @@ export const router = createBrowserRouter([
                 path: "/payments/request",
                 element: <PrivateRoute>
                     <PaymentRequest />
+                </PrivateRoute>
+            },
+            {
+                path: "/orders",
+                element: <PrivateRoute>
+                    <OrderTable />
                 </PrivateRoute>
             }
         ]

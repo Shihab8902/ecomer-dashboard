@@ -1,8 +1,7 @@
 import Avatar from 'react-avatar';
 import useStoreInfo from '../hooks/useStoreInfo';
-import { RxCaretDown } from "react-icons/rx";
 import { MdOutlineSettings } from "react-icons/md";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { LuPlus } from 'react-icons/lu';
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../context/AuthProvider';
@@ -63,12 +62,12 @@ const Store = () => {
     return (
         <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className='btn btn-ghost hover:bg-transparent'>
-                <div className="flex items-center gap-1  border p-1 rounded bg-gray-50">
-                    <div className='flex items-center gap-1'>
-                        <Avatar name={currentStore?.storeName} size="28" round="5px" color="#000" />
-                        <p className='font-semibold'>{currentStore?.storeName}</p>
-                    </div>
-                    <span className='text-xl'><RxCaretDown /></span>
+                <div className='hidden md:block'>
+                    <Avatar name={currentStore?.storeName} size="40" round="8px" color="#232327" />
+                </div>
+
+                <div className='md:hidden'>
+                    <Avatar name={currentStore?.storeName} size="30" round="8px" color="#232327" />
                 </div>
             </div>
             <div
@@ -77,6 +76,7 @@ const Store = () => {
 
                 {/* Display stores */}
                 <div className=" max-h-48 min-w-56 overflow-auto flex flex-col gap-1">
+                    <p className="text-sm font-medium text-[#696969]  leading-[18px] mb-2">Stores</p>
                     {
                         store && store?.map(store => {
                             return <div onClick={() => {
@@ -85,8 +85,8 @@ const Store = () => {
 
                             }} key={store?._id} className={`w-full flex  hover:bg-gray-100 justify-between items-center border ${currentStore === store && " bg-gray-100 cursor-default"}  cursor-pointer p-1 rounded `}>
                                 <div className="flex items-center gap-1">
-                                    <Avatar name={store?.storeName} size="24" round="5px" color="#000" />
-                                    <p className='text-xs font-medium'>{store?.storeName}</p>
+                                    <Avatar name={store?.storeName} size="30" round="8px" color="#232327" />
+                                    <p className='text-xs font-medium text-[#696969]'>{store?.storeName}</p>
                                 </div>
                                 {
                                     currentStore === store && <span className="text-xl cursor-pointer" onClick={(e) => {
@@ -102,24 +102,24 @@ const Store = () => {
                 </div>
 
                 {/* New store create button */}
-                <div className="mt-4">
-                    <button onClick={() => navigate("/store/create")} className="flex font-medium text-sm items-center justify-center p-[6px] gap-1 w-full rounded bg-[#232327] text-white hover:bg-black"><LuPlus className='text-base font-bold' /> Create Store</button>
+                <div className="mt-3">
+                    <button onClick={() => navigate("/store/create")} className="w-full py-[6px] h-fit hover:bg-white flex items-center justify-center text-xs gap-1 rounded-[4px] create-button font-medium text-[#232327] border border-[#000] leading-[150%]"><LuPlus className='text-base font-bold' /> Create Store</button>
                 </div>
 
-                <div className="w-full h-[1px] border-b my-5"></div>
+                <div className="w-full h-[1px] border-b mt-5"></div>
 
-                <div className="max-w-[150px]">
+                <div className="max-w-[150px] mt-3">
                     {user?.displayName && (
-                        <p className="font-bold text-sm  break-words">
+                        <p className="font-medium text-sm text-[#232327] leading-[140%]  break-words">
                             {user?.displayName}
                         </p>
                     )}
-                    <p className="text-[#6E717D] text-xs break-words">{user?.email}</p>
+                    <p className="text-[#696969] leading-[140%] text-xs break-words">{user?.email}</p>
 
                 </div>
 
 
-                <button onClick={handleLogOut} className="py-1 w-ful text-left hover:bg-transparent mt-2 font-semibold rounded-md">
+                <button onClick={handleLogOut} className="py-1 w-full text-left hover:bg-transparent mt-2 text-sm font-medium text-[#E93725]  rounded-md">
                     Logout
                 </button>
 

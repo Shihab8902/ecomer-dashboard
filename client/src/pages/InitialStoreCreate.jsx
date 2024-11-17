@@ -1,21 +1,21 @@
 import { useContext, useMemo, useState } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
-import LoaderSpinner from './LoaderSpinner';
-import TopBar from './TopBar';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import useStoreInfo from '../hooks/useStoreInfo';
 import { UserContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import LoaderSpinner from '../components/LoaderSpinner';
 
-const CreateStore = () => {
+
+const InitialStoreCreate = () => {
 
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const { refetchStore, selectNewStore } = useStoreInfo();
 
-    const { user } = useContext(UserContext)
+    const { user, logOut } = useContext(UserContext)
 
     const [isStoreCreating, setIsStoreCreating] = useState(false);
     const [location, setLocation] = useState('')
@@ -66,6 +66,41 @@ const CreateStore = () => {
 
     }
 
+    //Handle logout
+    const handleLogOut = () => {
+        Swal.fire({
+            title: "Logout?",
+            text: "Are you sure want to logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirm"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut()
+                    .then(() => {
+                        Swal.fire({
+                            text: "You've successfully logged out.",
+                            timer: 1500,
+                            showConfirmButton: false,
+                            icon: "success"
+
+                        });
+                        navigate("/");
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: "Error!",
+                            text: error.message,
+                            icon: "error"
+                        })
+                    })
+            }
+        });
+
+    }
+
 
 
     //Country selection
@@ -102,7 +137,6 @@ const CreateStore = () => {
 
     return (
         <main>
-            <TopBar title="Create Store" />
 
             <div className='h-screen max-w-7xl mx-auto flex justify-center items-center px-5'>
                 <form onSubmit={handleFormSubmit} className="max-w-[600px] w-full bg-white px-4 py-6 md:p-10 rounded-lg" >
@@ -124,12 +158,18 @@ const CreateStore = () => {
 
 
 
-                    <button type="submit" disabled={isStoreCreating} className="w-full focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327] p-3 hover:bg-black text-base font-medium rounded-md text-white flex items-center justify-center gap-2 mt-5">
-                        {
-                            isStoreCreating ? <><span>Creating</span> <LoaderSpinner shapeHeight='15' shapeWidth='15' shapeColor='#fff' /></> : "Create Store"
-                        }
+                    <div className="mt-4 flex gap-3 w-full justify-end">
+                        <button onClick={handleLogOut} type="button" className="py-3 px-5  focus:bg-[#E93725]  bg-[#E93725]  hover:bg-red-600 text-base font-medium rounded-[4px] text-white  flex items-center justify-center gap-2 ">
+                            Logout
+                        </button>
 
-                    </button>
+                        <button type="submit" disabled={isStoreCreating} className="py-3 px-5  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327]  hover:bg-black text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2 ">
+                            {
+                                isStoreCreating ? <><span>Creating</span> <LoaderSpinner shapeHeight='15' shapeWidth='15' shapeColor='#fff' /></> : "Create Store"
+                            }
+                        </button>
+
+                    </div>
 
                 </form>
             </div>
@@ -139,4 +179,4 @@ const CreateStore = () => {
     )
 }
 
-export default CreateStore
+export default InitialStoreCreate

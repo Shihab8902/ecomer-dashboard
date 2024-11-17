@@ -1,25 +1,32 @@
 import { NavLink } from "react-router-dom"
 import Store from "./Store"
-import useStoreInfo from "../hooks/useStoreInfo"
+
 
 
 const TopBar = ({ title }) => {
 
-
-    const { currentStore } = useStoreInfo();
-
-
     return (
-        <div className=" max-w-7xl mx-auto px-5 flex justify-between items-center fixed top-0 w-full py-6 bg-white ">
-            <h3 className="text-[32px] text-[#232327] font-semibold">{title}</h3>
-            {
-                currentStore?.storeId && <nav className="flex gap-6">
-                    <NavLink className="font-semibold text-base hover:underline" to="/">Home</NavLink>
-                    <NavLink className="font-semibold text-base hover:underline" to="/store/manage">Settings</NavLink>
-                    <NavLink className="font-semibold text-base hover:underline" to="/payments">Payments</NavLink>
-                </nav>
-            }
-            <Store />
+        <div className="bg-white py-4 md:py-6 fixed top-0 w-full z-50">
+            <div className=" max-w-7xl mx-auto px-4 md:px-5 flex justify-between items-center  ">
+                <div className="flex items-center gap-4">
+                    <div className="hidden md:flex items-center gap-2">
+                        <img className="w-8 h-8" src="ecomer.png" alt="eComer logo" />
+                        <p className="text-[#232327] text-[22px] leading-[170%] font-semibold">eComer</p>
+                    </div>
+                    <div className="w-[1px] hidden md:block h-[22px] bg-[#00000033]"></div>
+                    <h3 className="text-[#232327] text-lg md:text-base font-semibold leading-[120%]">{title}</h3>
+                </div>
+
+                {
+                    <nav className="md:flex gap-5 hidden ">
+                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/">Home</NavLink>
+                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/orders">Orders</NavLink>
+                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/store/manage">Settings</NavLink>
+                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/payment">Payment</NavLink>
+                    </nav>
+                }
+                <Store />
+            </div>
         </div>
     )
 }
