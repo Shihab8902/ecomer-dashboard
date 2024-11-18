@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import TopBar from '../components/TopBar';
 import LoaderSpinner from '../components/LoaderSpinner';
 import { FaCopy, FaTrashAlt } from 'react-icons/fa';
+import { MdContentCopy } from 'react-icons/md';
+import BottomBar from '../components/BottomBar';
 
 
 const ManageStore = () => {
@@ -115,6 +117,16 @@ const ManageStore = () => {
             })
     }
 
+    function formatText(text) {
+        if (text) {
+            const firstPart = text.slice(0, 9);
+            const middle = "********";
+            const lastPart = text.slice(-6);
+
+            return `${firstPart}${middle}${lastPart}`;
+        }
+    }
+
 
     //Country selection
     const options = useMemo(() => countryList().getData(), [])
@@ -131,8 +143,9 @@ const ManageStore = () => {
         }),
         valueContainer: (provided) => ({
             ...provided,
-            height: "42px",
+            height: "50px",
             padding: "0 1rem",
+            background: "#F6F6F6"
         }),
         input: (provided) => ({
             ...provided,
@@ -140,62 +153,63 @@ const ManageStore = () => {
         }),
         indicatorsContainer: (provided) => ({
             ...provided,
-            height: "42px",
+            height: "50px",
+            background: "#F6F6F6"
+
         }),
     };
 
 
     return (
-        <div className='max-w-7xl mx-auto px-5'>
+        <main >
             <TopBar title="Manage Store" />
 
-            <div className='h-[80vh] flex justify-center flex-col items-center'>
+            <div className='h-screen max-w-7xl mx-auto flex justify-center items-center px-5'>
 
-                {/* Store id */}
-                <div className="mt-3 max-w-[400px] md:min-w-[400px] mx-auto bg-[#FDFDFF] py-3 px-5 mb-10 border border-[#EBEBEE]">
-                    <label className="block text-base mb-1  text-[#232327]" htmlFor="storeId">Store ID</label>
-                    <div className="w-full rounded p-3 mb-2 border text-xs flex justify-between items-center border-[#D3D3D4] ">
-                        {currentStore?.storeId} <span onClick={handleStoreIdCopy} title='Copy Store ID' className='cursor-pointer'><FaCopy /></span>
-                    </div>
-                </div>
-
-                <form onSubmit={handleFormSubmit} className="max-w-[400px] md:min-w-[400px] bg-[#FDFDFF] p-8 border border-[#EBEBEE]" >
+                <form onSubmit={handleFormSubmit} className="max-w-[600px] w-full bg-white px-4 py-6 md:p-10 rounded-lg" >
                     <div>
-                        <label className="block text-base mb-1  text-[#232327]" htmlFor="name">Store Name</label>
-                        <input defaultValue={currentStore?.storeName} className="w-full px-4 py-[10px] outline-gray-300 rounded border placeholder:text-[#A9A9B7] border-[#D3D3D4] " type="text" name="storeName" id="storeName" placeholder="Enter store name" required />
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="name">Store ID</label>
+                        <div className="p-3 bg-[#FFEFAF] flex items-center justify-between w-full rounded-[4px]">
+                            <p className="text-sm text-[#232327] font-medium">{formatText(currentStore?.storeId)}</p> <span onClick={handleStoreIdCopy} className="text-[22px] text-[#232327] cursor-pointer" ><MdContentCopy /></span>
+                        </div>
+                    </div>
+                    <div className='mt-5'>
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="name">Store Name</label>
+                        <input defaultValue={currentStore?.storeName} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]  " type="text" name="storeName" id="storeName" placeholder="Enter store name" required />
                     </div>
 
-                    <div className='mt-3'>
-                        <label className="block text-base mb-1  text-[#232327]" htmlFor="location">Where is the business located?</label>
+                    <div className='mt-2'>
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="location">Business Location</label>
                         <Select styles={customStyles} options={options} defaultValue={location} className='cursor-pointer rounded-md  outline-gray-300 focus:border-gray-300' value={location} onChange={(value) => setLocation(value)} />
                     </div>
 
-                    <div className='mt-3'>
-                        <label className="block text-base mb-1  text-[#232327]" htmlFor="storeCurrency">Store Currency</label>
-                        <input defaultValue={currentStore?.storeCurrency} className="w-full px-4 py-[10px] outline-gray-300 rounded border placeholder:text-[#A9A9B7] border-[#D3D3D4] " type="text" name="storeCurrency" id="storeCurrency" placeholder="Enter store currency" required />
+                    <div className='mt-2'>
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="storeCurrency">Store Currency</label>
+                        <input defaultValue={currentStore?.storeCurrency} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969] " type="text" name="storeCurrency" id="storeCurrency" placeholder="Enter store currency" required />
                     </div>
 
-                    <button type="submit" disabled={isStoreUpdating} className="w-full h-10  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327] p-2 py-[10px] hover:bg-black font-medium rounded text-white flex items-center justify-center gap-2 mt-5">
-                        {
-                            isStoreUpdating ? <><span>Saving</span> <LoaderSpinner shapeHeight='15' shapeWidth='15' shapeColor='#fff' /></> : "Save"
-                        }
 
-                    </button>
+                    <div className="mt-5 flex gap-3 w-full justify-end">
+                        <button onClick={handleStoreDelete} type="button" className="py-3 px-5  focus:bg-[#E93725]  bg-[#E93725]  hover:bg-red-600 text-base font-medium rounded-[4px] text-white  flex items-center justify-center gap-2 ">
+                            Delete store
+                        </button>
+
+                        <button type="submit" disabled={isStoreUpdating} className="py-3 px-5  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327]  hover:bg-black text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2 ">
+                            {
+                                isStoreUpdating ? <><span>Updating</span> <LoaderSpinner shapeHeight='15' shapeWidth='15' shapeColor='#fff' /></> : "Update"
+                            }
+                        </button>
+
+                    </div>
 
                 </form>
 
-
-                {/* Delete button */}
-                <div className='flex justify-center w-full max-w-[400px] mt-6 mx-auto'>
-                    <button onClick={handleStoreDelete} className=' px-2 py-3 w-1/2 bg-red-600 hover:bg-red-700  text-sm flex justify-center items-center font-medium rounded gap-2 text-white '><FaTrashAlt className='text-lg' />Delete Store</button>
-                </div>
-
+            </div>
+            <div className='md:hidden'>
+                <BottomBar />
             </div>
 
-
-
-
-        </div>
+        </main>
     )
 
 }

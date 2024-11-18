@@ -1,9 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import Store from "./Store"
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 
 
-const TopBar = ({ title }) => {
+const TopBar = ({ title, subRoute, subRouteTitle }) => {
 
     const navigate = useNavigate();
 
@@ -17,18 +18,51 @@ const TopBar = ({ title }) => {
                         <p className="text-[#232327] text-[22px] leading-[170%] font-semibold">eComer</p>
                     </div>
                     <div className="w-[1px] hidden md:block h-[22px] bg-[#00000033]"></div>
-                    <h3 className="text-[#232327] text-lg md:text-base font-semibold leading-[120%]">{title}</h3>
+                    <div className="flex items-center gap-[2px]">
+                        <h3 className={`${subRoute ? "md:text-[#23232780] text-[#232327]" : "text-[#232327]"} text-lg md:text-base font-semibold leading-[120%]`}>{title}</h3>
+                        {
+                            subRoute && <div className="hidden md:flex  items-center gap-[2px]">
+                                <span className="text-[#23232780] text-2xl"><MdKeyboardArrowRight /></span>
+                                <h4 className={`text-[#232327] text-lg md:text-base font-semibold leading-[120%]`}>{subRouteTitle}</h4>
+                            </div>
+                        }
+
+                    </div>
                 </div>
 
                 {
-                    <nav className="md:flex gap-5 hidden ">
-                        <span onClick={() => navigate("/", { state: { renderDocs: true } })}> <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/">Home</NavLink></span>
-                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/orders">Orders</NavLink>
-                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/store/manage">Settings</NavLink>
-                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/payment">Payment</NavLink>
-                    </nav>
+                    !subRoute ? <>
+
+
+                        <nav className="md:flex gap-5 hidden ">
+                            <span onClick={() => navigate("/", { state: { renderDocs: true } })}> <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/">Home</NavLink></span>
+                            <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/orders">Orders</NavLink>
+                            <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/store/manage">Settings</NavLink>
+                            <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/payment">Payment</NavLink>
+                        </nav>
+
+                        <Store />
+                    </> :
+
+                        <>
+
+                            <div className="flex items-center gap-8">
+
+                                {
+                                    <nav className="md:flex gap-5 hidden ">
+                                        <span onClick={() => navigate("/", { state: { renderDocs: true } })}> <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/">Home</NavLink></span>
+                                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/orders">Orders</NavLink>
+                                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/store/manage">Settings</NavLink>
+                                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/payment">Payment</NavLink>
+                                    </nav>
+                                }
+                                <Store />
+                            </div>
+
+                        </>
+
+
                 }
-                <Store />
             </div>
         </div>
     )

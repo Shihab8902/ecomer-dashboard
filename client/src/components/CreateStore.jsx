@@ -68,40 +68,7 @@ const InitialStoreCreate = () => {
 
     }
 
-    //Handle logout
-    const handleLogOut = () => {
-        Swal.fire({
-            title: "Logout?",
-            text: "Are you sure want to logout?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Confirm"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                logOut()
-                    .then(() => {
-                        Swal.fire({
-                            text: "You've successfully logged out.",
-                            timer: 1500,
-                            showConfirmButton: false,
-                            icon: "success"
 
-                        });
-                        navigate("/");
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            title: "Error!",
-                            text: error.message,
-                            icon: "error"
-                        })
-                    })
-            }
-        });
-
-    }
 
 
 
@@ -141,7 +108,7 @@ const InitialStoreCreate = () => {
         <main>
             <TopBar title="Create Store" />
 
-            <div className='h-screen max-w-7xl mx-auto flex justify-center items-center px-5'>
+            <div className='min-h-screen max-w-7xl mx-auto flex justify-center items-center px-5 '>
                 <form onSubmit={handleFormSubmit} className="max-w-[600px] w-full bg-white px-4 py-6 md:p-10 rounded-lg" >
                     <h3 className='text-center text-xl md:text-[32px] leading-[160%] font-semibold text-[#232327] mb-5'>Create your store</h3>
                     <div>
@@ -171,7 +138,7 @@ const InitialStoreCreate = () => {
                 </form>
             </div>
 
-            <div className='md:hidden'>
+            <div className='md:hidden '>
                 <BottomBar />
             </div>
 

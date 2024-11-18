@@ -4,6 +4,7 @@ import { UserContext } from "../context/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import BottomBar from "../components/BottomBar";
 
 
 const PaymentRequest = () => {
@@ -58,46 +59,46 @@ const PaymentRequest = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-    return <main className="max-w-7xl mx-auto px-5">
+    return <main >
 
         {/* Top bar */}
-        <TopBar title="Payment Request" />
+        <TopBar title="Payment methods" subRoute={true} subRouteTitle="Payment request" />
 
-        <div className="my-5 max-w-[450px] md:min-w-[450px] mx-auto border p-5 bg-[#FDFDFF] border-[#EBEBEE]  mt-20">
+        <div className=" max-w-7xl mx-auto px-5">
+            <div className="pt-[88px] md:pt-[128px] min-h-screen max-w-[600px] mb-[70px] md:mb-0 mx-auto ">
 
-            <form onSubmit={handleFormSubmit}>
-                <div>
-                    <label className="text-base mb-1 block font-medium" htmlFor="providerName">Name of the payment service provider*</label>
-                    <input className="w-full rounded py-[10px] px-3 border border-[#EBEBEE] placeholder:text-sm  outline-gray-100" type="text" name="providerName" placeholder="Enter provider name" required />
-                </div>
+                <form onSubmit={handleFormSubmit} className="px-4 py-6 md:p-10 bg-white rounded-lg">
+                    <div>
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="providerName">Payment provider name <span className="text-[#E93725]">*</span></label>
+                        <input className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]" type="text" name="providerName" placeholder="Enter provider name" required />
+                    </div>
 
-                <div className="mt-4">
-                    <label className="text-base mb-1 block font-medium" htmlFor="providerWebsite">Provider website link*</label>
-                    <input className="w-full py-[10px] rounded px-3 border border-[#EBEBEE] placeholder:text-sm  outline-gray-100" type="text" name="providerWebsite" placeholder="Enter website link" required />
-                </div>
+                    <div className="mt-2">
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="providerWebsite">Provider website link <span className="text-[#E93725]">*</span></label>
+                        <input className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]" type="text" name="providerWebsite" placeholder="Enter website link" required />
+                    </div>
 
-                <div className="mt-4">
-                    <label className="text-base mb-1 block font-medium" htmlFor="providerWebsite">Service provider API link <span className="text-gray-400">(optional)</span></label>
-                    <input className="w-full py-[10px] px-3 border rounded border-[#EBEBEE] placeholder:text-sm  outline-gray-100" type="text" name="providerAPI" placeholder="Enter API link" />
-                </div>
+                    <div className="mt-2">
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="providerAPI">Service provider API link <span className="text-[#23232766]">(optional)</span></label>
+                        <input className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]" type="text" name="providerAPI" placeholder="Enter API link" />
+                    </div>
 
-                <div className="mt-4">
-                    <label className="text-base mb-1 block font-medium" htmlFor="providerWebsite">Describe why you need this payment method*</label>
-                    <textarea className="w-full py-[10px] px-3 min-h-24 border rounded border-[#EBEBEE] placeholder:text-sm  outline-gray-100" name="description" placeholder="Enter Description" required />
-                </div>
+                    <div className="mt-2">
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="Reason">Describe why you need the payment method <span className="text-[#E93725]">*</span></label>
+                        <textarea className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969] min-h-28" name="description" placeholder="Write Description..." required />
+                    </div>
 
-                <input className="w-full bg-[#232327] text-white cursor-pointer py-2 mt-4 hover:bg-black rounded" type="submit" value="Send" />
-            </form>
+                    <div className="flex w-full justify-end">
+                        <input className="w-[130px] bg-[#232327] text-white cursor-pointer py-3 mt-5 hover:bg-black rounded" type="submit" value="Send" />
+                    </div>
+                </form>
 
+            </div>
+        </div>
+
+
+        <div className='md:hidden '>
+            <BottomBar />
         </div>
 
 

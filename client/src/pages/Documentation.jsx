@@ -6,6 +6,7 @@ import { RxCaretDown } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import BottomBar from "../components/BottomBar";
 
 const Documentation = () => {
 
@@ -28,7 +29,8 @@ const Documentation = () => {
                 Swal.fire({
                     text: "Copied to clipboard",
                     icon: "success",
-                    timer: 1500
+                    timer: 1500,
+                    showConfirmButton: false
                 })
 
             })
@@ -226,7 +228,7 @@ const Documentation = () => {
 
                     {/* Accordion content */}
                     <div className={` mt-4 ${expendAcc3 ? "opacity-100" : "opacity-0"} transition-opacity  duration-300 rounded-lg opacity-0`}>
-                        <p className="text-sm md:text-base  font-normal text-[#696969] leading-[160%]">Navigate to <Link to="/store/payments" className="text-[#232327] font-medium underline">Payment page</Link> to configure payment method.</p>
+                        <p className="text-sm md:text-base  font-normal text-[#696969] leading-[160%]">Navigate to <Link to="/payment" className="text-[#232327] font-medium underline">Payment page</Link> to configure payment method.</p>
                         {
                             !store?.setupSteps?.some(step => step.index === 3) && <div className="w-full flex justify-center">
                                 <button onClick={() => handleStepCompletion(3)} className="w-full py-3 text-base font-semibold leading-[160%} max-w-[505px] mx-auto border border-[#9DE48B] mt-4 hover:bg-white text-[#38B818] rounded-[4px]">Mark as Done</button>
@@ -238,7 +240,9 @@ const Documentation = () => {
             </div>
 
         </div>
-
+        <div className="md:hidden">
+            <BottomBar />
+        </div>
 
     </div>
 }
