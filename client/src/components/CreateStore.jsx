@@ -1,21 +1,23 @@
 import { useContext, useMemo, useState } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
-import LoaderSpinner from './LoaderSpinner';
-import TopBar from './TopBar';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import useStoreInfo from '../hooks/useStoreInfo';
 import { UserContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import LoaderSpinner from '../components/LoaderSpinner';
+import TopBar from './TopBar';
+import BottomBar from './BottomBar';
 
-const CreateStore = () => {
+
+const InitialStoreCreate = () => {
 
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const { refetchStore, selectNewStore } = useStoreInfo();
 
-    const { user } = useContext(UserContext)
+    const { user, logOut } = useContext(UserContext)
 
     const [isStoreCreating, setIsStoreCreating] = useState(false);
     const [location, setLocation] = useState('')
@@ -63,6 +65,41 @@ const CreateStore = () => {
                 })
                 setIsStoreCreating(false);
             })
+
+    }
+
+    //Handle logout
+    const handleLogOut = () => {
+        Swal.fire({
+            title: "Logout?",
+            text: "Are you sure want to logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirm"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut()
+                    .then(() => {
+                        Swal.fire({
+                            text: "You've successfully logged out.",
+                            timer: 1500,
+                            showConfirmButton: false,
+                            icon: "success"
+
+                        });
+                        navigate("/");
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: "Error!",
+                            text: error.message,
+                            icon: "error"
+                        })
+                    })
+            }
+        });
 
     }
 
@@ -134,9 +171,12 @@ const CreateStore = () => {
                 </form>
             </div>
 
+            <div className='md:hidden'>
+                <BottomBar />
+            </div>
 
         </main>
     )
 }
 
-export default CreateStore
+export default InitialStoreCreate

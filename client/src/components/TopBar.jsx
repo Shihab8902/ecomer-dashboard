@@ -1,9 +1,12 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import Store from "./Store"
 
 
 
 const TopBar = ({ title }) => {
+
+    const navigate = useNavigate();
+
 
     return (
         <div className="bg-white py-4 md:py-6 fixed top-0 w-full z-50">
@@ -19,7 +22,7 @@ const TopBar = ({ title }) => {
 
                 {
                     <nav className="md:flex gap-5 hidden ">
-                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/">Home</NavLink>
+                        <span onClick={() => navigate("/", { state: { renderDocs: true } })}> <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/">Home</NavLink></span>
                         <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/orders">Orders</NavLink>
                         <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/store/manage">Settings</NavLink>
                         <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/payment">Payment</NavLink>

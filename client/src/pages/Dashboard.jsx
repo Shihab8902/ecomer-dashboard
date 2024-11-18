@@ -10,10 +10,8 @@ const Dashboard = () => {
 
     //Fetch store id
     const { storeLoading, currentStore } = useStoreInfo();
-    const { totalOrders } = useTotalOrders();
+    const { totalOrders, loadingTotalOrders } = useTotalOrders();
 
-
-    {/* Conditional render store creation  */ }
 
 
     // Conditional render for store creation or redirect
@@ -29,8 +27,12 @@ const Dashboard = () => {
         );
     }
 
+
     // Redirect to "/orders" if there are orders
-    if (totalOrders?.total > 0) {
+    if (loadingTotalOrders) {
+        return <LoaderSpinner />
+    }
+    if (totalOrders?.total >= 0) {
         return <Navigate to="/orders" />
     }
 
