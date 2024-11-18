@@ -8,8 +8,8 @@ import ManageStore from "../pages/ManageStore";
 import PaymentMethods from "../pages/PaymentMethods";
 import RemixTemplate from "../pages/RemixTemplate";
 import PaymentRequest from "../pages/PaymentRequest";
-import OrderTable from "../components/OrderTable";
 import Home from "../pages/Home";
+import { OrderTable } from "../components/OrderTable";
 
 
 export const router = createBrowserRouter([

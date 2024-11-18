@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import Store from "./Store"
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { GoArrowLeft } from "react-icons/go";
 
 
 
@@ -19,7 +20,12 @@ const TopBar = ({ title, subRoute, subRouteTitle }) => {
                     </div>
                     <div className="w-[1px] hidden md:block h-[22px] bg-[#00000033]"></div>
                     <div className="flex items-center gap-[2px]">
-                        <h3 className={`${subRoute ? "md:text-[#23232780] text-[#232327]" : "text-[#232327]"} text-lg md:text-base font-semibold leading-[120%]`}>{title}</h3>
+                        {/* For Mobile */}
+                        <div className="md:hidden flex items-center gap-2">
+                            {subRoute && <span onClick={() => navigate(-1)} className="text-[#232327] text-2xl "><GoArrowLeft /></span>}
+                            <h3 className={`${subRoute ? "md:text-[#23232780] text-[#232327]" : "text-[#232327]"}  text-lg md:text-base font-semibold leading-[120%]`}>{subRoute ? subRouteTitle : title}</h3>
+                        </div>
+                        <h3 className={`${subRoute ? "md:text-[#23232780] text-[#232327]" : "text-[#232327]"} hidden md:block text-lg md:text-base font-semibold leading-[120%]`}>{title}</h3>
                         {
                             subRoute && <div className="hidden md:flex  items-center gap-[2px]">
                                 <span className="text-[#23232780] text-2xl"><MdKeyboardArrowRight /></span>
