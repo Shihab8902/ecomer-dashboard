@@ -11,8 +11,6 @@ const useStoreInfo = () => {
 
     const navigate = useNavigate();
 
-
-
     const getSavedStore = (stores) => {
         const savedStoreId = localStorage.getItem("currentStore");
         if (savedStoreId && stores) {
@@ -25,11 +23,12 @@ const useStoreInfo = () => {
 
     }
 
+
     const selectNewStore = (store) => {
         localStorage.setItem("currentStore", store?._id);
-
         setCurrentStore(store);
         navigate("/");
+
     }
 
 
@@ -41,6 +40,8 @@ const useStoreInfo = () => {
     useEffect(() => {
         getSavedStore(store);
     }, [store]);
+
+
 
 
 

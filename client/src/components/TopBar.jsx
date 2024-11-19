@@ -40,10 +40,10 @@ const TopBar = ({ title, subRoute, subRouteTitle }) => {
 
 
                         <nav className="md:flex gap-5 hidden ">
-                            <span onClick={() => navigate("/", { state: { renderDocs: true } })}> <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/">Home</NavLink></span>
-                            <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/orders">Orders</NavLink>
-                            <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/store/manage">Settings</NavLink>
-                            <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/payment">Payment</NavLink>
+                            <span onClick={() => navigate("/", { state: { renderDocs: true } })}> <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/">Home</NavLink></span>
+                            <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/orders">Orders</NavLink>
+                            <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/store/manage">Settings</NavLink>
+                            <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/payment">Payment</NavLink>
                         </nav>
 
                         <Store />
@@ -55,10 +55,10 @@ const TopBar = ({ title, subRoute, subRouteTitle }) => {
 
                                 {
                                     <nav className="md:flex gap-5 hidden ">
-                                        <span onClick={() => navigate("/", { state: { renderDocs: true } })}> <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/">Home</NavLink></span>
-                                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/orders">Orders</NavLink>
-                                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/store/manage">Settings</NavLink>
-                                        <NavLink className="font-medium text-base text-[#696969] leading-[160%]" to="/payment">Payment</NavLink>
+                                        <span onClick={() => navigate("/", { state: { renderDocs: true } })}> <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/">Home</NavLink></span>
+                                        <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/orders">Orders</NavLink>
+                                        <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/store/manage">Settings</NavLink>
+                                        <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/payment">Payment</NavLink>
                                     </nav>
                                 }
                                 <Store />

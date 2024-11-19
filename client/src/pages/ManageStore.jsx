@@ -7,9 +7,11 @@ import useStoreInfo from '../hooks/useStoreInfo';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../components/TopBar';
 import LoaderSpinner from '../components/LoaderSpinner';
-import { FaCopy, FaTrashAlt } from 'react-icons/fa';
 import { MdContentCopy } from 'react-icons/md';
 import BottomBar from '../components/BottomBar';
+
+
+
 
 
 const ManageStore = () => {
@@ -17,6 +19,7 @@ const ManageStore = () => {
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const { refetchStore, currentStore, store, selectNewStore } = useStoreInfo();
+
 
 
     const [isStoreUpdating, setIsStoreUpdating] = useState(false);
@@ -97,6 +100,8 @@ const ManageStore = () => {
                                     showConfirmButton: false
                                 })
                                 selectNewStore(store[0]);
+                                navigate("/")
+
                             }
 
                         })

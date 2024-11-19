@@ -53,7 +53,7 @@ const InitialStoreCreate = () => {
                     icon: "success"
                 })
                 setIsStoreCreating(false);
-                navigate("/remix");
+                navigate("/");
 
             }).catch(error => {
                 Swal.fire({
