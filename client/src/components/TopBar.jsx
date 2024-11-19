@@ -2,8 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import Store from "./Store"
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { GoArrowLeft } from "react-icons/go";
-
-
+import logo from "../assets/images/ecomer.png"
 
 const TopBar = ({ title, subRoute, subRouteTitle }) => {
 
@@ -15,7 +14,7 @@ const TopBar = ({ title, subRoute, subRouteTitle }) => {
             <div className=" max-w-7xl mx-auto px-4 md:px-5 flex justify-between items-center  ">
                 <div className="flex items-center gap-4">
                     <div className="hidden md:flex items-center gap-2">
-                        <img className="w-8 h-8" src="ecomer.png" alt="eComer logo" />
+                        <img className="w-8 h-8" src={logo} alt="eComer logo" />
                         <p className="text-[#232327] text-[22px] leading-[170%] font-semibold">eComer</p>
                     </div>
                     <div className="w-[1px] hidden md:block h-[22px] bg-[#00000033]"></div>
@@ -25,7 +24,7 @@ const TopBar = ({ title, subRoute, subRouteTitle }) => {
                             {subRoute && <span onClick={() => navigate(-1)} className="text-[#232327] text-2xl "><GoArrowLeft /></span>}
                             <h3 className={`${subRoute ? "md:text-[#23232780] text-[#232327]" : "text-[#232327]"}  text-lg md:text-base font-semibold leading-[120%]`}>{subRoute ? subRouteTitle : title}</h3>
                         </div>
-                        <h3 className={`${subRoute ? "md:text-[#23232780] text-[#232327]" : "text-[#232327]"} hidden md:block text-lg md:text-base font-semibold leading-[120%]`}>{title}</h3>
+                        <h3 onClick={() => subRoute && navigate(-1)} className={`${subRoute ? "md:text-[#23232780] cursor-pointer text-[#232327]" : "text-[#232327] cursor-default"} hidden md:block text-lg md:text-base font-semibold leading-[120%]`}>{title}</h3>
                         {
                             subRoute && <div className="hidden md:flex  items-center gap-[2px]">
                                 <span className="text-[#23232780] text-2xl"><MdKeyboardArrowRight /></span>

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { UserContext } from "../context/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import Swal from 'sweetalert2'
+import logo from "../assets/images/ecomer.png"
 
 const Login = () => {
 
@@ -38,7 +39,7 @@ const Login = () => {
     return <div className="mx-auto max-w-7xl h-screen flex justify-center flex-col items-center px-5">
 
         <div className="max-w-[600px] w-full bg-white rounded-lg md:p-10 px-5 py-6  ">
-            <img className="md:w-[78px] md:h-[78px] w-12 h-12 mx-auto " src="ecomer.png" alt="Ecomer logo" />
+            <img className="md:w-[78px] md:h-[78px] w-12 h-12 mx-auto " src={logo} alt="Ecomer logo" />
             <h3 className="text-xl md:text-[32px] leading-[160%] font-semibold text-center my-5 md:my-8 text-[#232327]">Welcome to eComer</h3>
             <div className="flex w-full justify-center">
                 <button onClick={handleGoogleLogin} className="flex items-center text-base font-semibold gap-2 leading-[150%] rounded-[4px] hover:bg-black px-5 py-3 w-full justify-center bg-[#232327] text-white"> <FaGoogle />  Continue with Google</button>

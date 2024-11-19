@@ -10,6 +10,7 @@ import RemixTemplate from "../pages/RemixTemplate";
 import PaymentRequest from "../pages/PaymentRequest";
 import Home from "../pages/Home";
 import { OrderTable } from "../components/OrderTable";
+import OrderDetails from "../pages/OrderDetails";
 
 
 export const router = createBrowserRouter([
@@ -65,6 +66,12 @@ export const router = createBrowserRouter([
                 path: "/orders",
                 element: <PrivateRoute>
                     <OrderTable />
+                </PrivateRoute>
+            },
+            {
+                path: "/orders/details/:id",
+                element: <PrivateRoute>
+                    <OrderDetails />
                 </PrivateRoute>
             }
         ]

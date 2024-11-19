@@ -21,7 +21,7 @@ export const OrderTable = () => {
 
 
 
-    return <main >
+    return <section >
         {/* Top bar */}
         <div className="hidden md:block">
             <TopBar title="Orders" />
@@ -81,5 +81,5 @@ export const OrderTable = () => {
         <div className="md:hidden">
             <BottomBar />
         </div>
-    </main >
+    </section >
 }
