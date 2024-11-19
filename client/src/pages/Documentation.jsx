@@ -140,7 +140,7 @@ const Documentation = () => {
         <TopBar title="Setup guide" />
 
         {/* Content */}
-        <div className={` pt-[88px] md:pt-[128px] px-5 max-w-[860px] mx-auto flex w-full flex-col gap-5 `}>
+        <div className={` pt-[88px] md:pt-[128px] mb-[72px] md:mb-0 px-5 max-w-[860px] mx-auto flex w-full flex-col gap-5 `}>
 
             {/* Accordions */}
             <div className="my-2">

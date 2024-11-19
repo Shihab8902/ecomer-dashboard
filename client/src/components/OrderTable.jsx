@@ -4,6 +4,7 @@ import useStoreInfo from "../hooks/useStoreInfo";
 import BottomBar from "./BottomBar";
 import TopBar from "./TopBar";
 import OrderCard from "./OrderCard";
+import { useState } from "react";
 
 
 
@@ -16,10 +17,15 @@ export const OrderTable = () => {
 
 
     const { currentStore } = useStoreInfo();
+    const [searchValue, setSearchValue] = useState("")
 
-    const { orders, ordersLoading } = useOrderInfo({ currentStore: currentStore });
+    const { orders, ordersLoading } = useOrderInfo({ currentStore: currentStore, search: searchValue });
 
 
+    //Handle search
+    const handleSearching = (e) => {
+        setSearchValue(e.target.value);
+    }
 
     return <section >
         {/* Top bar */}
@@ -33,7 +39,7 @@ export const OrderTable = () => {
             <div className="w-full pt-4  bg-white  px-4 pb-4 ">
                 <div className=" bg-[#F6F6F6] px-3 flex gap-2  w-full items-center rounded-md">
                     <span>{searchIcon}</span>
-                    <input className="bg-transparent py-3 outline-none w-full placeholder:text-[#696969] placeholder:font-normal" type="search" name="search" id="search" placeholder="Search order" />
+                    <input onChange={handleSearching} className="bg-transparent py-3 outline-none w-full placeholder:text-[#696969] placeholder:font-normal" type="search" name="search" id="search" placeholder="Search order" />
                 </div>
             </div>
         </div>
@@ -42,22 +48,22 @@ export const OrderTable = () => {
 
         {/* Order content */}
         <div className="max-w-7xl px-5 mx-auto min-h-screen">
-            <div className="max-w-[860px] mx-auto pt-[88px] md:pt-[128px] mb-[72px] md:mb-0">
+            <div className="max-w-[860px] mx-auto pt-[88px] mt-[72px] md:mt-0 md:pt-[128px] mb-[72px] md:mb-0">
                 <div >
+                    {/* Search */}
+                    <div className="w-full hidden md:block bg-white sticky top-0 z-30 pt-5 pb-3 px-8 rounded-tr-lg rounded-tl-lg">
+                        <div className=" px-3  gap-2 bg-[#F6F6F6] flex w-full items-center rounded-md">
+                            <span>{searchIcon}</span>
+                            <input onChange={handleSearching} className=" bg-transparent py-3 outline-none w-full placeholder:text-[#696969] placeholder:font-normal " type="search" name="search" id="search" placeholder="Search order" />
+                        </div>
+                    </div>
 
                     {
                         ordersLoading ? <LoaderSpinner shapeWidth="40" shapeHeight="40" shapeColor="#6E717D" /> :
                             orders?.length <= 0 ? <h3 className="text-center mt-20 text-lg text-gray-500">No order found!</h3> :
-                                <div className=" ">
-                                    <div className="bg-white rounded-[4px] md:h-[80vh] md:overflow-auto md:rounded-lg py-4 md:pb-5 md:pt-0 md:px-8 px-3">
+                                <div className="">
+                                    <div className="bg-white rounded-[4px] md:rounded-bl-lg md:h-[70vh]  md:overflow-auto py-4 md:pb-5 md:pt-0 md:px-8 px-3">
                                         <div className="relative">
-                                            {/* Search */}
-                                            <div className="w-full hidden md:block bg-white sticky top-0 z-30 pt-4 pb-3">
-                                                <div className=" px-3  gap-2 bg-[#F6F6F6] flex w-full items-center rounded-md">
-                                                    <span>{searchIcon}</span>
-                                                    <input className=" bg-transparent py-3 outline-none w-full placeholder:text-[#696969] placeholder:font-normal " type="search" name="search" id="search" placeholder="Search order" />
-                                                </div>
-                                            </div>
 
                                             <h3 className="text-[#232327] font-semibold text-base  md:text-xl leading-[140%]">Orders</h3>
                                             {
