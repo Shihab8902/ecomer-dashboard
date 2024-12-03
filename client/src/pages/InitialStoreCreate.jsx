@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import useStoreInfo from '../hooks/useStoreInfo';
 import { UserContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
-import LoaderSpinner from '../components/LoaderSpinner';
 
 
 const InitialStoreCreate = () => {
@@ -164,9 +163,7 @@ const InitialStoreCreate = () => {
                         </button>
 
                         <button type="submit" disabled={isStoreCreating} className="py-3 px-5  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327]  hover:bg-black text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2 ">
-                            {
-                                isStoreCreating ? <><span>Creating</span> <LoaderSpinner shapeHeight='15' shapeWidth='15' shapeColor='#fff' /></> : "Create Store"
-                            }
+                            Create Store
                         </button>
 
                     </div>

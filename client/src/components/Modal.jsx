@@ -30,7 +30,7 @@ const Modal = ({ modalID, isModalVisible, setIsModalVisible, refetchStoreId }) =
             yocoSecret,
             admin: user.email
         }
-        console.log(storeData)
+
 
         //Close modal
         setIsModalVisible(false);

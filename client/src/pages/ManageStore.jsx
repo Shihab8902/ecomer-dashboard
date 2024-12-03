@@ -46,6 +46,8 @@ const ManageStore = () => {
 
 
 
+
+
     //Handle store update
     const handleFormSubmit = e => {
         e.preventDefault();
@@ -200,9 +202,7 @@ const ManageStore = () => {
                         </button>
 
                         <button type="submit" disabled={isStoreUpdating} className="py-3 px-5  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327]  hover:bg-black text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2 ">
-                            {
-                                isStoreUpdating ? <><span>Updating</span> <LoaderSpinner shapeHeight='15' shapeWidth='15' shapeColor='#fff' /></> : "Update"
-                            }
+                            Update
                         </button>
 
                     </div>

@@ -9,7 +9,7 @@ const handleGetUserOrder = async (req, res) => {
         res.send(userOrders);
     }
     catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 }
 

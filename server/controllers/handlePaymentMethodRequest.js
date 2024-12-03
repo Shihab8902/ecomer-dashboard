@@ -5,7 +5,7 @@ const handlePaymentMethodRequest = async (req, res) => {
     try {
         const data = req.body;
 
-        const result = await sendEmail(process.env.FEATURE_REQUEST_RECEIVER, "A new payment method request arrived.", paymentMethodRequestTemplate(data));
+        const result = await sendEmail(process.env.FEATURE_REQUEST_RECEIVER, "eComer", "A new payment method request arrived.", paymentMethodRequestTemplate(data));
 
         if (result?.messageId) {
             res.send("success");
@@ -18,7 +18,7 @@ const handlePaymentMethodRequest = async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.send(error.message);
+        res.send(error);
     }
 }
 

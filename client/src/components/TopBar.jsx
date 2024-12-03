@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import Store from "./Store"
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { GoArrowLeft } from "react-icons/go";
-import logo from "../assets/images/ecomer.png"
+import logo from '../assets/images/ecomer.png';
 
 const TopBar = ({ title, subRoute, subRouteTitle }) => {
 
@@ -12,8 +12,8 @@ const TopBar = ({ title, subRoute, subRouteTitle }) => {
     return (
         <div className="bg-white py-4 md:py-6 fixed top-0 w-full z-50">
             <div className=" max-w-7xl mx-auto px-4 md:px-5 flex justify-between items-center  ">
-                <div className="flex items-center gap-4">
-                    <div className="hidden md:flex items-center gap-2">
+                <div className="flex items-center gap-4 min-w-[300px]">
+                    <div onClick={() => navigate("/")} className="hidden md:flex cursor-pointer items-center gap-2">
                         <img className="w-8 h-8" src={logo} alt="eComer logo" />
                         <p className="text-[#232327] text-[22px] leading-[170%] font-semibold">eComer</p>
                     </div>

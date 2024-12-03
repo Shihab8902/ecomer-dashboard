@@ -148,12 +148,12 @@ const ownerEmailTemplate = (store, order) => {
                             <p>Quantity: ${product?.quantity}</p>
                         </div>
                     </div>
-                   <p class="product-price">$${parseFloat(product?.price || 0).toFixed(2)}</p>
+                   <p class="product-price">${store?.storeCurrency}${parseFloat((product?.price * product?.quantity) || 0).toFixed(2)}</p>
                 </div>
             `).join('')}
         </div>
       
-        <div class="total">Total: <span class="bold">$${(order?.subtotal / 100).toFixed(2)}</span></div>
+        <div class="total">Total: <span class="bold">${store?.storeCurrency}${(order?.subtotal / 100).toFixed(2)}</span></div>
     </div>
 
     <div class="contact-info">

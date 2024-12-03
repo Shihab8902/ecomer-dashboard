@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import useStoreInfo from '../hooks/useStoreInfo';
 import { UserContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
-import LoaderSpinner from '../components/LoaderSpinner';
 import TopBar from './TopBar';
 import BottomBar from './BottomBar';
 
@@ -17,7 +16,7 @@ const InitialStoreCreate = () => {
     const navigate = useNavigate();
     const { refetchStore, selectNewStore } = useStoreInfo();
 
-    const { user, logOut } = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     const [isStoreCreating, setIsStoreCreating] = useState(false);
     const [location, setLocation] = useState('')
@@ -129,10 +128,7 @@ const InitialStoreCreate = () => {
 
 
                     <button type="submit" disabled={isStoreCreating} className="w-full focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327] p-3 hover:bg-black text-base font-medium rounded-md text-white flex items-center justify-center gap-2 mt-5">
-                        {
-                            isStoreCreating ? <><span>Creating</span> <LoaderSpinner shapeHeight='15' shapeWidth='15' shapeColor='#fff' /></> : "Create Store"
-                        }
-
+                        Create Store
                     </button>
 
                 </form>

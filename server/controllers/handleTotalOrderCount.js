@@ -9,7 +9,7 @@ const handleTotalOrderCount = async (req, res) => {
         res.send({ total: result.length });
     }
     catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 }
 

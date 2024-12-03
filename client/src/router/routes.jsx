@@ -11,6 +11,10 @@ import PaymentRequest from "../pages/PaymentRequest";
 import Home from "../pages/Home";
 import { OrderTable } from "../components/OrderTable";
 import OrderDetails from "../pages/OrderDetails";
+import Docs from "../pages/Docs";
+import Setup from "../pages/Docs/Setup";
+import Integration from "../pages/Docs/Integration";
+
 
 
 export const router = createBrowserRouter([
@@ -73,6 +77,18 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <OrderDetails />
                 </PrivateRoute>
+            },
+            {
+                path: "/docs",
+                element: <Docs />
+            },
+            {
+                path: "/docs/setup",
+                element: <Setup />
+            },
+            {
+                path: "/docs/integration",
+                element: <Integration />
             }
         ]
     }

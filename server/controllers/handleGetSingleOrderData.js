@@ -8,7 +8,8 @@ const handleGetSingleOrderData = async (req, res) => {
         res.send(result);
     }
     catch (error) {
-        console.log(error.message);
+
+        console.log(error);
     }
 }
 

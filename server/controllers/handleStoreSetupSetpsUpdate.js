@@ -14,7 +14,7 @@ const handleStoreSetupStepsUpdate = async (req, res) => {
     }
     catch (error) {
         res.status(error.status).send(error.message);
-        console.log(error.message);
+        console.log(error);
     }
 }
 

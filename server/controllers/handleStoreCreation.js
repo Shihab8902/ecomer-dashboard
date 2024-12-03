@@ -21,7 +21,7 @@ const handleStoreCreation = async (req, res) => {
         res.status(400).send({ message: "Invalid store data!" });
     }
     catch (error) {
-        throw new Error(error.message)
+        console.log(error);
     }
 
 

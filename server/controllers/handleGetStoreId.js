@@ -7,7 +7,8 @@ const handleGetStoreId = async (req, res) => {
         res.send(storeInfo);
     }
     catch (error) {
-        console.log(error.message);
+        console.log(error);
+
     }
 }
 

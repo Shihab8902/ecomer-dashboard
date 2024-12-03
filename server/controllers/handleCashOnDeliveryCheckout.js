@@ -57,12 +57,12 @@ const handleCashOnDeliveryCheckout = async (req, res) => {
 
 
         //Send confirmation email to the store owner
-        const result = await sendEmail(requestedStore?.admin, "A new order received!", ownerEmailTemplate(requestedStore, data))
+        const result = await sendEmail(requestedStore?.admin, requestedStore?.storeName, "A new order received!", ownerEmailTemplate(requestedStore, data))
 
 
         if (result?.messageId) {
             //Send confirmation email to the customer
-            const result = await sendEmail(userData?.shipping_details?.email, "Order placed!", customerEmailTemplate(requestedStore, data));
+            const result = await sendEmail(userData?.shipping_details?.email, requestedStore?.storeName, "Order placed!", customerEmailTemplate(requestedStore, data));
             if (result?.messageId) {
                 //Update email usage for the store
                 const newEmailCount = requestedStore?.emailUsage ? requestedStore.emailUsage + 2 : 2;

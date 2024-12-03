@@ -68,10 +68,10 @@ const handleCheckoutSuccess = async (req, res) => {
         const newOrder = orderCollection(orderDetails);
         await newOrder.save();
         //Send confirmation email to the store owner
-        const result = await sendEmail(requestedStore?.admin, "A new order received!", ownerEmailTemplate(requestedStore, orderDetails))
+        const result = await sendEmail(requestedStore?.admin, requestedStore?.storeName, "A new order received!", ownerEmailTemplate(requestedStore, orderDetails))
         if (result?.messageId) {
             //Send confirmation email to the customer
-            const result = await sendEmail(orderDetails?.shipping_details?.email, "Order placed!", customerEmailTemplate(requestedStore, orderDetails));
+            const result = await sendEmail(orderDetails?.shipping_details?.email, requestedStore?.storeName, "Order placed!", customerEmailTemplate(requestedStore, orderDetails));
             if (result?.messageId) {
                 //Update email usage for the store
                 const newEmailCount = requestedStore?.emailUsage ? requestedStore.emailUsage + 2 : 2;

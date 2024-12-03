@@ -41,7 +41,7 @@ const handleOrderUpdate = async (req, res) => {
         res.send("Order not found");
     }
     catch (error) {
-        console.log(error.message);
+        console.log(error);
         res.status(500).send("Internal Server Error");
     }
 }

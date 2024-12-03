@@ -6,11 +6,11 @@ apiKey.apiKey = process.env.EMAIL_API_KEY;
 
 
 
-const sendEmail = async (receiver, subject, htmlContent) => {
+const sendEmail = async (receiver, storeName, subject, htmlContent) => {
     const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
     const sender = {
         email: process.env.EMAIL_SENDER,
-        name: "Ecomer"
+        name: storeName || "eComer"
     }
     const receivers = [
         {
