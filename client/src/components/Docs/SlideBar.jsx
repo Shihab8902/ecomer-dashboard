@@ -26,17 +26,16 @@ const SideBar = ({ content }) => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu  text-base-content min-h-full w-80 p-4">
-                    <div>
+                <ul className="menu pt-0 text-base-content min-h-full w-80 p-4">
+                    <div className="relative ">
                         {/* Logo and Title */}
-
-                        <div onClick={() => navigate("/")} className="hidden md:flex cursor-pointer items-center gap-2 border-b pb-3">
+                        <div onClick={() => navigate("/")} className="hidden sticky top-0 pt-4 z-10 w-full bg-white md:flex cursor-pointer items-center gap-2 border-b pb-3">
                             <img className="w-8 h-8" src={logo} alt="eComer logo" />
                             <p className="text-[#232327] text-[22px] leading-[170%] font-semibold">eComer</p>
                         </div>
 
                         {/* Sidebar links */}
-                        <div className="mt-5 w-full">
+                        <div className="mt-5  w-full">
 
                             {/* Introduction */}
                             <Link to="/docs" className="text-lg flex items-center justify-between font-medium text-[#232327]  leading-[150%] bg-gray-100 transition-colors duration-300 hover:bg-gray-200 w-full py-2 px-3 rounded">Introduction <span className="text-2xl pr-1"><IoIosArrowRoundForward /></span></Link>
@@ -67,7 +66,11 @@ const SideBar = ({ content }) => {
                                     <a href="/docs/integration#store-id-injector" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Store ID injector</a>
                                     <a href="/docs/integration#product-cms" className=" px-6  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product CMS</a>
                                     <a href="/docs/integration#product-data" className=" px-6 flex justify-between items-center  font-medium text-[#232327] text-base  py-2 hover:bg-gray-200 transition-colors duration-300">Collecting product data <span className="text-base rotate-90 pr-1"><IoIosArrowForward /></span></a>
+                                    <a href="/docs/integration#product-name" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product name</a>
+                                    <a href="/docs/integration#product-id" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product ID</a>
                                 </ul>
+
+
                             </div>
 
 
