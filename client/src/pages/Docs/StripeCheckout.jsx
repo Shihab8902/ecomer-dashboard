@@ -23,12 +23,12 @@ const StripeCheckout = () => {
 
 
     const content = <div id="setup">
-        <h1 className="text-[#232327] font-semibold text-[32px]">Checkout with Stripe</h1>
+        <h1 className="text-[#232327] font-semibold text-[26px] lg:text-[32px]">Checkout with Stripe</h1>
         <p className="text-[#696969] font-normal leading-[140%] text-base mt-3">eComer also supports Stripe for checkout, providing a secure and versatile payment gateway for your store. To enable Stripe checkout, first ensure that the Stripe payment method is activated for your store. If it isn’t enabled, refer to the <a href='/docs/setup#payment-methods' className='underline text-[#232327]'>Configure Payment Methods</a> section for guidance.</p>
 
-        <iframe className="my-5 rounded-lg " width="90%" height="490" src="https://www.youtube.com/embed/_fuimO6ErKI?si=TQbUdoGaziGbHkly" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe className="my-5 rounded-lg w-full h-[200px] md:h-[300px] lg:w-[90%] lg:h-[490px]" src="https://www.youtube.com/embed/_fuimO6ErKI?si=TQbUdoGaziGbHkly" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">Once activated, add the following code override to a button. For better organization, it’s recommended to place the code in a separate override file. </p>
-        <div className='my-3 max-h-[490px] overflow-auto bg-gray-100 w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
+        <div className='my-3 lg:max-h-[490px] overflow-auto bg-gray-100 w-[90vw] text-xs lg:text-base lg:w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
             <CopyBlock
                 language='jsx'
                 text={overrides?.stripeCheckout?.code}

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { IoIosArrowForward, IoIosArrowRoundForward } from "react-icons/io";
 import logo from '../../assets/images/ecomer.png'
+import { FiMenu } from "react-icons/fi";
 
 
 
@@ -12,22 +13,28 @@ const SideBar = ({ content }) => {
     return <main className="bg-white">
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content max-w-7xl mx-auto p-5">
+            <div className="drawer-content max-w-7xl mx-auto px-5 pb-5 lg:p-5">
                 {/* Page content here */}
-                {/* <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
-                    Open drawer
-                </label> */}
+                <div className="flex lg:hidden justify-between items-center py-5 sticky top-0 bg-white z-10">
+                    <div onClick={() => navigate("/")} className="flex items-center gap-1">
+                        <img className="w-8 h-8" src={logo} alt="eComer logo" />
+                        <p className="text-[#232327] text-[22px] leading-[170%] font-semibold">eComer</p>
+                    </div>
+                    <label htmlFor="my-drawer-2" className="text-3xl text-[#232327]">
+                        <FiMenu />
+                    </label>
+                </div>
                 {/* Main content */}
                 {content}
 
 
             </div>
-            <div className="drawer-side">
+            <div className="drawer-side z-20">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu pt-0 text-base-content min-h-full w-80 p-4">
+                <ul className="menu pt-0 text-base-content min-h-full bg-white w-80 p-4">
                     <div className="relative ">
                         {/* Logo and Title */}
-                        <div onClick={() => navigate("/")} className="hidden sticky top-0 pt-4 z-10 w-full bg-white md:flex cursor-pointer items-center gap-2 border-b pb-3">
+                        <div onClick={() => navigate("/")} className="hidden sticky top-0 pt-4 z-20 w-full bg-white md:flex cursor-pointer items-center gap-2 border-b pb-3">
                             <img className="w-8 h-8" src={logo} alt="eComer logo" />
                             <p className="text-[#232327] text-[22px] leading-[170%] font-semibold">eComer</p>
                         </div>

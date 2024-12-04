@@ -44,6 +44,7 @@ const TopBar = ({ title, subRoute, subRouteTitle }) => {
                             <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/orders">Orders</NavLink>
                             <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/store/manage">Settings</NavLink>
                             <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/payment">Payment</NavLink>
+
                         </nav>
 
                         <Store />
@@ -59,6 +60,7 @@ const TopBar = ({ title, subRoute, subRouteTitle }) => {
                                         <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/orders">Orders</NavLink>
                                         <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/store/manage">Settings</NavLink>
                                         <NavLink className="font-medium text-base text-[#232327] opacity-60 leading-[160%]" to="/payment">Payment</NavLink>
+
                                     </nav>
                                 }
                                 <Store />
