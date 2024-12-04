@@ -68,6 +68,9 @@ const SideBar = ({ content }) => {
                                     <a href="/docs/integration#product-data" className=" px-6 flex justify-between items-center  font-medium text-[#232327] text-base  py-2 hover:bg-gray-200 transition-colors duration-300">Collecting product data <span className="text-base rotate-90 pr-1"><IoIosArrowForward /></span></a>
                                     <a href="/docs/integration#product-name" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product name</a>
                                     <a href="/docs/integration#product-id" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product ID</a>
+                                    <a href="/docs/integration#product-price" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product price</a>
+                                    <a href="/docs/integration#product-image" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product image</a>
+                                    <a href="/docs/integration#order-quantity" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Order quantity</a>
                                 </ul>
 
 
@@ -77,21 +80,6 @@ const SideBar = ({ content }) => {
 
 
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                     </div>
                 </ul>
