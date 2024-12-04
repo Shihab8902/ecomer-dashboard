@@ -14,6 +14,9 @@ import OrderDetails from "../pages/OrderDetails";
 import Docs from "../pages/Docs";
 import Setup from "../pages/Docs/Setup";
 import Integration from "../pages/Docs/Integration";
+import Checkout from "../pages/Docs/Checkout";
+import StripeCheckout from "../pages/Docs/StripeCheckout";
+import Support from "../pages/Docs/Support";
 
 
 
@@ -89,6 +92,18 @@ export const router = createBrowserRouter([
             {
                 path: "/docs/integration",
                 element: <Integration />
+            },
+            {
+                path: "/docs/checkout",
+                element: <Checkout />
+            },
+            {
+                path: "/docs/checkout/stripe",
+                element: <StripeCheckout />
+            },
+            {
+                path: "/docs/support",
+                element: <Support />
             }
         ]
     }

@@ -11,6 +11,8 @@ import { IoCheckmarkOutline } from "react-icons/io5";
 import SideBar from "../../components/Docs/SlideBar";
 import { useLocation } from "react-router-dom";
 import DataCollection from "../../components/Docs/DataCollection";
+import { CopyBlock, googlecode } from 'react-code-blocks';
+import overrides from "../../assets/code/overrides";
 
 const Integration = () => {
     const [isComponentCopied, setIsComponentCopied] = useState({});
@@ -22,6 +24,8 @@ const Integration = () => {
             if (element) {
                 element.scrollIntoView();
             }
+        }else{
+            window.scrollTo(0, 0)
         }
     }, [location]);
 
@@ -107,8 +111,70 @@ const Integration = () => {
             </div>
         </div>
 
+        {/* Collecting product data */}
         <DataCollection />
 
+        {/* Add to cart button setup */}
+        <div id="add-to-cart" className="mt-6">
+            <h4 className="text-2xl font-semibold text-[#232327]">Setting up the Add to cart button</h4>
+            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">Once all the essential product data has been collected, we can move on to adding it to the cart. Apply the following code override to the Add to Cart button. This will store the product data in local storage for use during the checkout process later.</p>
+            <div className='my-3 max-h-[490px] overflow-auto bg-gray-100 w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
+                <CopyBlock
+                    language='jsx'
+                    text={overrides?.addToCartButton?.code}
+                    showLineNumbers={true}
+                    theme={googlecode}
+                    wrapLines={true}
+                />
+            </div>
+            <p className="text-[#696969] font-normal leading-[140%] text-base"><span className="text-[#232327] font-medium">Note:</span> This override checks for item duplication in the cart based on the product ID. If the same product already exists, it will update the quantity of the existing item rather than adding a new entry. </p>
+        </div>
+
+        {/* Display product subtotal */}
+        <div id="subtotal-display" className="mt-6">
+            <h4 className="text-2xl font-semibold text-[#232327]">Display product subtotal</h4>
+            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">Apply the following override to a text element to display the subtotal amount for the cart items. If you're using a currency other than USD, make sure to replace the currency symbol in the code accordingly.</p>
+            <div className='my-3 max-h-[490px] overflow-auto bg-gray-100 w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
+                <CopyBlock
+                    language='jsx'
+                    text={overrides?.displaySubtotal?.code}
+                    showLineNumbers={true}
+                    theme={googlecode}
+                    wrapLines={true}
+                />
+            </div>
+
+        </div>
+
+        {/* Display cart total */}
+        <div id="cart-total" className="mt-6">
+            <h4 className="text-2xl font-semibold text-[#232327]">Display total cart items</h4>
+            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">Attach the following override to a text element to display the total count of items in the cart.</p>
+            <div className='my-3 max-h-[490px] overflow-auto bg-gray-100 w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
+                <CopyBlock
+                    language='jsx'
+                    text={overrides?.displayCartTotal?.code}
+                    showLineNumbers={true}
+                    theme={googlecode}
+                    wrapLines={true}
+                />
+            </div>
+        </div>
+
+        {/* Hide UI */}
+        <div id="cart-total" className="mt-6">
+            <h4 className="text-2xl font-semibold text-[#232327]">Hide UI elements</h4>
+            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">If you want to show or hide an element based on the presence of items in the cart, apply the following override to that element.</p>
+            <div className='my-3 max-h-[490px] overflow-auto bg-gray-100 w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
+                <CopyBlock
+                    language='jsx'
+                    text={overrides?.hideUI?.code}
+                    showLineNumbers={true}
+                    theme={googlecode}
+                    wrapLines={true}
+                />
+            </div>
+        </div>
 
         <Toaster />
     </article>

@@ -1,14 +1,12 @@
 import { Link, useNavigate } from "react-router-dom"
 import { IoIosArrowForward, IoIosArrowRoundForward } from "react-icons/io";
 import logo from '../../assets/images/ecomer.png'
-import { useState } from "react";
+
 
 
 const SideBar = ({ content }) => {
     const navigate = useNavigate();
-    //States
-    const [isdropDown1Open, setIsDropdown1Open] = useState(true);
-    const [isdropDown2Open, setIsDropdown2Open] = useState(true);
+
 
 
     return <main className="bg-white">
@@ -41,11 +39,11 @@ const SideBar = ({ content }) => {
                             <Link to="/docs" className="text-lg flex items-center justify-between font-medium text-[#232327]  leading-[150%] bg-gray-100 transition-colors duration-300 hover:bg-gray-200 w-full py-2 px-3 rounded">Introduction <span className="text-2xl pr-1"><IoIosArrowRoundForward /></span></Link>
 
                             {/* Setup */}
-                            <div onClick={() => setIsDropdown1Open(!isdropDown1Open)} className="mt-3 bg-gray-100 rounded">
-                                <Link to="/docs/setup" className="text-lg flex items-center justify-between font-medium text-[#232327]  leading-[150%]  transition-colors duration-300 hover:bg-gray-200 w-full py-2 px-3 rounded">Setup <span className="text-lg pr-1"><IoIosArrowForward className={`transition-transform duration-300 ease-in-out ${isdropDown1Open ? "rotate-90" : "rotate-0"}`} /></span></Link>
+                            <div className="mt-3 bg-gray-100 rounded">
+                                <Link to="/docs/setup" className="text-lg flex items-center justify-between font-medium text-[#232327]  leading-[150%]  transition-colors duration-300 hover:bg-gray-200 w-full py-2 px-3 rounded">Setup <span className="text-lg pr-1"><IoIosArrowForward className={`transition-transform duration-300 ease-in-out rotate-90`} /></span></Link>
 
                                 {/* Additional links */}
-                                <ul onClick={(e) => e.stopPropagation()} className={`flex overflow-hidden bg-white flex-col ${isdropDown1Open ? "h-fit" : "h-0"}`}>
+                                <ul onClick={(e) => e.stopPropagation()} className={`flex overflow-hidden bg-white flex-col h-fit`}>
                                     <a href="/docs/setup#login" className="mt-2 px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Login </a>
                                     <a href="/docs/setup#create-store" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Create your first store </a>
                                     <a href="/docs/setup#initial-setup" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Initial setup options </a>
@@ -55,11 +53,11 @@ const SideBar = ({ content }) => {
                             </div>
 
                             {/* Integration */}
-                            <div onClick={() => setIsDropdown2Open(!isdropDown2Open)} className="mt-3 bg-gray-100 rounded">
-                                <Link to="/docs/integration" className="text-lg flex items-center justify-between font-medium text-[#232327]  leading-[150%]  transition-colors duration-300 hover:bg-gray-200 w-full py-2 px-3 rounded">Integration guide<span className="text-lg pr-1"><IoIosArrowForward className={`transition-transform duration-300 ease-in-out ${isdropDown2Open ? "rotate-90" : "rotate-0"}`} /></span></Link>
+                            <div className="mt-3 bg-gray-100 rounded">
+                                <Link to="/docs/integration" className="text-lg flex items-center justify-between font-medium text-[#232327]  leading-[150%]  transition-colors duration-300 hover:bg-gray-200 w-full py-2 px-3 rounded">Integration guide<span className="text-lg pr-1"><IoIosArrowForward className={`transition-transform duration-300 ease-in-out rotate-90`} /></span></Link>
 
                                 {/* Additional links */}
-                                <ul onClick={(e) => e.stopPropagation()} className={`flex overflow-hidden bg-white flex-col ${isdropDown2Open ? "h-fit" : "h-0"}`}>
+                                <ul onClick={(e) => e.stopPropagation()} className={`flex overflow-hidden bg-white flex-col h-fit`}>
                                     <a href="/docs/integration#cart-preview" className="mt-2 px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Cart preview</a>
                                     <a href="/docs/integration#cart-summary-preview" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Cart summary preview</a>
                                     <a href="/docs/integration#order-tracker" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Order tracker</a>
@@ -71,12 +69,27 @@ const SideBar = ({ content }) => {
                                     <a href="/docs/integration#product-price" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product price</a>
                                     <a href="/docs/integration#product-image" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product image</a>
                                     <a href="/docs/integration#order-quantity" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Order quantity</a>
+                                    <a href="/docs/integration#add-to-cart" className=" px-6  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Add to cart button</a>
+                                    <a href="/docs/integration#subtotal-display" className=" px-6 flex justify-between items-center  font-medium text-[#232327] text-base  py-2 hover:bg-gray-200 transition-colors duration-300">Additional UI elements <span className="text-base rotate-90 pr-1"><IoIosArrowForward /></span></a>
+                                    <a href="/docs/integration#subtotal-display" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Display product subtotal</a>
+                                    <a href="/docs/integration#cart-total" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Display total cart items</a>
+                                    <a href="/docs/integration#hide-ui" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Hide UI elements</a>
                                 </ul>
-
-
                             </div>
 
+                            {/* Checkout */}
+                            <div className="mt-3 bg-gray-100 rounded">
+                                <Link to="/docs/checkout" className="text-lg flex items-center justify-between font-medium text-[#232327]  leading-[150%]  transition-colors duration-300 hover:bg-gray-200 w-full py-2 px-3 rounded">Handling checkout <span className="text-lg pr-1"><IoIosArrowForward className={`transition-transform duration-300 ease-in-out rotate-90`} /></span></Link>
 
+                                {/* Additional links */}
+                                <ul onClick={(e) => e.stopPropagation()} className={`flex overflow-hidden bg-white flex-col h-fit`}>
+                                    <a href="/docs/checkout#checkout-cod" className="mt-2 px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Checkout without payments</a>
+                                    <Link to="/docs/checkout/stripe" className="mt-2 px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Checkout with Stripe</Link>
+                                </ul>
+                            </div>
+
+                            {/* Help & Support */}
+                            <Link to="/docs/support" className="text-lg flex mt-3 items-center justify-between font-medium text-[#232327]  leading-[150%] bg-gray-100 transition-colors duration-300 hover:bg-gray-200 w-full py-2 px-3 rounded">Help & Support <span className="text-2xl pr-1"><IoIosArrowRoundForward /></span></Link>
 
 
                         </div>

@@ -18,6 +18,8 @@ const Setup = () => {
             if (element) {
                 element.scrollIntoView();
             }
+        }else{
+            window.scrollTo(0, 0)
         }
     }, [location]);
 

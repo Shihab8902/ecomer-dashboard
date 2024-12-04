@@ -1,8 +1,25 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useLocation } from "react-router-dom";
 import SideBar from "../components/Docs/SlideBar"
+import { useEffect } from "react";
 
 
 const Docs = () => {
+
+
+    const location = useLocation();
+    useEffect(() => {
+        if (location.hash) {
+            const element = document.getElementById(location.hash.substring(1));
+            if (element) {
+                element.scrollIntoView();
+            }
+        } else {
+            window.scrollTo(0, 0)
+        }
+    }, [location]);
+
+
     const content = <div>
         {/* Heading Section */}
         <div className=" flex flex-col mt-4 justify-center items-center bg-gray-100 py-6 rounded-md  w-3/4 mx-auto">
