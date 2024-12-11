@@ -68,7 +68,7 @@ const SideBar = ({ content }) => {
                                     <a href="/docs/integration#cart-preview" className="mt-2 px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Cart preview</a>
                                     <a href="/docs/integration#cart-summary-preview" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Cart summary preview</a>
                                     <a href="/docs/integration#order-tracker" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Order tracker</a>
-                                    <a href="/docs/integration#store-id-injector" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Store ID injector</a>
+                                    <a href="/docs/integration#ecomer-settings" className=" px-6 text-base block py-2 hover:bg-gray-200 transition-colors duration-300">eComer Settings</a>
                                     <a href="/docs/integration#product-cms" className=" px-6  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product CMS</a>
                                     <a href="/docs/integration#product-data" className=" px-6 flex justify-between items-center  font-medium text-[#232327] text-base  py-2 hover:bg-gray-200 transition-colors duration-300">Collecting product data <span className="text-base rotate-90 pr-1"><IoIosArrowForward /></span></a>
                                     <a href="/docs/integration#product-name" className=" px-12  text-base block py-2 hover:bg-gray-200 transition-colors duration-300">Product name</a>

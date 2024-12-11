@@ -20,14 +20,13 @@ app.use(routes);
 
 
 
-
-
 //Listen to the server and database connection
 const run = async () => {
     await connectDB();
     app.listen(PORT, () => {
         console.log(`The server is running at http://localhost:${PORT}`);
     });
+
 
 }
 

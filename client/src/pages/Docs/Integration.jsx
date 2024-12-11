@@ -12,6 +12,7 @@ import SideBar from "../../components/Docs/SlideBar";
 import { useLocation } from "react-router-dom";
 import DataCollection from "../../components/Docs/DataCollection";
 import { CopyBlock, googlecode } from 'react-code-blocks';
+import currencySymbol from '../../assets/images/docs/currencySymbol.png';
 import overrides from "../../assets/code/overrides";
 
 const Integration = () => {
@@ -85,16 +86,29 @@ const Integration = () => {
             </div>
         </div>
 
-        {/* Store id injector */}
-        <div id="store-id-injector" className="mt-6">
-            <h4 className="text-2xl font-semibold text-[#232327]">Store ID injector</h4>
-            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">The Store ID Injector is a utility component designed to simplify the process of managing your Store ID across your project. It automatically injects your Store ID into the browser's local storage, ensuring that all code overrides requiring the Store ID can access it without needing manual input for each override.</p>
-            <p className="text-[#232327] font-semibold leading-[140%] text-base mt-2">To use the component, provide your Store ID through its property control and place it within a shared component in your project, such as a navbar or footer, which is present across multiple pages.</p>
+        {/* eComer settings */}
+        <div id="ecomer-settings" className="mt-6">
+            <h4 className="text-2xl font-semibold text-[#232327]">eComer Settings</h4>
+            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">The eComer Settings is a utility component designed to simplify the process of managing different store settings and preference across your project. Currently the component is used to provide the Store ID and store currency. It automatically injects these information into the browser's local storage, ensuring that all code overrides and components requiring the Store ID & currency preference can access it without needing manual input for each of them.</p>
+            <p className="text-[#232327] font-semibold leading-[140%] text-base mt-2">To use the component, provide your Store ID & currency preference (Currency symbol & Symbol position) through its property control and place it within a shared component in your project, such as a navbar or footer, which is present across multiple pages.</p>
             <div className="w-full lg:w-[90%] relative bg-gray-100 border-[#EAEAEA] border rounded-lg p-10 h-[200px] md:h-[300px] lg:h-[490px] my-3">
                 <img className=" mt-8 rounded-lg w-full  h-full" src={storeIdInjector} alt="Store id injector component example" />
-                <button onClick={() => handleComponentCopy("https://framer.com/m/Store-Id-Injector-CSq4.js", 4)} className="absolute right-3 top-3 bg-[#232327] text-white font-semibold leading-[150%] text-sm py-3 px-8 rounded flex items-center gap-3">Copy component <span>{isComponentCopied[4] ? <IoCheckmarkOutline /> : <FaRegCopy />}</span></button>
+                <button onClick={() => handleComponentCopy("https://framer.com/m/eComer-Settings-mStu.js", 4)} className="absolute right-3 top-3 bg-[#232327] text-white font-semibold leading-[150%] text-sm py-3 px-8 rounded flex items-center gap-3">Copy component <span>{isComponentCopied[4] ? <IoCheckmarkOutline /> : <FaRegCopy />}</span></button>
             </div>
-            <p className="text-[#696969] font-normal leading-[140%] text-base">Although the Store ID is injected only once for a new browser, it’s recommended to keep this component readily available. This ensures that if the Store ID is ever removed from local storage, it will be re-injected immediately, preventing any disruptions in the functionality of your code overrides.</p>
+            <p className="text-[#696969] font-normal leading-[140%] text-base">Although these information is injected only once for a new browser, it's recommended to keep this component readily available. This ensures that if these information is ever removed from local storage, it will be re-injected immediately, preventing any disruptions in the functionality of your code overrides.</p>
+            <h4 className="text-xl font-semibold text-[#232327] mt-3">How to Set the Currency Symbol in a Framer Project Using "eComer Settings"?</h4>
+            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">First, configure the currency symbol and specify whether it should appear before or after the price in the "eComer Settings." Then, apply the following override to the price value.</p>
+            <div className='my-3 lg:max-h-[490px] overflow-auto bg-gray-100 w-[90vw] text-xs lg:text-base lg:w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
+                <CopyBlock
+                    language='jsx'
+                    text={overrides?.productPrice.currencySymbol}
+                    showLineNumbers={true}
+                    theme={googlecode}
+                    wrapLines={true}
+                />
+            </div>
+            <p className="text-[#696969] font-normal leading-[140%] text-base">Ensure that Framer's text formatting is not used to set the currency symbol. Doing so may lead to a double currency symbol and issues with <a href="/docs/integration#product-price" className="hover:underline">product price collection</a>.</p>
+            <img className="rounded-lg my-3 w-full lg:w-[90%] border border-[#EAEAEA]" src={currencySymbol} alt="currency symbol example" />
         </div>
 
         {/* Building e-commerce feature */}

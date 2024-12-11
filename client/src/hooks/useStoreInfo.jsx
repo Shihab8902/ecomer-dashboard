@@ -43,9 +43,6 @@ const useStoreInfo = () => {
 
 
 
-
-
-
     return { store, refetchStore, currentStore, selectNewStore, storeLoading }
 }
 

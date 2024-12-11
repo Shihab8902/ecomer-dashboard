@@ -37,6 +37,10 @@ const storeSchema = new mongoose.Schema({
     },
     setupSteps: {
         type: [Object]
+    },
+    customerEmailTemplate: {
+        type: String,
+
     }
 });
 

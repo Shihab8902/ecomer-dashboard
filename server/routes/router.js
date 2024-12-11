@@ -1,5 +1,6 @@
 const handleCashOnDeliveryCheckout = require("../controllers/handleCashOnDeliveryCheckout");
 const handleCheckoutSuccess = require("../controllers/handleCheckoutSuccess");
+const handleFileUpload = require("../controllers/handleFileUpload");
 const handleGetOrders = require("../controllers/handleGetOrders");
 const handleGetSingleOrderData = require("../controllers/handleGetSingleOrderData");
 const handleGetStoreId = require("../controllers/handleGetStoreId");
@@ -18,6 +19,8 @@ const handleYocoCheckout = require("../controllers/handleYocoCheckout");
 const handleYocoSuccess = require("../controllers/success/handleYocoSuccess");
 
 const router = require("express").Router();
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 
 
 //Stripe checkout routes
@@ -53,6 +56,10 @@ router.get("/userOrders", handleGetUserOrder);
 
 //Feature request routes
 router.put("/payment/request", handlePaymentMethodRequest);
+
+//File upload routes
+router.post("/file/upload", upload.single("image"), handleFileUpload);
+
 
 
 

@@ -79,60 +79,90 @@ export function forProductId(Component): ComponentType {
     },
     productPrice: {
         id: 4,
-        nonCommaSeparatedCode: `//For collecting non-comma separated price
-export function forProductPrice(Component): ComponentType {
+        nonCommaSeparatedCode: `export function forProductPrice(Component): ComponentType {
     return (props) => {
         const [store, setStore] = useStore()
+        const [currencyPosition, setCurrencyPosition] = useState(null)
+        const [currencySymbol, setCurrencySymbol] = useState("")
 
         useEffect(() => {
-            const captureProductName = () => {
-                setStore({ price: parseFloat(props.text.split("$")[1]) })
-            }
-
-            captureProductName()
-            const pollingInterval = setInterval(() => {
-                captureProductName()
-            }, 500) //Updates every 500ms
+            setStore({ price: parseFloat(props.text) })
+            //Currency preference
+            setCurrencyPosition(
+                JSON.parse(localStorage.getItem("currency-position"))
+            )
+            setCurrencySymbol(localStorage.getItem("currency-symbol"))
 
             return () => {
-                clearInterval(pollingInterval)
-                setStore({ price: 0 })
+                setStore({ price: "", quantity: 1 })
             }
         }, [])
-
-        return <Component {...props} />
+        return (
+            <Component
+                {...props}
+                  text={
+                    currencyPosition
+                        ? \`\${currencySymbol || "\\$"}\${props.text}\`
+                        : \`\${props.text}\${currencySymbol}\`
+                }
+            />
+        )
     }
 }`,
         commaSeparatedCode: `
-//For collecting comma-separated prices
-export function forCurrentProductPrice(Component): ComponentType {
+export function forProductPrice(Component): ComponentType {
     return (props) => {
         const [store, setStore] = useStore()
+        const [currencyPosition, setCurrencyPosition] = useState(null)
+        const [currencySymbol, setCurrencySymbol] = useState("")
 
         useEffect(() => {
-            const captureProductName = () => {
-                setStore({
-                    price: parseInt(
-                        props?.text?.split("$")?.[1]?.replace(/,/g, "")
-                    ),
-                })
-            }
-
-            captureProductName()
-            const pollingInterval = setInterval(() => {
-                captureProductName()
-            }, 500) //Updates every 500ms
+            setStore({ price: parseFloat(props.text?.replace(/,/g, "")) })
+            //Currency preference
+            setCurrencyPosition(
+                JSON.parse(localStorage.getItem("currency-position"))
+            )
+            setCurrencySymbol(localStorage.getItem("currency-symbol"))
 
             return () => {
-                clearInterval(pollingInterval)
-                setStore({ price: 0 })
+                setStore({ price: "", quantity: 1 })
+            }
+        }, [])
+        return (
+            <Component
+                {...props}
+                 text={
+                    currencyPosition
+                        ? \`\${currencySymbol || "\\$"}\${props.text}\`
+                        : \`\${props.text}\${currencySymbol}\`
+                }
+            />
+        )
+    }
+}
+`,
+        currencySymbol: `//For giving currency symbol
+export function forCurrencySymbol(Component): ComponentType {
+    return (props) => {
+        const priceValue = props?.text
+        const [price, setPrice] = useState(priceValue)
+
+        //Preferred currency data
+        useEffect(() => {
+            const currencySymbol = localStorage.getItem("currency-symbol")
+            const currencyPosition = JSON.parse(
+                localStorage.getItem("currency-position")
+            )
+            if (currencyPosition) {
+                setPrice(currencySymbol + priceValue)
+            } else {
+                setPrice(priceValue + currencySymbol)
             }
         }, [])
 
-        return <Component {...props} />
+        return <Component {...props} text={price} />
     }
-}
-`
+}`
     },
     productImage: {
         id: 5,

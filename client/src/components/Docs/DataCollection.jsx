@@ -65,8 +65,7 @@ const DataCollection = () => {
         {/* Collecting product price */}
         <div id="product-price" className="mt-6">
             <h4 className="text-2xl font-semibold text-[#232327]">Collecting product price</h4>
-            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">Collecting the product price may slightly vary depending on the currency you are using.</p>
-            <p className="text-[#696969] font-normal leading-[140%] text-base ">First, let’s look at how to collect the price in USD or any currency without comma separation. If you're using a currency symbol other than "$" or a different prefix before the actual price, please replace the "$" in the code with the appropriate symbol or prefix.</p>
+            <p className="text-[#696969] font-normal leading-[140%] text-base mt-2">Collecting the product price may slightly vary depending on the currency you are using. First, let’s look at how to collect the price in USD or any currency without comma separation.</p>
             <p className="text-[#696969] font-normal leading-[140%] text-base ">Apply the override to the product price on the details page.</p>
             <strong className="text-[#2323237] leading-[140%] text-base ">For collecting non-comma separated price. (e.g:$99.99)</strong>
             <div className='my-3 lg:max-h-[490px] overflow-auto bg-gray-100 w-[90vw] text-xs lg:text-base lg:w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
@@ -78,7 +77,7 @@ const DataCollection = () => {
                     wrapLines={true}
                 />
             </div>
-            <strong className="text-[#2323237] leading-[140%] text-base ">If you're using comma-separated prices (e.g: 30,000IQR), use this override instead. Be sure to replace the symbol or prefix in the code if it doesn't match your currency.</strong>
+            <strong className="text-[#2323237] leading-[140%] text-base ">If you're using comma-separated prices (e.g: 30,000IQR), use this override instead.</strong>
             <div className='my-3 lg:max-h-[490px] overflow-auto bg-gray-100 w-[90vw] text-xs lg:text-base lg:w-[90%] fira-code p-5 border border-[#EAEAEA] rounded-lg'>
                 <CopyBlock
                     language='jsx'

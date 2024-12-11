@@ -265,48 +265,78 @@ const OrderDetails = () => {
 
                         {/* Additional Information */}
                         {
-                            shipping_details?.address?.additionalData && <div className="mt-2">
-                                <h4 className="font-medium leading-[140%] text-sm md:text-base text-[#232327]">Additional information</h4>
-                                <div className="flex items-center flex-wrap">
-                                    {
-                                        shipping_details?.address?.additionalData
-                                            ?.map((data, index) => {
+                            shipping_details?.address?.additionalData && (
+                                <div className="mt-2">
+                                    <h4 className="font-medium leading-[140%] text-sm md:text-base text-[#232327]">Additional information</h4>
+                                    <div className="flex items-center flex-wrap">
+                                        {
+                                            shipping_details?.address?.additionalData?.map((data, index) => {
                                                 const [key, value] = Object.entries(data)[0];
+
+                                                // Regular expression to check if the value is a valid URL
+                                                const isLink = /^(https?:\/\/[^\s]+)/.test(String(value));
+
                                                 return (
                                                     <span key={index} className="text-sm md:text-base ml-[2px] font-normal text-[#232327] leading-[160%]">
-                                                        {key}: <span className="text-[#696969]">{String(value)}</span>
+                                                        {key}:
+                                                        {
+                                                            isLink ? (
+                                                                <a
+                                                                    href={String(value)}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-blue-500 underline"
+                                                                >
+                                                                    {String(value)}
+                                                                </a>
+                                                            ) : (
+                                                                <span className="text-[#696969]">{String(value)}</span>
+                                                            )
+                                                        }
                                                         {index !== shipping_details?.address?.additionalData.length - 1 && ', '}
                                                     </span>
                                                 );
                                             })
-                                    }
-
+                                        }
+                                    </div>
                                 </div>
-                            </div>
+                            )
                         }
+
 
 
                         {/* Customer dedicated additional Information */}
                         {
-                            additionalCustomerData?.length > 0 && <div className="mt-2">
-                                <h4 className="font-medium leading-[140%] text-sm text-[#232327]">Additional information</h4>
-                                <div className="flex items-center flex-wrap">
-                                    {
-                                        additionalCustomerData
-                                            ?.map((data, index) => {
+                            additionalCustomerData?.length > 0 && (
+                                <div className="mt-2">
+                                    <h4 className="font-medium leading-[140%] text-sm text-[#232327]">Additional information</h4>
+                                    <div className="flex items-center flex-wrap">
+                                        {
+                                            additionalCustomerData?.map((data, index) => {
                                                 const [key, value] = Object.entries(data)[0];
+
+                                                // Regular expression to check if the value is a URL
+                                                const isLink = /^(https?:\/\/[^\s]+)$/.test(value);
+
                                                 return (
                                                     <span key={index} className="text-sm ml-[2px] font-normal text-[#232327] leading-[160%]">
-                                                        {key}: <span className="text-[#696969]">{String(value)}</span>
+                                                        {key}:
+                                                        {/* Check if it's a link, if so render as anchor */}
+                                                        {isLink ? (
+                                                            <a href={value} target="_blank" className="text-[#0066cc] hover:underline">{String(value)}</a>
+                                                        ) : (
+                                                            <span className="text-[#696969]">{String(value)}</span>
+                                                        )}
                                                         {index !== additionalCustomerData.length - 1 && ', '}
                                                     </span>
                                                 );
                                             })
-                                    }
-
+                                        }
+                                    </div>
                                 </div>
-                            </div>
+                            )
                         }
+
 
                     </div>
 

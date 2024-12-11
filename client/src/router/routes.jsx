@@ -17,6 +17,7 @@ import Integration from "../pages/Docs/Integration";
 import Checkout from "../pages/Docs/Checkout";
 import StripeCheckout from "../pages/Docs/StripeCheckout";
 import Support from "../pages/Docs/Support";
+import CustomerEmailTemplate from "../pages/CustomerEmailTemplate";
 
 
 
@@ -104,6 +105,10 @@ export const router = createBrowserRouter([
             {
                 path: "/docs/support",
                 element: <Support />
+            },
+            {
+                path: "/notifications/emailTemplates/customer",
+                element: <CustomerEmailTemplate />
             }
         ]
     }

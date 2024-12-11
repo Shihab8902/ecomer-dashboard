@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import BottomBar from "../components/BottomBar";
+import { FaRegFileAlt } from "react-icons/fa";
 
 const Documentation = () => {
 
@@ -238,6 +239,8 @@ const Documentation = () => {
                 </div>
 
             </div>
+
+            <p className="text-center md:hidden font-medium text-[#696969] mt-1 hover:underline  text-base flex items-center gap-1 justify-center"> <FaRegFileAlt className="text-xl " /> <Link to="https://ecomer.framax.co/docs" target="_blank">View full documentation</Link></p>
 
         </div>
         <div className="md:hidden">

@@ -1,4 +1,9 @@
+const dynamicHTML = require("./dynamicParsing");
+
 const customerEmailTemplate = (store, order) => {
+
+    const emailTemplate = dynamicHTML(store?.customerEmailTemplate, store, order);
+
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -34,8 +39,8 @@ const customerEmailTemplate = (store, order) => {
           padding: 20px;
           border-bottom: 1px solid #ddd;
       }
-      .order-summary h2 {
-          margin-top: 0;
+      .order-summary-h2 {
+          margin-top: 20px;
           font-size: 20px;
           font-weight: 700;
           color: #333;
@@ -91,11 +96,10 @@ const customerEmailTemplate = (store, order) => {
           text-align: right;
           margin-top: 20px;
       }
-      .contact-info {
-          padding: 20px 0;
-      }
-      .contact-info h3 {
+    
+      .contact-info-h3 {
           font-size: 18px;
+          margin-top: 40px;
           font-weight: 700;
           margin-bottom: 10px;
       }
@@ -108,15 +112,29 @@ const customerEmailTemplate = (store, order) => {
           font-size: 14px;
           font-weight: 600;
           color: #232327;
+          list-style:none;
           line-height: 1.5;
       }
       .address-list span {
           color: #6E717D;
       }
+          ul{
+            padding-left: 0;
+            margin-top: 0;
+          }
+            li {
+                margin-left: 0;
+            }
       .bold {
           font-weight: bold;
           color: #333;
       }
+    .address-list-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+        margin-bottom : 0;
+    }
       .footer {
           text-align: center;
           padding: 20px;
@@ -130,57 +148,8 @@ const customerEmailTemplate = (store, order) => {
 <body>
 
 <div class="container">
-  <div class="header">
-      <h1>New Order Placed at ${store?.storeName}</h1>
-  </div>
 
-  <div class="order-summary">
-      <h2>A new order has been placed by <span class="bold">${order?.shipping_details?.name}</span>.</h2>
-      <p>Order Number: <strong>${order?.orderNumber}</strong></p>
-      
-      <div class="order-item">
-          ${order?.products?.map(product => `
-              <div class="product-wrapper">
-                  <div class="product-image-wrapper">
-                      <img class="product-image" src="${product?.image}" alt="Image unavailable" />
-                      <div class="product-details">
-                          <h3>${product?.productName}</h3>
-                          <p>Quantity: ${product?.quantity}</p>
-                      </div>
-                  </div>
-                        <p class="product-price">${store?.storeCurrency}${parseFloat((product?.price * product?.quantity) || 0).toFixed(2)}</p>
-              </div>
-          `).join('')}
-      </div>
-    
-      <div class="total">Total: <span class="bold">${store?.storeCurrency}${(order?.subtotal / 100).toFixed(2)}</span></div>
-  </div>
-
-  <div class="contact-info">
-      <h3>Shipping Address</h3>
-      <ul>
-          <li class="address-list">Name: <span>${order?.shipping_details?.name}</span></li>
-          <li class="address-list">Email: <span>${order?.shipping_details?.email}</span></li>
-          <li class="address-list">Address:
-              <ul>
-                  ${Object.entries(order?.shipping_details?.address || {})
-            .filter(([key]) => key !== 'additionalData')
-            .map(([key, value], index, array) => `
-                      <li class="address-list">${key}: <span>${typeof value === 'object' && value !== null ? JSON.stringify(value) : value}</span>
-                      ${index !== array.length - 1 ? ', ' : ''}</li>
-                  `).join('')}
-              </ul>
-          </li>
-          ${order?.shipping_details?.address?.additionalData?.map((data, index) => `
-              <li class="address-list">
-                  Additional: ${Object.entries(data).map(([key, value]) => `
-                  <span>${key}: <span class="additional-address">${value}</span></span>`).join(', ')}
-              </li>
-          `).join('')}
-      </ul>
-      <p><strong>Payment Method:</strong> ${order?.paymentMethod}</p>
-      <p><strong>Ordered At:</strong> ${order?.orderedAt}</p>
-  </div>
+${emailTemplate}
 
   <div class="footer">
       <p>Powered by eComer.</p>
