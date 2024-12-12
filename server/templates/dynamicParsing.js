@@ -8,7 +8,7 @@ const dynamicHTML = (userInput, store, order) => {
             return ` <h2 class="order-summary-h2">${beforeText} <span class="bold">${order?.shipping_details?.name}</span>.</h2>`
         } else if (variableName === "order-number") {
             return `<p>${beforeText} <strong>${order?.orderNumber}</strong></p>`
-        } else if (variableName === "order-summary") {
+        } else if (variableName === "product-summary") {
             return `
               <div class="order-summary">  
       <div class="order-item order-summary">

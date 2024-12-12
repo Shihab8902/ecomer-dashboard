@@ -21,6 +21,7 @@ import CustomerEmailTemplate from "../pages/CustomerEmailTemplate";
 
 
 
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -107,9 +108,10 @@ export const router = createBrowserRouter([
                 element: <Support />
             },
             {
-                path: "/notifications/emailTemplates/customer",
+                path: "/store/manage/emailTemplates/customer",
                 element: <CustomerEmailTemplate />
             }
+
         ]
     }
 ])
