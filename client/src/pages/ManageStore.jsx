@@ -4,11 +4,11 @@ import countryList from 'react-select-country-list'
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import useStoreInfo from '../hooks/useStoreInfo';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TopBar from '../components/TopBar';
-import LoaderSpinner from '../components/LoaderSpinner';
 import { MdContentCopy } from 'react-icons/md';
 import BottomBar from '../components/BottomBar';
+import { GoArrowUpRight } from 'react-icons/go';
 
 
 
@@ -171,7 +171,7 @@ const ManageStore = () => {
         <main >
             <TopBar title="Manage Store" />
 
-            <div className='h-screen max-w-7xl mx-auto flex justify-center items-center px-5'>
+            <div className='min-h-screen max-w-7xl mx-auto flex justify-center items-center px-5 pt-28 pb-28 md:pb-5'>
 
                 <form onSubmit={handleFormSubmit} className="max-w-[600px] w-full bg-white px-4 py-6 md:p-10 rounded-lg" >
                     <div>
@@ -193,6 +193,14 @@ const ManageStore = () => {
                     <div className='mt-2'>
                         <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="storeCurrency">Store Currency</label>
                         <input defaultValue={currentStore?.storeCurrency} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969] " type="text" name="storeCurrency" id="storeCurrency" placeholder="Enter store currency" required />
+                    </div>
+
+                    <div className='mt-2'>
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="storeCurrency">Email Templates</label>
+                        <div className='py-[14px] px-3 bg-[#F6F6F6] rounded'>
+                            <Link to="/store/manage/emailTemplates/customer" className='text-[#232327] text-base leading-[150%] w-full pb-3 flex justify-between items-center border-b border-[#0000001A]'>Customer template <GoArrowUpRight className='text-xl' /> </Link>
+                            <Link className='text-[#232327] text-base leading-[150%] w-full flex justify-between items-center pt-3'>Owner template <GoArrowUpRight className='text-xl' /> </Link>
+                        </div>
                     </div>
 
 

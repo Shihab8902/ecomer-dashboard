@@ -5,7 +5,6 @@ const handleStoreUpdate = async (req, res) => {
         const id = req.query.id;
         const data = req.body;
 
-
         const updateFields = {};
 
         switch (true) {

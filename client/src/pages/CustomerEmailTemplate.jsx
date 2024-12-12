@@ -107,20 +107,20 @@ Ordered At: {{order-date}}
                 <div className="px-4 py-6 md:p-10 bg-white rounded-lg">
 
                     <p className="text-[#696969] font-normal leading-[140%] text-base ">Use any of these variables in Email body and they will be automatically replaced.</p>
-                    <p className="flex items-center border-b pb-5 flex-wrap gap-x-2 gap-y-1 mt-1">
-                        <span className="text-[#232327] font-medium  text-sm">{"{{store-name}}"}</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{customer-name-0}}"}</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{order-number}}"}</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{product-summary}}"}</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{section-title}}"}</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{customer-name-1}}"}</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{customer-email}}"}</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{other-shipping-details}}"}</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{payment-method}}"},</span>
-                        <span className="text-[#232327] font-medium  text-sm">{"{{order-date}}"}</span>
+                    <p className="flex items-center border border-[#0000001A] p-3 rounded flex-wrap gap-x-3 gap-y-2 mt-1">
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{store-name}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{customer-name-0}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{order-number}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{product-summary}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{section-title}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{customer-name-1}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{customer-email}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{other-shipping-details}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{payment-method}}"}</span>
+                        <span className="text-[#232327] bg-gray-200 p-1 rounded font-medium  text-sm">{"{{order-date}}"}</span>
                     </p>
 
-                    <form className="mt-3" onSubmit={handleFormSubmit}>
+                    <form className="mt-5 " onSubmit={handleFormSubmit}>
                         <div>
                             <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="providerName">Email subject</label>
                             <input defaultValue={currentStore?.customerEmailTemplate?.subject} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]" type="text" name="subject" placeholder="Enter email subject" required />
@@ -129,7 +129,7 @@ Ordered At: {{order-date}}
                             <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="Reason">Email body</label>
                             <textarea defaultValue={currentStore?.customerEmailTemplate?.template} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969] min-h-56 resize-none" name="body" placeholder="Email body..." required />
                         </div>
-                        <div className="flex w-full justify-end gap-6">
+                        <div className="flex w-full justify-end gap-5">
                             <button onClick={handleReset} type="button" className=" px-5  bg-[#E5E7EB] hover:bg-[#E5E7EB] focus:bg-[#E5E7EB] text-[#232327] cursor-pointer py-3 mt-5  rounded">Reset to default</button>
                             <input className="w-[130px] bg-[#232327] text-white cursor-pointer py-3 mt-5 hover:bg-black rounded" type="submit" value="Save" />
                         </div>
