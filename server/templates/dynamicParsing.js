@@ -30,7 +30,7 @@ const dynamicHTML = (userInput, store, order) => {
   </div>
             
             `
-        } else if (variableName === "shipping-title") {
+        } else if (variableName === "section-title") {
             return ` <h3 class="contact-info-h3">${beforeText}</h3>`
         } else if (variableName === "customer-name-1") {
             return ` <li class="address-list">Name: <span>${order?.shipping_details?.name}</span></li>`

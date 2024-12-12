@@ -5,6 +5,7 @@ const handleGetOrders = require("../controllers/handleGetOrders");
 const handleGetSingleOrderData = require("../controllers/handleGetSingleOrderData");
 const handleGetStoreId = require("../controllers/handleGetStoreId");
 const handleGetUserOrder = require("../controllers/handleGetUserOrder");
+const handleMigration = require("../controllers/handleMigration");
 const handleOrderUpdate = require("../controllers/handleOrderUpdate");
 const handlePaymentMethodActivation = require("../controllers/handlePaymentMethodActivation");
 const handlePaymentMethodDeactivation = require("../controllers/handlePaymentMethodDeactivation");
@@ -59,6 +60,9 @@ router.put("/payment/request", handlePaymentMethodRequest);
 
 //File upload routes
 router.post("/file/upload", upload.single("image"), handleFileUpload);
+
+//Migration 
+router.get("/admin/migrate", handleMigration)
 
 
 

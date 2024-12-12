@@ -2,7 +2,7 @@ const dynamicHTML = require("./dynamicParsing");
 
 const ownerEmailTemplate = (store, order) => {
 
-    const emailTemplate = dynamicHTML(store?.customerEmailTemplate, store, order);
+    const emailTemplate = dynamicHTML(store?.customerEmailTemplate?.template, store, order);
 
     return `
 <!DOCTYPE html>

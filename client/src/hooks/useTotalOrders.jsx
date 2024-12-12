@@ -1,22 +1,30 @@
 import { useEffect } from "react";
 import useGetDataPublic from "./useGetPublic";
+import useStoreInfo from "./useStoreInfo";
 
 
 
 const useTotalOrders = () => {
     const savedStoreId = localStorage.getItem("currentStore");
+    const { currentStore } = useStoreInfo();
 
-    const { data: totalOrders, refetch: refetchTotalOrders, isLoading: loadingTotalOrders } = useGetDataPublic([savedStoreId, "totalOrders"], `/orders/total?id=${savedStoreId}`);
+    // Build the API endpoint dynamically
+    const storeId = savedStoreId || currentStore?._id;
+    const endpoint = storeId ? `/orders/total?id=${storeId}` : null;
 
-    //Refetch
+    const { data: totalOrders, refetch: refetchTotalOrders, isLoading: loadingTotalOrders } = useGetDataPublic(
+        [storeId, "totalOrders"],
+        endpoint
+    );
+
+    // Refetch when storeId changes
     useEffect(() => {
-        refetchTotalOrders();
-    }, [savedStoreId, refetchTotalOrders]);
-
-
+        if (storeId) {
+            refetchTotalOrders();
+        }
+    }, [storeId, refetchTotalOrders]);
 
     return { totalOrders, refetchTotalOrders, loadingTotalOrders };
+};
 
-}
-
-export default useTotalOrders
+export default useTotalOrders;
