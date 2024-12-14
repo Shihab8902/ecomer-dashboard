@@ -18,6 +18,7 @@ import Checkout from "../pages/Docs/Checkout";
 import StripeCheckout from "../pages/Docs/StripeCheckout";
 import Support from "../pages/Docs/Support";
 import CustomerEmailTemplate from "../pages/CustomerEmailTemplate";
+import OwnerEmailTemplate from "../pages/OwnerEmailTemplate";
 
 
 
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
             {
                 path: "/store/manage/emailTemplates/customer",
                 element: <CustomerEmailTemplate />
+            },
+            {
+                path: "/store/manage/emailTemplates/owner",
+                element: <OwnerEmailTemplate />
             }
 
         ]

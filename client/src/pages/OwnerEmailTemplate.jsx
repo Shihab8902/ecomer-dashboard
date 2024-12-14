@@ -6,7 +6,7 @@ import useStoreInfo from "../hooks/useStoreInfo";
 import { useNavigate } from "react-router-dom";
 
 
-const CustomerEmailTemplate = () => {
+const OwnerEmailTemplate = () => {
     const axiosPublic = useAxiosPublic();
 
 
@@ -20,7 +20,7 @@ const CustomerEmailTemplate = () => {
         const body = e.target.body.value;
         const data = { subject, template: body }
 
-        axiosPublic.put(`/store?id=${currentStore?._id}`, { customerEmailTemplate: data })
+        axiosPublic.put(`/store?id=${currentStore?._id}`, { ownerEmailTemplate: data })
             .then(res => {
                 if (res.data) {
                     refetchStore();
@@ -58,7 +58,7 @@ const CustomerEmailTemplate = () => {
             confirmButtonText: "Confirm"
         }).then((result) => {
             if (result.isConfirmed) {
-                const subject = "Order placed.";
+                const subject = "A new order received!";
                 const body = `
 A new order has been placed by <b>{{customer-name}}</b>
 
@@ -79,11 +79,11 @@ A new order has been placed by <b>{{customer-name}}</b>
 `
                 const data = { subject, template: body };
 
-                axiosPublic.put(`/store?id=${currentStore?._id}`, { customerEmailTemplate: data })
+                axiosPublic.put(`/store?id=${currentStore?._id}`, { ownerEmailTemplate: data })
                     .then(res => {
                         if (res.data) {
                             refetchStore();
-                            navigate(-1)
+                            navigate(-1);
                             Swal.fire({
                                 text: "Email template has been reset to default!",
                                 showConfirmButton: false,
@@ -110,7 +110,7 @@ A new order has been placed by <b>{{customer-name}}</b>
     return <main >
 
         {/* Top bar */}
-        <TopBar title="Settings" subRoute={true} subRouteTitle="Customer email template" />
+        <TopBar title="Settings" subRoute={true} subRouteTitle="Owner email template" />
 
         <div className=" max-w-7xl mx-auto px-5">
             <div className="pt-[88px] md:pt-[128px] min-h-screen max-w-[650px] mb-[70px] md:mb-0 mx-auto ">
@@ -132,11 +132,11 @@ A new order has been placed by <b>{{customer-name}}</b>
                     <form className="mt-5 " onSubmit={handleFormSubmit}>
                         <div>
                             <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="providerName">Email subject</label>
-                            <input defaultValue={currentStore?.customerEmailTemplate?.subject} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]" type="text" name="subject" placeholder="Enter email subject" required />
+                            <input defaultValue={currentStore?.ownerEmailTemplate?.subject} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]" type="text" name="subject" placeholder="Enter email subject" required />
                         </div>
                         <div className="mt-2">
                             <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="Reason">Email body</label>
-                            <textarea defaultValue={currentStore?.customerEmailTemplate?.template} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969] min-h-56 resize-none" name="body" placeholder="Email body..." required />
+                            <textarea defaultValue={currentStore?.ownerEmailTemplate?.template} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969] min-h-56 resize-none" name="body" placeholder="Email body..." required />
                         </div>
                         <div className="flex w-full justify-end gap-5">
                             <button onClick={handleReset} type="button" className=" px-5  bg-[#E5E7EB] hover:bg-[#E5E7EB] focus:bg-[#E5E7EB] text-[#232327] cursor-pointer py-3 mt-5  rounded">Reset to default</button>
@@ -157,4 +157,4 @@ A new order has been placed by <b>{{customer-name}}</b>
     </main>
 
 }
-export default CustomerEmailTemplate
+export default OwnerEmailTemplate

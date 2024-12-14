@@ -1,8 +1,5 @@
-const storeCollection = require("../model/storeModel");
-
-const customerTemp = {
-    subject: "Order placed",
-    template: `
+const customerSubject = "Order placed.";
+const customerBody = `
 A new order has been placed by <b>{{customer-name}}</b>
 
 <b>Order number:</b> {{order-number}}
@@ -19,13 +16,10 @@ A new order has been placed by <b>{{customer-name}}</b>
 <b>Payment Method: </b> {{payment-method}}
 <b>Ordered At: </b> {{order-date}}
 
-`
-}
+`;
 
-
-const ownerTemp = {
-    subject: "New order received.",
-    template: `
+const ownerSubject = "A new order received!";
+const ownerBody = `
 A new order has been placed by <b>{{customer-name}}</b>
 
 <b>Order number:</b> {{order-number}}
@@ -42,29 +36,12 @@ A new order has been placed by <b>{{customer-name}}</b>
 <b>Payment Method: </b> {{payment-method}}
 <b>Ordered At: </b> {{order-date}}
 
-`
-}
-
-const handleMigration = async (req, res) => {
-    try {
-
-        // const result = await storeCollection.updateMany({}, {
-        //     $set: {
-        //         customerEmailTemplate: customerTemp,
-        //         ownerEmailTemplate: ownerTemp
-        //     }
-        // })
-
-        // res.send(result);
-
-        res.status(403).send({ message: "forbidden" });
+`;
 
 
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
 
 
-module.exports = handleMigration;
+const customerDefaultEmailTemplate = { subject: customerSubject, template: customerBody };
+const ownerDefaultEmailTemplate = { subject: ownerSubject, template: ownerBody };
+
+export const templates = { customerDefaultEmailTemplate, ownerDefaultEmailTemplate };

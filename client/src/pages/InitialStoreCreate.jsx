@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import useStoreInfo from '../hooks/useStoreInfo';
 import { UserContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import { templates } from '../assets/code/defaultEmailTemplates';
 
 
 const InitialStoreCreate = () => {
@@ -30,6 +31,8 @@ const InitialStoreCreate = () => {
         const storeData = {
             storeName,
             location,
+            customerEmailTemplate: templates?.customerDefaultEmailTemplate,
+            ownerEmailTemplate: templates?.ownerDefaultEmailTemplate,
             storeCurrency,
             admin: user.email
         }

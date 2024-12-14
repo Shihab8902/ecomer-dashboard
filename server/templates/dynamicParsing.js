@@ -1,76 +1,91 @@
+
 const dynamicHTML = (userInput, store, order) => {
-    return userInput.replace(/(.*?)\{\{(.*?)\}\}/g, (match, beforeText, variableName) => {
-        if (variableName === "store-name") {
-            return ` <div class="header">
-                        <h1>${beforeText} ${store?.storeName}</h1>
-                     </div>`
-        } else if (variableName === "customer-name-0") {
-            return ` <h2 class="order-summary-h2">${beforeText} <span class="bold">${order?.shipping_details?.name}</span>.</h2>`
-        } else if (variableName === "order-number") {
-            return `<p>${beforeText} <strong>${order?.orderNumber}</strong></p>`
-        } else if (variableName === "product-summary") {
-            return `
-              <div class="order-summary">  
-      <div class="order-item order-summary">
-          ${order?.products?.map(product => `
-              <div class="product-wrapper">
-                  <div class="product-image-wrapper">
-                      <img class="product-image" src="${product?.image}" alt="Image unavailable" />
-                      <div class="product-details">
-                          <h3>${product?.productName}</h3>
-                          <p>Quantity: ${product?.quantity}</p>
-                      </div>
+    // HTML Blocks
+    const productSummaryBlock = `
+<div class="order-summary">  
+  <div class="order-item order-summary">
+      ${order?.products?.map(product => `
+          <div class="product-wrapper">
+              <div class="product-image-wrapper">
+                  <img class="product-image" src="${product?.image}" alt="Image unavailable" />
+                  <div class="product-details">
+                      <h3>${product?.productName}</h3>
+                      <p>Quantity: ${product?.quantity}</p>
                   </div>
-                        <p class="product-price">${store?.storeCurrency}${parseFloat((product?.price * product?.quantity) || 0).toFixed(2)}</p>
               </div>
-          `).join('')}
-      </div>
-    
-      <div class="total">Total: <span class="bold">${store?.storeCurrency}${(order?.subtotal / 100).toFixed(2)}</span></div>
+              <p class="product-price">${store?.storeCurrency}${parseFloat((product?.price * product?.quantity) || 0).toFixed(2)}</p>
+          </div>
+      `).join('')}
   </div>
-            
-            `
-        } else if (variableName === "section-title") {
-            return ` <h3 class="contact-info-h3">${beforeText}</h3>`
-        } else if (variableName === "customer-name-1") {
-            return ` <li class="address-list">Name: <span>${order?.shipping_details?.name}</span></li>`
-        } else if (variableName === "customer-email") {
-            return `<li class="address-list">Email: <span>${order?.shipping_details?.email}</span></li>`
-        } else if (variableName === "other-shipping-details") {
-            return `    <div>
-                        <p class="address-list-title">${beforeText}</p>
-                            <div>
-                                <li class="address-list">
-                                    <ul >
-                                        ${Object.entries(order?.shipping_details?.address || {})
-                    .filter(([key]) => key !== 'additionalData')
-                    .map(([key, value], index, array) => `
-                                            <li class="address-list">${key}: <span>${typeof value === 'object' && value !== null ? JSON.stringify(value) : value}</span>
-                                            ${index !== array.length - 1 ? ', ' : ''}</li>
-                                        `).join('')}
-                                    </ul>
-                                </li>
-                                ${order?.shipping_details?.address?.additionalData?.map((data, index) => `
-                                    <li class="address-list">
-                                        ${Object.entries(data).map(([key, value]) => `
-                                        ${key}: <span class="additional-address">${value}</span>`).join(', ')}
-                                    </li>
-                                `).join('')}
-                            
-                            </div>
-     
-                    </div>`
-        } else if (variableName === "payment-method") {
-            return ` <p><strong>Payment Method:</strong> ${order?.paymentMethod}</p>`
-        } else if (variableName === "order-date") {
-            return ` <p><strong>Ordered At:</strong> ${order?.orderedAt}</p>
-`
-        }
 
-        return `${beforeText.trim()} ${variableName}`;
-    })
-}
+  <div class="total">Total: <span class="bold">${store?.storeCurrency}${(order?.subtotal / 100).toFixed(2)}</span></div>
+</div>
+`;
 
+    const shippingDetailsBlock = `
+<div>
+        <div>
+            <li class="address-list">
+                <ul>
+                    ${Object.entries(order?.shipping_details?.address || {})
+            .filter(([key]) => key !== 'additionalData')
+            .map(([key, value], index, array) => `
+                        <li class="address-list">${key}: <span>${typeof value === 'object' && value !== null ? JSON.stringify(value) : value}</span>
+                        ${index !== array.length - 1 ? ', ' : ''}</li>
+                    `).join('')}
+                </ul>
+            </li>
+            ${order?.shipping_details?.address?.additionalData?.map((data, index) => `
+                <li class="address-list">
+                    ${Object.entries(data).map(([key, value]) => `
+                    ${key}: <span class="additional-address">${value}</span>`).join(', ')}
+                </li>
+            `).join('')}
+        </div>
+</div>
+`;
+
+    //HTML block protected replacement
+    let result = userInput
+        .replace(/{{product-summary}}/, '%%PRODUCT_SUMMARY%%')
+        .replace(/{{shipping-details}}/, '%%SHIPPING_DETAILS%%');
+
+
+    result = result
+        .replace(/{{(.*?)}}/g, (_, key) => {
+            switch (key?.trim()) {
+                case "store-name":
+                    return store?.storeName;
+                case "customer-name":
+                    return order?.shipping_details?.name;
+                case "order-number":
+                    return order?.orderNumber;
+                case "customer-email":
+                    return order?.shipping_details?.email;
+                case "payment-method":
+                    return order?.paymentMethod;
+                case "order-date":
+                    return order?.orderedAt;
+                default:
+                    return '';
+            }
+        })
+
+        //Replacement conditions for style elements
+        .replace(/<b>(.*?)<\/b>/g, (_, text) => `<b>${text}</b>`)
+        .replace(/\s*---\s*/g, '<hr style="border: none; border-top: 1px solid #ccc; margin: 10px 0;">')
+        .replace(/(\n)(?!<hr)/g, '<br>')
+        .replace(/<hr><br>/g, '<hr>')
+        .replace(/ {2,}/g, match => '&nbsp;'.repeat(match.length));
+
+    // Restore formatted HTML blocks
+    result = result
+        .replace('%%PRODUCT_SUMMARY%%', productSummaryBlock)
+        .replace('%%SHIPPING_DETAILS%%', shippingDetailsBlock);
+
+    return result;
+};
 
 module.exports = dynamicHTML;
+
 

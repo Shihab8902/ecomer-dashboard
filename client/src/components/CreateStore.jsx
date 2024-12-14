@@ -8,6 +8,10 @@ import { UserContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import TopBar from './TopBar';
 import BottomBar from './BottomBar';
+import { templates } from '../assets/code/defaultEmailTemplates';
+
+
+
 
 
 const InitialStoreCreate = () => {
@@ -33,6 +37,8 @@ const InitialStoreCreate = () => {
             storeName,
             location,
             storeCurrency,
+            customerEmailTemplate: templates?.customerDefaultEmailTemplate,
+            ownerEmailTemplate: templates?.ownerDefaultEmailTemplate,
             admin: user.email
         }
         if (!location) {

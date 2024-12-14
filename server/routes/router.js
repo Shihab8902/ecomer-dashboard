@@ -21,6 +21,7 @@ const handleYocoSuccess = require("../controllers/success/handleYocoSuccess");
 
 const router = require("express").Router();
 const multer = require("multer");
+const customerEmailTemplate = require("../templates/customer");
 const upload = multer({ storage: multer.memoryStorage() });
 
 
@@ -63,7 +64,6 @@ router.post("/file/upload", upload.single("image"), handleFileUpload);
 
 //Migration 
 router.get("/admin/migrate", handleMigration)
-
 
 
 

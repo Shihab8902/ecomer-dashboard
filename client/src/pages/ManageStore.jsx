@@ -199,7 +199,7 @@ const ManageStore = () => {
                         <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="storeCurrency">Email Templates</label>
                         <div className='py-[14px] px-3 bg-[#F6F6F6] rounded'>
                             <Link to="/store/manage/emailTemplates/customer" className='text-[#232327] text-base leading-[150%] w-full pb-3 flex justify-between items-center border-b border-[#0000001A]'>Customer template <GoArrowUpRight className='text-xl' /> </Link>
-                            <Link className='text-[#232327] text-base leading-[150%] w-full flex justify-between items-center pt-3'>Owner template <GoArrowUpRight className='text-xl' /> </Link>
+                            <Link to="/store/manage/emailTemplates/owner" className='text-[#232327] text-base leading-[150%] w-full flex justify-between items-center pt-3'>Owner template <GoArrowUpRight className='text-xl' /> </Link>
                         </div>
                     </div>
 

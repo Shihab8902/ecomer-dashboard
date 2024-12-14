@@ -2,7 +2,7 @@ const dynamicHTML = require("./dynamicParsing");
 
 const ownerEmailTemplate = (store, order) => {
 
-    const emailTemplate = dynamicHTML(store?.customerEmailTemplate?.template, store, order);
+    const emailTemplate = dynamicHTML(store?.ownerEmailTemplate?.template, store, order);
 
     return `
 <!DOCTYPE html>
@@ -16,6 +16,7 @@ const ownerEmailTemplate = (store, order) => {
           margin: 0;
           padding: 0;
           background-color: #f4f4f4;
+          font-size: 16px;
       }
       .container {
           width: 80vw;
@@ -37,7 +38,6 @@ const ownerEmailTemplate = (store, order) => {
       }
       .order-summary {
           padding: 20px;
-          border-bottom: 1px solid #ddd;
       }
       .order-summary-h2 {
           margin-top: 20px;
@@ -148,8 +148,13 @@ const ownerEmailTemplate = (store, order) => {
 <body>
 
 <div class="container">
+<div class="header">
+    <h1>New Order Placed at ${store?.storeName}</h1>
+ </div>
 
-${emailTemplate}
+<div style="font-size: 16px;">
+ ${emailTemplate}
+</div>
 
   <div class="footer">
       <p>Powered by eComer.</p>
