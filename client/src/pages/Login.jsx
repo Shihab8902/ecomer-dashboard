@@ -27,11 +27,14 @@ const Login = () => {
 
             })
             .catch(error => {
-                Swal.fire({
-                    title: "Error!",
-                    text: error.message,
-                    icon: "error"
-                })
+                if (error.message !== "Firebase: Error (auth/popup-closed-by-user).") {
+                    Swal.fire({
+                        title: "Error!",
+                        text: error.message === "Firebase: Error (auth/popup-blocked)." ? "Popup blocked! Please allow popups in your browser settings and try again." : error.message,
+                        icon: "error"
+                    })
+                }
+
             })
     }
 

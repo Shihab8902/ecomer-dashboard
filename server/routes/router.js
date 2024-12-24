@@ -22,6 +22,9 @@ const handleYocoSuccess = require("../controllers/success/handleYocoSuccess");
 const router = require("express").Router();
 const multer = require("multer");
 const customerEmailTemplate = require("../templates/customer");
+const handleUserDetailsSaving = require("../controllers/handleUserDetailsSaving");
+const handleGetUserDetails = require("../controllers/handleGetUserDetails");
+const handleLogin = require("../controllers/handleLogin");
 const upload = multer({ storage: multer.memoryStorage() });
 
 
@@ -62,8 +65,15 @@ router.put("/payment/request", handlePaymentMethodRequest);
 //File upload routes
 router.post("/file/upload", upload.single("image"), handleFileUpload);
 
+//User Details routes
+router.get("/userDetails", handleGetUserDetails);
+router.post("/userDetails", handleUserDetailsSaving);
+
+//Login Routes
+router.post("/login", handleLogin);
+
 //Migration 
-router.get("/admin/migrate", handleMigration)
+router.get("/admin/migrate", handleMigration);
 
 
 

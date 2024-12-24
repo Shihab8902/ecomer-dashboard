@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import { LuFileText } from "react-icons/lu";
 import { FiHome } from "react-icons/fi";
-import { MdOutlinePayment, MdOutlineSettings } from "react-icons/md";
+import { MdOutlineSettings } from "react-icons/md";
+import MobileMenuDrawer from "./MobileMenuDrawer";
 
 
 const BottomBar = () => {
@@ -14,7 +15,7 @@ const BottomBar = () => {
                 <li onClick={() => navigate("/", { state: { renderDocs: true } })}><NavLink className="flex items-center font-normal text-xs leading-[160%] opacity-60 flex-col cursor-pointer" to="/"> <FiHome className="text-2xl" /> Home</NavLink></li>
                 <li><NavLink className="flex items-center font-normal text-xs leading-[160%] opacity-60 flex-col cursor-pointer" to="/orders"> <LuFileText className="text-2xl" /> Orders</NavLink></li>
                 <li><NavLink className="flex items-center font-normal text-xs leading-[160%] opacity-60 flex-col cursor-pointer" to="/store/manage"> < MdOutlineSettings className="text-2xl" /> Settings</NavLink></li>
-                <li><NavLink className="flex items-center font-normal text-xs leading-[160%] opacity-60 flex-col cursor-pointer" to="/payment"> < MdOutlinePayment className="text-2xl" /> Payment</NavLink></li>
+                <li><MobileMenuDrawer /></li>
             </ul>
         </nav>
     )
