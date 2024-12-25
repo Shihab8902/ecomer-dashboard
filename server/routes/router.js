@@ -25,6 +25,8 @@ const customerEmailTemplate = require("../templates/customer");
 const handleUserDetailsSaving = require("../controllers/handleUserDetailsSaving");
 const handleGetUserDetails = require("../controllers/handleGetUserDetails");
 const handleLogin = require("../controllers/handleLogin");
+const handleDiscountCodeCreation = require("../controllers/handleDiscountCodeCreation");
+const handleDiscountCodeVerify = require("../controllers/handleDiscountCodeVerify");
 const upload = multer({ storage: multer.memoryStorage() });
 
 
@@ -71,6 +73,10 @@ router.post("/userDetails", handleUserDetailsSaving);
 
 //Login Routes
 router.post("/login", handleLogin);
+
+//Discount code routes
+router.post("/discountCode", handleDiscountCodeCreation);
+router.post("/discountCode/verify", handleDiscountCodeVerify);
 
 //Migration 
 router.get("/admin/migrate", handleMigration);
