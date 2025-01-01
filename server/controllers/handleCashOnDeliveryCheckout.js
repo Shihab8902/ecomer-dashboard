@@ -11,6 +11,7 @@ const handleCashOnDeliveryCheckout = async (req, res) => {
 
         const userData = req.body;
 
+
         //Check for cod delivery permission
         const requestedStore = await storeCollection.findOne({ storeId: userData?.storeId });
         if (!requestedStore?.allowCod) {

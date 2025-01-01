@@ -19,6 +19,9 @@ import StripeCheckout from "../pages/Docs/StripeCheckout";
 import Support from "../pages/Docs/Support";
 import CustomerEmailTemplate from "../pages/CustomerEmailTemplate";
 import OwnerEmailTemplate from "../pages/OwnerEmailTemplate";
+import Discounts from "../pages/Discounts/Discounts";
+import CreateNewDiscounts from "../pages/Discounts/CreateNewDiscounts";
+
 
 
 
@@ -110,11 +113,27 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/store/manage/emailTemplates/customer",
-                element: <CustomerEmailTemplate />
+                element: <PrivateRoute>
+                    <CustomerEmailTemplate />
+                </PrivateRoute>
             },
             {
                 path: "/store/manage/emailTemplates/owner",
-                element: <OwnerEmailTemplate />
+                element: <PrivateRoute>
+                    <OwnerEmailTemplate />
+                </PrivateRoute>
+            },
+            {
+                path: "/store/manage/discounts",
+                element: <PrivateRoute>
+                    <Discounts />
+                </PrivateRoute>
+            },
+            {
+                path: "/store/manage/discount/new",
+                element: <PrivateRoute>
+                    <CreateNewDiscounts />
+                </PrivateRoute>
             }
 
         ]

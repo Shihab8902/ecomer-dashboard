@@ -222,7 +222,7 @@ const ManageStore = () => {
                 <BottomBar />
             </div>
 
-        </main>
+        </main>       
     )
 
 }

@@ -2,7 +2,7 @@ const discountCodeCollection = require("../model/discountCodeModel");
 
 const handleDiscountCodeVerify = async (req, res) => {
     try {
-        const { storeId, code, usingAmount } = req.body;
+        const { storeId, email, code, usingAmount } = req.body;
 
         //Check if the code is valid
         const discountCode = await discountCodeCollection.findOne({ storeId, discountCode: code });
@@ -34,13 +34,14 @@ const handleDiscountCodeVerify = async (req, res) => {
             }
         }
 
+
         //Check if the user already used the code once
-        // if (discountCode?.oncePerCustomer) {
-        //     const isUsed = discountCode?.usedCustomers.includes(email);
-        //     if (isUsed) {
-        //         return res.status(400).json({ message: "Discount code already used" });
-        //     }
-        // }
+        if (discountCode?.oncePerCustomer && email) {
+            const isUsed = discountCode?.usedCustomers.includes(email);
+            if (isUsed) {
+                return res.status(400).json({ message: "Discount code already used" });
+            }
+        }
 
         //Check if discount code usage date ends
         if (discountCode?.endsAt) {
@@ -74,3 +75,5 @@ const handleDiscountCodeVerify = async (req, res) => {
 
 
 module.exports = handleDiscountCodeVerify;
+
+

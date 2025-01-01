@@ -16,6 +16,7 @@ const discountCodeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
     discountValueType: {
         type: String,
         required: true
