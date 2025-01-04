@@ -28,6 +28,7 @@ const handleLogin = require("../controllers/handleLogin");
 const handleDiscountCodeCreation = require("../controllers/handleDiscountCodeCreation");
 const handleDiscountCodeVerify = require("../controllers/handleDiscountCodeVerify");
 const handleVerificationCodeEmailAssign = require("../controllers/handleVerificationCodeEmailAssign");
+const handleDiscountCodeGetting = require("../controllers/handleDiscountCodeGetting");
 const upload = multer({ storage: multer.memoryStorage() });
 
 
@@ -76,6 +77,7 @@ router.post("/userDetails", handleUserDetailsSaving);
 router.post("/login", handleLogin);
 
 //Discount code routes
+router.get("/discountCodes", handleDiscountCodeGetting);
 router.post("/discountCode", handleDiscountCodeCreation);
 router.post("/discountCode/verify", handleDiscountCodeVerify);
 router.post("/discountCode/assign/email", handleVerificationCodeEmailAssign);

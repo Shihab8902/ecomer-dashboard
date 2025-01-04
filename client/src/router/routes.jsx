@@ -124,13 +124,13 @@ export const router = createBrowserRouter([
                 </PrivateRoute>
             },
             {
-                path: "/store/manage/discounts",
+                path: "/discounts",
                 element: <PrivateRoute>
                     <Discounts />
                 </PrivateRoute>
             },
             {
-                path: "/store/manage/discount/new",
+                path: "/discounts/new",
                 element: <PrivateRoute>
                     <CreateNewDiscounts />
                 </PrivateRoute>

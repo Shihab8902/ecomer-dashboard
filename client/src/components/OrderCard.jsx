@@ -12,7 +12,7 @@ const OrderCard = ({ order }) => {
 
     const { currentStore } = useStoreInfo();
 
-    const navigate = useNavigate();
+
 
 
 

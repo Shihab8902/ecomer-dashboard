@@ -18,7 +18,6 @@ const handleDiscountCodeCreation = async (req, res) => {
             return res.status(200).json({ message: "Discount code created successfully" });
         }
 
-
         res.send("Operation failed");
 
     }
