@@ -8,6 +8,10 @@ const discountCodeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    discountName: {
+        type: String,
+        required: true,
+    },
     discountType: {
         type: String,
         required: true

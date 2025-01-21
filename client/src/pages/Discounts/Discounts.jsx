@@ -4,6 +4,7 @@ import TopBar from "../../components/TopBar"
 import useDiscountInfo from "../../hooks/useDiscountInfo"
 import useStoreInfo from "../../hooks/useStoreInfo"
 import DiscountCard from "../../components/DiscountCard";
+import BottomBar from "../../components/BottomBar";
 
 const Discounts = () => {
 
@@ -45,6 +46,11 @@ const Discounts = () => {
                 }
             </div>
 
+        </div>
+
+        {/* Bottom bar */}
+        <div className="md:hidden">
+            <BottomBar />
         </div>
     </main>
 }

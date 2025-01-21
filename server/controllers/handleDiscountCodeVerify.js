@@ -43,6 +43,15 @@ const handleDiscountCodeVerify = async (req, res) => {
             }
         }
 
+
+        //Check if discount code usage date hasn't started yet
+        if (discountCode?.activeAt) {
+            const isExpired = new Date(discountCode?.activeAt) < new Date();
+            if (isExpired) {
+                return res.status(400).json({ message: "The discount code is not live yet." });
+            }
+        }
+
         //Check if discount code usage date ends
         if (discountCode?.endsAt) {
             const isExpired = new Date(discountCode?.endsAt) < new Date();
@@ -52,9 +61,6 @@ const handleDiscountCodeVerify = async (req, res) => {
         }
 
         //Let the user use the code if everything is fine
-        //Include the user to the used customers list
-        // discountCode.usedCustomers.push(email);
-        // await discountCode.save();
         res.status(200).json({
             message: "success", codeData: {
                 discountType: discountCode.discountType,

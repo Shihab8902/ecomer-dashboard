@@ -2,9 +2,9 @@ import { RxCaretRight } from "react-icons/rx";
 import { GoDotFill } from "react-icons/go";
 import useStoreInfo from "../hooks/useStoreInfo";
 import moment from "moment";
-import { Link } from "react-router-dom";
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock, FaRegCopy } from "react-icons/fa";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import Swal from "sweetalert2";
 
 
 
@@ -13,7 +13,7 @@ const DiscountCard = ({ discount }) => {
 
     const { currentStore } = useStoreInfo();
 
-    const { discountCode, discountType, discountValueType, discountValue, usedCustomers, activeAt, endsAt, isActive: isCodeActive } = discount;
+    const { discountCode, discountName, discountType, discountValueType, discountValue, usedCustomers, activeAt, endsAt, isActive: isCodeActive } = discount;
 
     //Format date
     const formatDate = (dateString) => {
@@ -24,6 +24,20 @@ const DiscountCard = ({ discount }) => {
         const date = moment(dateString);
         return date.format('Do MMMM YYYY');
     };
+
+    //Handle code copy
+    const handleCodeCopy = e => {
+        e.stopPropagation();
+        navigator.clipboard.writeText(discountCode)
+            .then(() => {
+                Swal.fire({
+                    text: "Copied to clipboard",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    icon: "success"
+                })
+            })
+    }
 
 
 
@@ -37,13 +51,21 @@ const DiscountCard = ({ discount }) => {
     }
 
 
-    return <Link to="/">
+    return <div>
 
         <div className="my-3 border-b pb-3 cursor-pointer">
             {/* Order number */}
             <div className="w-full flex items-center justify-between">
-                <h4 className="text-[#232327] font-medium text-sm md:text-base leading-[160%]">{discountCode}</h4>
+                <div className="flex items-center gap-1">
+                    <h4 className="text-[#232327] font-medium text-sm md:text-base leading-[160%]">{discountName}</h4>
+                    <GoDotFill className="text-[10px] text-[#232327]" />
+                    <div className="flex items-center gap-1">
+                        <h4 className="text-[#232327] font-medium text-sm  leading-[160%]">{discountCode}</h4>
+                        <span title="Copy to clipboard" onClick={handleCodeCopy} className="block text-sm"><FaRegCopy /></span>
+                    </div>
+                </div>
                 <span className="text-[#23232780] text-xl"><RxCaretRight /></span>
+
             </div>
 
             {/* Details */}
@@ -69,6 +91,7 @@ const DiscountCard = ({ discount }) => {
 
                 </div>
 
+
                 {
                     isActive ? <button className="text-xs font-medium text-white bg-[#38B818] rounded px-2 py-1">Active</button> : <button className="text-xs font-medium text-[#232327] bg-[#E5E7EB] rounded px-2 py-1">Expired</button>
                 }
@@ -77,7 +100,7 @@ const DiscountCard = ({ discount }) => {
 
         </div>
 
-    </Link>
+    </div>
 }
 
 export default DiscountCard
