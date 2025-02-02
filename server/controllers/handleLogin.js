@@ -55,11 +55,11 @@ const handleLogin = async (req, res) => {
                 const emailResult = await sendEmail(email, requestedStore?.storeName, `Your login code is ${verificationCode}`, verificationCodeTemplate(verificationCode, requestedStore?.storeName));
 
                 if (emailResult?.messageId) {
-                    res.status(200).send("success");
+                    res.status(200).send({ message: "success" });
                 }
 
                 else {
-                    res.status(500).send("Internal Server Error");
+                    res.status(500).send({ message: "Internal Server Error" });
                 }
             }
 

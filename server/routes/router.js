@@ -29,7 +29,17 @@ const handleDiscountCodeCreation = require("../controllers/handleDiscountCodeCre
 const handleDiscountCodeVerify = require("../controllers/handleDiscountCodeVerify");
 const handleVerificationCodeEmailAssign = require("../controllers/handleVerificationCodeEmailAssign");
 const handleDiscountCodeGetting = require("../controllers/handleDiscountCodeGetting");
-const upload = multer({ storage: multer.memoryStorage() });
+const handleDiscountCodeUpdate = require("../controllers/handleDiscountCodeUpdate");
+const handleDiscountCodeDelete = require("../controllers/handleDiscountCodeDelete");
+
+
+//Multer configuration
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: Infinity,
+    },
+});
 
 
 //Stripe checkout routes
@@ -67,7 +77,7 @@ router.get("/userOrders", handleGetUserOrder);
 router.put("/payment/request", handlePaymentMethodRequest);
 
 //File upload routes
-router.post("/file/upload", upload.single("image"), handleFileUpload);
+router.post("/file/upload", upload.single("file"), handleFileUpload);
 
 //User Details routes
 router.get("/userDetails", handleGetUserDetails);
@@ -81,6 +91,8 @@ router.get("/discountCodes", handleDiscountCodeGetting);
 router.post("/discountCode", handleDiscountCodeCreation);
 router.post("/discountCode/verify", handleDiscountCodeVerify);
 router.post("/discountCode/assign/email", handleVerificationCodeEmailAssign);
+router.put("/discountCode", handleDiscountCodeUpdate);
+router.delete("/discountCode", handleDiscountCodeDelete);
 
 //Migration 
 router.get("/admin/migrate", handleMigration);

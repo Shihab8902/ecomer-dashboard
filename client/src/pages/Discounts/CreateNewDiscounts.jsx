@@ -20,7 +20,7 @@ const CreateNewDiscounts = () => {
 
     //States
     const [discountValueType, setDiscountValueType] = useState("percentage");
-    const [expendMinAmountValue, setExpendedMinAmountValue] = useState("");
+    const [expendMinAmountValue, setExpendedMinAmountValue] = useState(false);
     const [hasMaxLimit, setHasMaxLimit] = useState(false);
     const [discountCode, setDiscountCode] = useState(uid.rnd(8)?.toUpperCase());
     const [oneUsePerCustomer, setOneUsePerCustomer] = useState(false);

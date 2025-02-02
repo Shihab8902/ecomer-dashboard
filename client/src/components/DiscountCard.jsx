@@ -5,6 +5,7 @@ import moment from "moment";
 import { FaRegClock, FaRegCopy } from "react-icons/fa";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -12,6 +13,7 @@ import Swal from "sweetalert2";
 const DiscountCard = ({ discount }) => {
 
     const { currentStore } = useStoreInfo();
+    const navigate = useNavigate();
 
     const { discountCode, discountName, discountType, discountValueType, discountValue, usedCustomers, activeAt, endsAt, isActive: isCodeActive } = discount;
 
@@ -51,7 +53,7 @@ const DiscountCard = ({ discount }) => {
     }
 
 
-    return <div>
+    return <div onClick={() => navigate("/discounts/update", { state: discount })}>
 
         <div className="my-3 border-b pb-3 cursor-pointer">
             {/* Order number */}
@@ -93,8 +95,9 @@ const DiscountCard = ({ discount }) => {
 
 
                 {
-                    isActive ? <button className="text-xs font-medium text-white bg-[#38B818] rounded px-2 py-1">Active</button> : <button className="text-xs font-medium text-[#232327] bg-[#E5E7EB] rounded px-2 py-1">Expired</button>
+                    isCodeActive && isActive ? <button className="text-xs font-medium text-white bg-[#38B818] rounded px-2 py-1">Active</button> : <button className="text-xs font-medium text-[#232327] bg-[#E5E7EB] rounded px-2 py-1">Expired</button>
                 }
+
 
             </div>
 

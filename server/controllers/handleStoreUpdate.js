@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const storeCollection = require("../model/storeModel");
 
 const handleStoreUpdate = async (req, res) => {
@@ -7,33 +8,30 @@ const handleStoreUpdate = async (req, res) => {
 
         const updateFields = {};
 
-        switch (true) {
-            case (data.storeName !== undefined):
-                updateFields.storeName = data.storeName;
-                break;
-            case (data.location !== undefined):
-                updateFields.location = data.location;
-                break;
-            case (data.storeCurrency !== undefined):
-                updateFields.storeCurrency = data.storeCurrency;
-                break;
-            case (data.customerEmailTemplate !== undefined):
-                updateFields.customerEmailTemplate = data.customerEmailTemplate;
-                break;
-            case (data.ownerEmailTemplate !== undefined):
-                updateFields.ownerEmailTemplate = data.ownerEmailTemplate;
-                break;
+        if (data.storeName !== undefined) {
+            updateFields.storeName = data.storeName;
+        }
+        if (data.location !== undefined) {
+            updateFields.location = data.location;
+        }
+        if (data.storeCurrency !== undefined) {
+            updateFields.storeCurrency = data.storeCurrency;
+        }
+        if (data.customerEmailTemplate !== undefined) {
+            updateFields.customerEmailTemplate = data.customerEmailTemplate;
+        }
+        if (data.ownerEmailTemplate !== undefined) {
+            updateFields.ownerEmailTemplate = data.ownerEmailTemplate;
         }
 
-        const result = await storeCollection.findOneAndUpdate(
-            { _id: id },
-            updateFields,
-            { new: true }
+        const result = await storeCollection.updateOne(
+            { _id: new mongoose.Types.ObjectId(id) },
+            { $set: updateFields }
         );
 
         res.send(result);
     } catch (error) {
-        res.send(error.message);
+        res.status(500).send(error.message);
         console.log(error);
     }
 };

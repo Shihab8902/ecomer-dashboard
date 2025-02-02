@@ -21,6 +21,7 @@ import CustomerEmailTemplate from "../pages/CustomerEmailTemplate";
 import OwnerEmailTemplate from "../pages/OwnerEmailTemplate";
 import Discounts from "../pages/Discounts/Discounts";
 import CreateNewDiscounts from "../pages/Discounts/CreateNewDiscounts";
+import UpdateDiscount from "../pages/Discounts/UpdateDiscount";
 
 
 
@@ -133,6 +134,12 @@ export const router = createBrowserRouter([
                 path: "/discounts/new",
                 element: <PrivateRoute>
                     <CreateNewDiscounts />
+                </PrivateRoute>
+            },
+            {
+                path: "/discounts/update",
+                element: <PrivateRoute>
+                    <UpdateDiscount />
                 </PrivateRoute>
             }
 
