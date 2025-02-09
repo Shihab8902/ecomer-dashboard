@@ -45,6 +45,10 @@ const storeSchema = new mongoose.Schema({
     },
     ownerEmailTemplate: {
         type: Object
+    },
+    shippingMethods: {
+        type: [Object],
+        default: []
     }
 
 });

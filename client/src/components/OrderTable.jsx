@@ -19,6 +19,7 @@ export const OrderTable = () => {
     const { currentStore } = useStoreInfo();
     const [searchValue, setSearchValue] = useState("")
 
+
     const { orders, ordersLoading } = useOrderInfo({ currentStore: currentStore, search: searchValue });
 
 

@@ -7,7 +7,6 @@ const handleDiscountCodeVerify = async (req, res) => {
         //Check if the code is valid
         const discountCode = await discountCodeCollection.findOne({ storeId, discountCode: code });
 
-
         if (!discountCode) {
             return res.status(404).json({ message: "Enter a valid discount code" });
         }
@@ -26,14 +25,12 @@ const handleDiscountCodeVerify = async (req, res) => {
             }
         }
 
-
         //Check if the user has the minimum required amount to use the code
         if (discountCode?.minRequiredAmount > 0) {
             if (discountCode?.minRequiredAmount > parseInt(usingAmount)) {
                 return res.status(400).json({ message: "Minimum required amount not reached" });
             }
         }
-
 
         //Check if the user already used the code once
         if (discountCode?.oncePerCustomer && email) {
@@ -43,11 +40,10 @@ const handleDiscountCodeVerify = async (req, res) => {
             }
         }
 
-
         //Check if discount code usage date hasn't started yet
         if (discountCode?.activeAt) {
-            const isExpired = new Date(discountCode?.activeAt) < new Date();
-            if (isExpired) {
+            const isNotActiveYet = new Date(discountCode?.activeAt) > new Date();
+            if (isNotActiveYet) {
                 return res.status(400).json({ message: "The discount code is not live yet." });
             }
         }
@@ -70,16 +66,10 @@ const handleDiscountCodeVerify = async (req, res) => {
             }
         });
 
-
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal server error" });
     }
-
 }
 
-
 module.exports = handleDiscountCodeVerify;
-
-

@@ -16,6 +16,8 @@ const Discounts = () => {
     const { discounts, discountsLoading } = useDiscountInfo({ currentStore: currentStore });
 
 
+
+
     return <main>
         {/* Top bar */}
         <TopBar title="Discounts" />

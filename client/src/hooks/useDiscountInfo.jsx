@@ -19,7 +19,7 @@ const useDiscountInfo = ({ currentStore }) => {
 
     useEffect(() => {
         refetchDiscounts();
-    }, [refetchDiscounts])
+    }, [currentStore, refetchDiscounts])
 
 
     return { discounts, refetchDiscounts, discountsLoading }

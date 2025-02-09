@@ -31,6 +31,7 @@ const handleVerificationCodeEmailAssign = require("../controllers/handleVerifica
 const handleDiscountCodeGetting = require("../controllers/handleDiscountCodeGetting");
 const handleDiscountCodeUpdate = require("../controllers/handleDiscountCodeUpdate");
 const handleDiscountCodeDelete = require("../controllers/handleDiscountCodeDelete");
+const handleGetStorePaymentMethods = require("../controllers/store/handleGetStorePaymentMethods");
 
 
 //Multer configuration
@@ -63,9 +64,10 @@ router.get("/order", handleGetSingleOrderData);
 router.get("/orders/total", handleTotalOrderCount);
 router.put("/orders", handleOrderUpdate);
 
-//Store creation routes
+//Store routes
 router.post("/store", handleStoreCreation);
 router.get("/store", handleGetStoreId)
+router.get("/store/paymentMethods", handleGetStorePaymentMethods)
 router.put("/store", handleStoreUpdate);
 router.delete("/store", handleStoreDelete);
 router.put("/store/setup", handleStoreSetupStepsUpdate);
