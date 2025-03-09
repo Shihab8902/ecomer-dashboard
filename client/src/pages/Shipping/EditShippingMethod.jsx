@@ -1,32 +1,108 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import TopBar from "../../components/TopBar"
 import BottomBar from "../../components/BottomBar";
 import useStoreInfo from "../../hooks/useStoreInfo";
 import { useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const EditShippingMethod = () => {
 
     //Hooks
     const location = useLocation();
-    const { currentStore } = useStoreInfo();
+    const navigate = useNavigate();
+    const { currentStore, refetchStore } = useStoreInfo();
     const method = location.state;
-    console.log(method);
-
-
-
+    const axiosPublic = useAxiosPublic();
 
     //States
-    const [priceTyped, setPriceTyped] = useState(false);
+    const [priceTyped, setPriceTyped] = useState(parseFloat(method?.price) > 0 ? true : false);
 
 
 
+
+
+    //handle shipping profile update
+    const handleShippingProfileUpdate = (e) => {
+        e.preventDefault();
+        const data = {
+            id: method?.id,
+            profileName: e.target.profileName.value,
+            rateType: e.target.rateType.value,
+            rateName: e.target.rateName.value,
+            deliveryDescription: e.target.deliveryDescription.value,
+            price: e.target.price.value || "0"
+        }
+
+        //Update store
+        axiosPublic.put(`/store?id=${currentStore?._id}`, { shippingMethods: currentStore?.shippingMethods.map(item => item.id === method?.id ? data : item) })
+            .then(res => {
+                if (res.data) {
+                    refetchStore();
+                    navigate(-1);
+                    Swal.fire({
+                        text: "Shipping profile updated",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        icon: "success"
+                    })
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error"
+                })
+            })
+    }
+
+
+
+    //Handle delete
+    const handleDelete = () => {
+        Swal.fire({
+            title: "Delete?",
+            text: "Are you sure want to delete the shipping profile?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel",
+            cancelButtonColor: "#d33",
+            confirmButtonColor: "#3085d6"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                //Update store
+                axiosPublic.put(`/store?id=${currentStore?._id}`, { shippingMethods: currentStore?.shippingMethods.filter(item => item.id !== method?.id) })
+                    .then(res => {
+                        if (res.data) {
+                            refetchStore();
+                            navigate(-1);
+                            Swal.fire({
+                                text: "Shipping profile deleted",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                icon: "success"
+                            })
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: "Error!",
+                            text: error.message,
+                            icon: "error"
+                        })
+                    })
+            }
+        })
+    }
 
 
 
     return <main>
         <TopBar title="Shipping" subRoute={true} subRouteTitle={method?.profileName} />
 
-        <form className="max-w-7xl px-5 mx-auto" >
+        <form className="max-w-7xl px-5 mx-auto" onSubmit={handleShippingProfileUpdate}>
 
             {/* Content boxes */}
             <div className="w-full max-w-[600px] mb-[80px] md:mb-0 min-h-screen  mx-auto pt-[88px] md:pt-[128px] pb-5">
@@ -43,7 +119,7 @@ const EditShippingMethod = () => {
                     {/* Rate type */}
                     <div className="mt-3">
                         <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="rateType">Shipping Rate</label>
-                        <select defaultValue={method?.rateType} className="w-full border-r-8 border-r-transparent outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal " defaultValue="flat-rate" name="rateType" id="rateType" required>
+                        <select defaultValue={method?.rateType} className="w-full border-r-8 border-r-transparent outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal " name="rateType" id="rateType" required>
                             <option value="flat-rate">Use flat rate</option>
                             <option value="carrier-rate">Use carrier calculated rate</option>
                         </select>
@@ -71,13 +147,15 @@ const EditShippingMethod = () => {
                     <div className="mt-3 relative">
                         <span className="absolute left-0 top-[30px] py-4 px-3 font-medium text-sm bg-gray-200 rounded-tl-md rounded-bl-md min-w-14 text-center">{currentStore?.storeCurrency}</span>
                         <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="price">Price</label>
-                        <input step="any" onChange={(e) => e.target.value > 0 ? setPriceTyped(true) : setPriceTyped(false)} className="w-full outline-none  px-16 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]" type="number" min={0} name="price" id="price" placeholder={`0.00`} />
+                        <input defaultValue={parseFloat(method?.price)} step="any" onChange={(e) => e.target.value > 0 ? setPriceTyped(true) : setPriceTyped(false)} className="w-full outline-none  px-16 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969]" type="number" min={0} name="price" id="price" placeholder={`0.00`} />
                         {!priceTyped && <span className="text-sm text-gray-600 absolute right-5 top-[46px]">FREE</span>}
                     </div>
 
-                    {/* Save button */}
-                    <div className="w-full mt-5 flex justify-end">
-                        <button className="py-3 px-5  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327]  hover:bg-black text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2  " type="submit">Save profile</button>
+
+                    {/* Action buttons */}
+                    <div className="w-full mt-5 flex justify-end gap-6">
+                        <button onClick={handleDelete} type="button" className="py-3 px-5  bg-red-500  text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2  " >Delete profile</button>
+                        <button className="py-3 px-5  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327]  hover:bg-black text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2  " type="submit">Update profile</button>
                     </div>
 
 

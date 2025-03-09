@@ -292,7 +292,7 @@ const UpdateDiscount = () => {
                     </div>
                 </div>
 
-                {/* Save button */}
+                {/* Action buttons */}
                 <div className="w-full mt-5 flex justify-end gap-6">
                     <button onClick={handleDelete} type="button" className="py-3 px-5  bg-red-500  text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2  " >Delete discount</button>
                     <button className="py-3 px-5  focus:bg-[#232327] disabled:bg-[#232327] bg-[#232327]  hover:bg-black text-base font-medium  rounded-[4px] text-white  flex items-center justify-center gap-2  " type="submit">Save changes</button>
