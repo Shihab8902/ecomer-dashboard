@@ -1,4 +1,5 @@
 import { IoMdAddCircleOutline } from "react-icons/io"
+import { LuTruck } from "react-icons/lu"
 import { MdOutlineDiscount, MdOutlinePayment } from "react-icons/md"
 import { RiFileList2Line } from "react-icons/ri"
 import { NavLink } from "react-router-dom"
@@ -26,6 +27,7 @@ const MobileMenuDrawer = () => {
                     <div className="mt-1">
                         <NavLink className="flex items-center gap-1 text-[#232327] text-base font-medium leading-[140%]" to="/payment"> < MdOutlinePayment className="text-[28px] text-[#696969]" /> Payment</NavLink>
                         <NavLink className="flex mt-3 items-center gap-1 text-[#232327] text-base font-medium leading-[140%]" to="/discounts"> < MdOutlineDiscount className="text-2xl text-[#696969]" /> Discounts</NavLink>
+                        <NavLink className="flex mt-3 items-center gap-1 text-[#232327] text-base font-medium leading-[140%]" to="/shipping"> < LuTruck className="text-2xl text-[#696969]" /> Shipping</NavLink>
                         <NavLink className="flex mt-3 items-center gap-1 text-[#232327] text-base font-medium leading-[140%]" to="/docs"> < RiFileList2Line className="text-2xl text-[#696969]" /> Docs</NavLink>
                     </div>
 

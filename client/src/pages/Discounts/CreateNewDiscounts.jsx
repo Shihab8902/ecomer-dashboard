@@ -125,7 +125,7 @@ const CreateNewDiscounts = () => {
 
                     <div >
                         <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="discountType">Discount Type</label>
-                        <select className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal " defaultValue="product" name="discountType" id="discountType" required>
+                        <select className="w-full outline-none border-r-8 border-r-transparent  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal " defaultValue="product" name="discountType" id="discountType" required>
                             <option value="product">Product discount</option>
                             <option value="shipping">Free shipping</option>
                         </select>

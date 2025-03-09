@@ -34,7 +34,6 @@ const OrderDetails = () => {
 
 
 
-
     //Product subtotal calculation
     const calculatedSubtotal = products?.reduce(
         (acc, item) => acc + parseFloat(item.totalPrice),

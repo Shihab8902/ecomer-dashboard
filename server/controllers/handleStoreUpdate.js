@@ -23,6 +23,9 @@ const handleStoreUpdate = async (req, res) => {
         if (data.ownerEmailTemplate !== undefined) {
             updateFields.ownerEmailTemplate = data.ownerEmailTemplate;
         }
+        if (data.shippingMethods !== undefined) {
+            updateFields.shippingMethods = data.shippingMethods;
+        }
 
         const result = await storeCollection.updateOne(
             { _id: new mongoose.Types.ObjectId(id) },

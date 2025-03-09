@@ -59,7 +59,7 @@ const DiscountCard = ({ discount }) => {
             {/* Order number */}
             <div className="w-full flex items-center justify-between">
                 <div className="flex items-center gap-1">
-                    <h4 className="text-[#232327] font-medium text-sm md:text-base leading-[160%]">{discountName}</h4>
+                    <h4 className="text-[#232327] font-medium text-sm md:text-base leading-[160%] opacity-60">{discountName}</h4>
                     <GoDotFill className="text-[10px] text-[#232327]" />
                     <div className="flex items-center gap-1">
                         <h4 className="text-[#232327] font-medium text-sm  leading-[160%]">{discountCode}</h4>

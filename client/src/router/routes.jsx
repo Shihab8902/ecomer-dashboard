@@ -22,6 +22,9 @@ import OwnerEmailTemplate from "../pages/OwnerEmailTemplate";
 import Discounts from "../pages/Discounts/Discounts";
 import CreateNewDiscounts from "../pages/Discounts/CreateNewDiscounts";
 import UpdateDiscount from "../pages/Discounts/UpdateDiscount";
+import ShippingMethods from "../pages/Shipping/ShippingMethods";
+import CreateShippingMethod from "../pages/Shipping/CreateShippingMethod";
+import EditShippingMethod from "../pages/Shipping/EditShippingMethod";
 
 
 
@@ -140,6 +143,24 @@ export const router = createBrowserRouter([
                 path: "/discounts/update",
                 element: <PrivateRoute>
                     <UpdateDiscount />
+                </PrivateRoute>
+            },
+            {
+                path: "/shipping",
+                element: <PrivateRoute>
+                    <ShippingMethods />
+                </PrivateRoute>
+            },
+            {
+                path: "/shipping/new",
+                element: <PrivateRoute>
+                    <CreateShippingMethod />
+                </PrivateRoute>
+            },
+            {
+                path: "/shipping/update",
+                element: <PrivateRoute>
+                    <EditShippingMethod />
                 </PrivateRoute>
             }
 
