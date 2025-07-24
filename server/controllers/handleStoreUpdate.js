@@ -11,6 +11,9 @@ const handleStoreUpdate = async (req, res) => {
         if (data.storeName !== undefined) {
             updateFields.storeName = data.storeName;
         }
+        if (data.tax !== undefined) {
+            updateFields.tax = data.tax;
+        }
         if (data.location !== undefined) {
             updateFields.location = data.location;
         }
@@ -25,6 +28,9 @@ const handleStoreUpdate = async (req, res) => {
         }
         if (data.shippingMethods !== undefined) {
             updateFields.shippingMethods = data.shippingMethods;
+        }
+        if (data.currencyPosition !== undefined) {
+            updateFields.currencyPosition = data.currencyPosition;
         }
 
         const result = await storeCollection.updateOne(

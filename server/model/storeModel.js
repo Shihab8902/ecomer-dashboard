@@ -36,6 +36,10 @@ const storeSchema = new mongoose.Schema({
         type: String,
         default: "$"
     },
+    currencyPosition: {
+        type: String,
+        default: "start"
+    },
     setupSteps: {
         type: [Object]
     },
@@ -49,6 +53,10 @@ const storeSchema = new mongoose.Schema({
     shippingMethods: {
         type: [Object],
         default: []
+    },
+    tax: {
+        type: Number,
+        default: 0
     }
 
 });

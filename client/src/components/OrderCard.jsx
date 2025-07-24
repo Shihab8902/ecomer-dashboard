@@ -51,7 +51,10 @@ const OrderCard = ({ order }) => {
                     </div>
                 </div>
 
-                <p className="text-[#232327] font-medium text-sm md:text-base leading-[160%]">{currentStore?.storeCurrency}{parseFloat((subtotal / 100)?.toFixed(2))}</p>
+                {/* <p className="text-[#232327] font-medium text-sm md:text-base leading-[160%]">{currentStore?.storeCurrency}{parseFloat((subtotal / 100)?.toFixed(2))}</p> */}
+                <p className="text-[#232327] font-medium text-sm md:text-base leading-[160%]">
+                    {currentStore?.currencyPosition === "end" ? `${parseFloat((subtotal / 100)?.toFixed(2))}${currentStore?.storeCurrency}` : `${currentStore?.storeCurrency}${parseFloat((subtotal / 100)?.toFixed(2))}`}
+                </p>
             </div>
 
 

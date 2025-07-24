@@ -22,7 +22,7 @@ const handleGetStorePaymentMethods = async (req, res) => {
         }
 
 
-        res.status(200).send({ paymentMethods, shippingMethods: store?.shippingMethods });
+        res.status(200).send({ paymentMethods, shippingMethods: store?.shippingMethods, tax: store?.tax });
 
     }
     catch (err) {

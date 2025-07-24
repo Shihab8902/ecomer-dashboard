@@ -22,8 +22,14 @@ const ManageStore = () => {
 
 
 
+
     const [isStoreUpdating, setIsStoreUpdating] = useState(false);
     const [location, setLocation] = useState(currentStore?.location);
+    const [storeCurrencyPosition, setStoreCurrencyPosition] = useState("");
+
+    useEffect(() => {
+        setStoreCurrencyPosition(currentStore?.currencyPosition)
+    }, [currentStore])
 
     //Handle Store Id copy
     const handleStoreIdCopy = () => {
@@ -44,6 +50,11 @@ const ManageStore = () => {
         setLocation(currentStore?.location);
     }, [currentStore]);
 
+    // Set store currency
+    useEffect(() => {
+        setStoreCurrencyPosition(currentStore?.currencyPosition)
+    }, [currentStore])
+
 
 
 
@@ -52,10 +63,14 @@ const ManageStore = () => {
     const handleFormSubmit = e => {
         e.preventDefault();
         setIsStoreUpdating(true)
+
         const storeName = e.target.storeName.value;
         const storeCurrency = e.target.storeCurrency.value;
+        const tax = e.target.tax.value;
+        const currencyPosition = document.querySelector("#currencyPositionToggle")?.checked ? "end" : "start";
 
-        axiosPublic.put(`/store?id=${currentStore?._id}`, { storeName, location, storeCurrency })
+
+        axiosPublic.put(`/store?id=${currentStore?._id}`, { storeName, location, storeCurrency, tax, currencyPosition })
             .then(res => {
                 if (res.data) {
                     refetchStore();
@@ -190,9 +205,28 @@ const ManageStore = () => {
                         <Select styles={customStyles} options={options} defaultValue={location} className='cursor-pointer rounded-md  outline-gray-300 focus:border-gray-300' value={location} onChange={(value) => setLocation(value)} />
                     </div>
 
-                    <div className='mt-2'>
+                    <div className='mt-2 relative'>
                         <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="storeCurrency">Store Currency</label>
                         <input defaultValue={currentStore?.storeCurrency} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969] " type="text" name="storeCurrency" id="storeCurrency" placeholder="Enter store currency" required />
+
+                        {/* Symbol Position */}
+                        <div className="absolute rounded-md w-32 h-[64%] bg-white border right-0 bottom-0 px-3 py-1 flex items-start justify-center flex-col">
+                            <label className="block text-xs mb-1 font-medium leading-[150%] text-[#232327]" htmlFor="symbolPosition">Symbol Position</label>
+
+                            <div className='toggle-color-update flex items-center gap-1 '>
+                                <label className="block text-[11px] mb-1 font-medium leading-[100%] text-[#232327bd]" htmlFor="start"> Start</label>
+                                <input id='currencyPositionToggle' type="checkbox" checked={storeCurrencyPosition === "end"} onChange={(e) => setStoreCurrencyPosition(e.target.checked ? "end" : "start")} className="toggle toggle-sm" />
+                                <label className="block text-[11px] mb-1 font-medium leading-[100%] text-[#232327bd]" htmlFor="end"> End</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div className='mt-2 relative'>
+                        <label className="block text-base mb-1 font-medium leading-[160%] text-[#232327]" htmlFor="storeCurrency">Tax</label>
+                        <input defaultValue={currentStore?.tax} className="w-full outline-none  px-3 py-[14px] rounded-md text-[#232327] bg-[#F6F6F6] text-base font-normal placeholder:text-[#696969] " type="number" min={0} max={100} name="tax" id="tax" placeholder="Enter tax percentage" required />
+                        <span className='absolute right-4 bottom-4'>%</span>
                     </div>
 
                     <div className='mt-2'>

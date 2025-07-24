@@ -12,7 +12,12 @@ body {
 
 .active {
     opacity: 1 !important;
-    
+
+}
+
+.toggle-color-update .toggle:checked,
+.toggle {
+    color: #38B818 !important;
 }
 
 @tailwind base;

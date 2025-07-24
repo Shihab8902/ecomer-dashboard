@@ -468,7 +468,10 @@ const OrderDetails = () => {
                                             }
                                         </div>
                                         <div className="flex justify-end mt-1">
-                                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">{currentStore?.storeCurrency}{product?.price}</span>
+
+                                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">
+                                                {currentStore?.currencyPosition === "end" ? `${product?.price}${currentStore?.storeCurrency}` : `${currentStore?.storeCurrency}${product?.price}`}
+                                            </span>
                                         </div>
 
                                     </div>
@@ -528,7 +531,10 @@ const OrderDetails = () => {
                                 <h4 className="font-medium leading-[140%] text-base  text-[#232327]">Subtotal</h4>
                                 <p className="text-xs text-[#696969] leading-[140%] font-normal">{`${products?.length} ${products?.length === 1 ? "item" : "items"}`}</p>
                             </div>
-                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">{currentStore?.storeCurrency}{parseFloat((calculatedSubtotal)?.toFixed(2))}</span>
+                            {/* <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">{currentStore?.storeCurrency}{parseFloat((calculatedSubtotal)?.toFixed(2))}</span> */}
+                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">
+                                {currentStore?.currencyPosition === "end" ? `${parseFloat((calculatedSubtotal)?.toFixed(2))}${currentStore?.storeCurrency}` : `${currentStore?.storeCurrency}${parseFloat((calculatedSubtotal)?.toFixed(2))}`}
+                            </span>
                         </div>
 
                         {/* Discount */}
@@ -537,7 +543,10 @@ const OrderDetails = () => {
                                 <h4 className="font-medium leading-[140%] text-base text-[#232327]">Discount</h4>
                                 <p className="text-xs md:text-sm text-[#696969] leading-[140%] font-normal">Custom discount</p>
                             </div>
-                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">-{currentStore?.storeCurrency}{parseFloat(additionalCharges?.discount?.toFixed(2))}</span>
+                            {/* <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">-{currentStore?.storeCurrency}{parseFloat(additionalCharges?.discount?.toFixed(2))}</span> */}
+                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">
+                                {currentStore?.currencyPosition === "end" ? `-${parseFloat(additionalCharges?.discount?.toFixed(2))}${currentStore?.storeCurrency}` : `-${currentStore?.storeCurrency}${parseFloat(additionalCharges?.discount?.toFixed(2))}`}
+                            </span>
                         </div>
 
                         {/* Shipping */}
@@ -546,7 +555,10 @@ const OrderDetails = () => {
                                 <h4 className="font-medium leading-[140%] text-base text-[#232327]">Shipping</h4>
                                 <p className="text-xs md:text-sm text-[#696969] leading-[140%] font-normal">Custom ({`${products?.length} ${products?.length === 1 ? "item" : "items"}`})</p>
                             </div>
-                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">{currentStore?.storeCurrency}{parseFloat(additionalCharges?.shipping?.toFixed(2))}</span>
+                            {/* <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">{currentStore?.storeCurrency}{parseFloat(additionalCharges?.shipping?.toFixed(2))}</span> */}
+                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">
+                                {currentStore?.currencyPosition === "end" ? `${parseFloat(additionalCharges?.shipping?.toFixed(2))}${currentStore?.storeCurrency}` : `${currentStore?.storeCurrency}${parseFloat(additionalCharges?.shipping?.toFixed(2))}`}
+                            </span>
                         </div>
 
                         {/* Tax */}
@@ -555,7 +567,10 @@ const OrderDetails = () => {
                                 <h4 className="font-medium leading-[140%] text-base text-[#232327]">Tax</h4>
                                 <p className="text-xs md:text-sm text-[#696969] leading-[140%] font-normal">{(additionalCharges?.tax / calculatedSubtotal) * 100}% tax</p>
                             </div>
-                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">{currentStore?.storeCurrency}{parseFloat(additionalCharges?.tax?.toFixed(2))}</span>
+                            {/* <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">{currentStore?.storeCurrency}{parseFloat(additionalCharges?.tax?.toFixed(2))}</span> */}
+                            <span className="text-[#232327] font-medium text-xs md:text-sm leading-[160%]">
+                                {currentStore?.currencyPosition === "end" ? `${parseFloat(additionalCharges?.tax?.toFixed(2))}${currentStore?.storeCurrency}` : `${currentStore?.storeCurrency}${parseFloat(additionalCharges?.tax?.toFixed(2))}`}
+                            </span>
                         </div>
 
                         {/* Divider */}
@@ -564,9 +579,12 @@ const OrderDetails = () => {
                         {/* Total */}
                         <div className="my-3 flex items-center justify-between w-full">
                             <h4 className="text-[#232327] font-semibold text-base leading-[140%]">Total</h4>
-                            <span className="text-[#232327] font-semibold text-base leading-[140%]">
+                            {/* <span className="text-[#232327] font-semibold text-base leading-[140%]">
                                 {currentStore?.storeCurrency}
                                 {((calculatedSubtotal + additionalCharges?.shipping + additionalCharges?.tax) - additionalCharges?.discount)?.toFixed(2)}
+                            </span> */}
+                            <span className="text-[#232327] font-semibold text-xs md:text-sm leading-[140%]">
+                                {currentStore?.currencyPosition === "end" ? `${((calculatedSubtotal + additionalCharges?.shipping + additionalCharges?.tax) - additionalCharges?.discount)?.toFixed(2)}${currentStore?.storeCurrency}` : `${currentStore?.storeCurrency}${((calculatedSubtotal + additionalCharges?.shipping + additionalCharges?.tax) - additionalCharges?.discount)?.toFixed(2)}`}
                             </span>
                         </div>
 

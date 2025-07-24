@@ -18,13 +18,13 @@ const handleYocoCheckout = async (req, res) => {
             return res.status(403).send("Operation now allowed!");
         }
 
-        const convertUsdToZarInCents = (usdAmount) => {
-            // Constant exchange rate: 1 USD = 18 ZAR
-            const usdToZarRate = 18.00;
-            const zarAmount = usdAmount * usdToZarRate;
-            const zarInCents = Math.round(zarAmount * 100);
-            return zarInCents;
-        };
+        // const convertUsdToZarInCents = (usdAmount) => {
+        //     // Constant exchange rate: 1 USD = 18 ZAR
+        //     const usdToZarRate = 18.00;
+        //     const zarAmount = usdAmount * usdToZarRate;
+        //     const zarInCents = Math.round(zarAmount * 100);
+        //     return zarInCents;
+        // };
 
         //Initially save to the database
         //Calculate subtotal
@@ -32,6 +32,8 @@ const handleYocoCheckout = async (req, res) => {
             (acc, item) => acc + parseFloat(item.totalPrice),
             0
         )
+
+
 
         const data = {
             subtotal: (((countedSubtotal * 100) + ((userData?.shipping || 0) * 100) + ((userData?.tax || 0) * 100)) - ((userData?.discount || 0) * 100)),
@@ -61,7 +63,7 @@ const handleYocoCheckout = async (req, res) => {
         const response = await axios.post(
             'https://payments.yoco.com/api/checkouts',
             {
-                amount: convertUsdToZarInCents(countedSubtotal),
+                amount: countedSubtotal * 100,
                 currency: 'ZAR',
                 successUrl: `${process.env.BASE_URL}/success/yoco?origin=${originUrl}&id=${dataSaveResult._id.toString()}`,
                 failureUrl: `${originUrl}/cancel`
